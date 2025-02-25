@@ -18,9 +18,11 @@ import Dashboard from "./pages/Dashboard";
 import Addresses from "./pages/Addresses";
 import AccountDetails from "./pages/AccountDetail";
 import PrivateRoute from "./components/Route/PrivateRoute";
-import GuestRoute from './components/Route/GuestRoute';
+import GuestRoute from "./components/Route/GuestRoute";
 import OrderDetail from "./pages/OrderDetail";
 import PaymentSuccess from "./pages/PaymentSucces";
+import ResetPassword from "./pages/ResetPassword";
+import ForgotPassword from "./pages/ForgotPassword";
 
 const App = () => {
   return (
@@ -38,6 +40,10 @@ const App = () => {
         <Route path="/product/:slug" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
+
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+
         <Route
           path="/login"
           element={
@@ -65,4 +71,5 @@ const App = () => {
     </div>
   );
 };
+
 export default App;

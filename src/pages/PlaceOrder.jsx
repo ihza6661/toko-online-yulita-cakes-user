@@ -176,12 +176,11 @@ const PlaceOrder = () => {
         onSuccess: function () {
           toast.success("Pembayaran berhasil!");
           clearCart();
-          navigate("/payment-success");
+          navigate("/payment-success", {state: {paymentSuccess: true}});
         },
         onPending: function () {
           toast.info("Pembayaran tertunda.");
           clearCart();
-          navigate("/payment-success");
         },
         onError: function () {
           toast.error("Pembayaran gagal.");

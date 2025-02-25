@@ -2,9 +2,9 @@ import { useState, useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const AuthForm = () => {
-  
   useEffect(() => {
     let judul = isLogin ? "Masuk" : "Register";
     document.title = `AS Denim - ${judul}`;
@@ -150,6 +150,15 @@ const AuthForm = () => {
             {isLogin ? "Daftar" : "Masuk"}
           </span>
         </p>
+
+        {/* Tambahan link Lupa Password untuk mode login */}
+        {isLogin && (
+          <p className="mt-2 text-sm">
+            <Link to="/forgot-password" className="text-blue-500">
+              Lupa Password?
+            </Link>
+          </p>
+        )}
       </form>
     </div>
   );
@@ -159,9 +168,12 @@ const AuthForm = () => {
     const fields = [];
 
     if (!isLogin) {
-      fields.push(
-        { label: "Nama Lengkap", name: "name", type: "text", required: true },
-      );
+      fields.push({
+        label: "Nama Lengkap",
+        name: "name",
+        type: "text",
+        required: true,
+      });
     }
 
     fields.push(

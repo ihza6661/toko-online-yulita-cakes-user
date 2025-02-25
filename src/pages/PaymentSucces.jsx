@@ -1,7 +1,15 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const PaymentSuccess = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.state || !location.state.paymentSuccess) {
+      navigate('/', { replace: true });
+    }
+  }, [location, navigate]);
 
   const handleGoToOrders = () => {
     navigate('/dashboard/orders');
@@ -12,8 +20,7 @@ const PaymentSuccess = () => {
   };
 
   return (
-    
-    <div className="flex flex-col  sm:gap-10 pt-10 mt-16 border-t">
+    <div className="flex flex-col sm:gap-10 pt-10 mt-16 border-t">
       <h1 className="text-3xl font-bold mb-6 text-center">Pembayaran Berhasil!</h1>
       <p className="text-lg mb-8 text-center">
         Terima kasih telah melakukan pembelian. Pesanan kamu sedang diproses.

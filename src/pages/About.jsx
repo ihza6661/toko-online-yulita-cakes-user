@@ -7,7 +7,7 @@ const About = () => {
   }, []);
   return (
     <div className="pt-36 flex flex-col items-center justify-center">
-      <div className="text-2xl text-center pt-8 border-t">
+      <div className="text-2xl text-center pt-8">
         <Title text1={"TENTANG"} text2={"KAMI"} />
       </div>
       <div className="my-10 flex flex-col md:flex-row gap-16 items-center justify-center">

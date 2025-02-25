@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
+import ProductReview from "../components/ProductReview";
 
 const Product = () => {
   const { slug } = useParams();
@@ -9,13 +10,6 @@ const Product = () => {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
   const [loading, setLoading] = useState(true);
-
-  function stripHtmlTags(str) {
-    if (!str) {
-      return "";
-    }
-    return str.replace(/<[^>]*>?/gm, "");
-  }
 
   const fetchProductData = async () => {
     try {
@@ -45,11 +39,10 @@ const Product = () => {
   }, [slug]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p className="text-center mt-20">Loading...</p>;
   }
-
   if (!productData) {
-    return <p>Produk tidak ditemukan.</p>;
+    return <p className="text-center mt-20">Produk tidak ditemukan.</p>;
   }
 
   const handleAddToCart = () => {
@@ -57,95 +50,89 @@ const Product = () => {
   };
 
   return (
-    <div className="border-t-2 pt-36 transition-opacity ease-in duration-500 opacity-100">
-      <div className="flex gap-12 sm:gap-12 flex-col sm:flex-row">
-        {/* Bagian Gambar Produk */}
-        <div className="flex-1 flex flex-col-reverse gap-3 sm:flex-row">
-          <div className="flex flex-row sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full">
-            {images.map((item, index) => (
+    <div className="pt-36 pb-10 border-t-2">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex flex-col sm:flex-row gap-8">
+          {/* Gambar Produk */}
+          <div className="flex flex-col sm:flex-row gap-4 flex-1">
+            <div className="flex sm:flex-col gap-2 overflow-x-auto sm:overflow-y-auto">
+              {images.map((item, index) => (
+                <img
+                  key={index}
+                  onClick={() => setSelectedImage(item)}
+                  src={item}
+                  alt={`Product ${index + 1}`}
+                  className={`cursor-pointer rounded-lg border ${
+                    selectedImage === item ? "border-blue-500" : "border-transparent"
+                  } w-20 h-20 object-cover`}
+                />
+              ))}
+            </div>
+            <div className="flex-1">
               <img
-                key={index}
-                onClick={() => setSelectedImage(item)}
-                src={item}
-                alt={`Product ${index + 1}`}
-                className={`w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer ${
-                  selectedImage === item ? "border-2 border-black" : ""
-                }`}
+                className="w-full rounded-lg shadow-lg object-cover"
+                src={selectedImage}
+                alt={productData.product_name}
               />
-            ))}
+            </div>
           </div>
-          <div className="w-full sm:w-[80%]">
-            <img
-              className="w-full h-auto"
-              src={selectedImage}
-              alt={productData.product_name}
-            />
-          </div>
-        </div>
-
-        {/* Bagian Detail Produk */}
-        <div className="flex-1">
-          <h1 className="font-medium text-2xl mt-2">
-            {productData.product_name}
-          </h1>
-          {productData.original_price === productData.sale_price && (
-            <p className="mt-5 text-3xl font-medium ">
-              Rp{productData.original_price.toLocaleString("id-ID")}
-            </p>
-          )}
-          {productData.original_price > productData.sale_price && (
-            <p className="mt-5 text-2xl text-gray-500 font-medium line-through">
-              Rp{productData.original_price.toLocaleString("id-ID")} 
-            </p>
-          )}
-          {productData.original_price > productData.sale_price && (
-            <span className="mt-5 text-1xl bg-red-500 font-medium">
-              Diskon {(((productData.original_price - productData.sale_price) / productData.original_price) * 100).toFixed(2)} %
-            </span>
-          )}
-          {productData.original_price !== productData.sale_price && (
-            <p className="mt-5 text-3xl font-medium ">
-              Rp{productData.sale_price.toLocaleString("id-ID")}
-            </p>
-          )}
-          
-
-          {/* Informasi Ukuran dan Stok Produk */}
-          <div className="flex flex-col gap-4 my-8">
-            <p>Ukuran:</p>
-            <div className="flex gap-2">
-              <span
-                className="px-4 py-2 border bg-black text-white"
-                style={{ cursor: "default" }}
-              >
+          {/* Detail Produk */}
+          <div className="flex-1">
+            <h1 className="text-3xl font-semibold mb-4">{productData.product_name}</h1>
+            <div className="mb-6">
+              {productData.original_price === productData.sale_price ? (
+                <p className="text-3xl font-bold">
+                  Rp {productData.original_price.toLocaleString("id-ID")}
+                </p>
+              ) : (
+                <>
+                  <p className="text-2xl font-bold text-red-500">
+                    Rp {productData.sale_price.toLocaleString("id-ID")}
+                  </p>
+                  <p className="text-lg text-gray-500 line-through">
+                    Rp {productData.original_price.toLocaleString("id-ID")}
+                  </p>
+                  <p className="mt-2 inline-block bg-red-100 text-red-600 px-3 py-1 rounded">
+                    Diskon{" "}
+                    {(
+                      ((productData.original_price - productData.sale_price) /
+                        productData.original_price) *
+                      100
+                    ).toFixed(2)}{" "}
+                    %
+                  </p>
+                </>
+              )}
+            </div>
+            <div className="mb-6">
+              <p className="mb-2 font-medium">Ukuran:</p>
+              <span className="inline-block px-4 py-2 bg-black text-white rounded">
                 {productData.size}
               </span>
             </div>
-            <p>Stok: {productData.stock}</p>
-          </div>
-
-          {/* Tombol Tambah ke Keranjang */}
-          <button
-            onClick={handleAddToCart}
-            className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700"
-          >
-            Tambah ke Keranjang
-          </button>
-
-          <hr className="mt-8 sm:w-4/5" />
-          <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
-            <p>100% Produk Original</p>
+            <p className="mb-6 text-gray-600">Stok: {productData.stock}</p>
+            <button
+              onClick={handleAddToCart}
+              className="bg-black text-white px-8 py-3 rounded hover:bg-gray-700 transition-colors"
+            >
+              Tambah ke Keranjang
+            </button>
           </div>
         </div>
-      </div>
-
-      {/* Bagian Deskripsi Produk */}
-      <div className="mt-20">
-        <div className="flex">
-          <b className="border px-5 py-3 text-sm">Deskripsi</b>
+        {/* Deskripsi Produk */}
+        <div className="mt-20">
+          <div className="mb-4">
+            <h2 className="inline-block px-5 py-3 border rounded text-lg font-medium">
+              Deskripsi
+            </h2>
+          </div>
+          <div className="border rounded-lg p-6 text-gray-700 leading-relaxed">
+            <div dangerouslySetInnerHTML={{ __html: productData.description }} />
+          </div>
         </div>
-        <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
-          <p>{stripHtmlTags(productData.description)}</p>
+        {/* Review Produk */}
+        <div className="mt-20">
+          <ProductReview productId={productData.id} />
         </div>
       </div>
     </div>

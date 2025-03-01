@@ -86,10 +86,10 @@ const Product = () => {
                 </p>
               ) : (
                 <>
-                  <p className="text-2xl font-bold text-red-500">
+                  <p className="text-2xl font-bold text-black">
                     Rp {productData.sale_price.toLocaleString("id-ID")}
                   </p>
-                  <p className="text-lg text-gray-500 line-through">
+                  <p className="text-lg text-red-500 line-through">
                     Rp {productData.original_price.toLocaleString("id-ID")}
                   </p>
                   <p className="mt-2 inline-block bg-red-100 text-red-600 px-3 py-1 rounded">

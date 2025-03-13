@@ -10,10 +10,10 @@ function SampleNextArrow(props) {
   const { onClick } = props;
   return (
     <div
-      className="absolute top-1/2 right-0 transform -translate-y-1/2 text-black text-2xl cursor-pointer z-10"
+      className="absolute top-1/2 right-2 transform -translate-y-1/2 text-white text-4xl cursor-pointer z-10 hover:scale-110 transition-all duration-300 drop-shadow-lg"
       onClick={onClick}
     >
-      <FaArrowCircleRight />
+      <FaArrowCircleRight className="bg-pink-500 rounded-full p-1 hover:bg-pink-700 transition-colors duration-300" />
     </div>
   );
 }
@@ -22,10 +22,10 @@ function SamplePrevArrow(props) {
   const { onClick } = props;
   return (
     <div
-      className="absolute top-1/2 left-0 transform -translate-y-1/2 text-black text-2xl cursor-pointer z-10"
+      className="absolute top-1/2 left-2 transform -translate-y-1/2 text-white text-4xl cursor-pointer z-10 hover:scale-110 transition-all duration-300 drop-shadow-lg"
       onClick={onClick}
     >
-      <FaArrowCircleLeft />
+      <FaArrowCircleLeft className="bg-pink-500 rounded-full p-1 hover:bg-pink-700 transition-colors duration-300" />
     </div>
   );
 }
@@ -50,14 +50,12 @@ const Categories = () => {
       });
   }, []);
 
-  // Tentukan jumlah slide yang ditampilkan
   const slidesToShow = categories.length < 3 ? categories.length : 3;
-  // Autoplay hanya aktif jika data lebih dari 3
   const autoplay = categories.length > 3;
 
   const sliderSettings = {
     dots: false,
-    infinite: categories.length > slidesToShow, // infinite jika ada lebih banyak data daripada slidesToShow
+    infinite: categories.length > slidesToShow,
     speed: 600,
     slidesToShow: slidesToShow,
     slidesToScroll: 1,
@@ -66,18 +64,9 @@ const Categories = () => {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: slidesToShow },
-      },
-      {
-        breakpoint: 768,
-        settings: { slidesToShow: Math.min(2, slidesToShow) },
-      },
-      {
-        breakpoint: 480,
-        settings: { slidesToShow: 1 },
-      },
+      { breakpoint: 1024, settings: { slidesToShow: slidesToShow } },
+      { breakpoint: 768, settings: { slidesToShow: Math.min(2, slidesToShow) } },
+      { breakpoint: 480, settings: { slidesToShow: 1 } },
     ],
   };
 
@@ -89,9 +78,7 @@ const Categories = () => {
       {loading ? (
         <p className="text-center text-gray-500">Memuat kategori...</p>
       ) : error ? (
-        <p className="text-center text-red-500">
-          Terjadi kesalahan saat mengambil data.
-        </p>
+        <p className="text-center text-red-500">Terjadi kesalahan saat mengambil data.</p>
       ) : (
         <Slider {...sliderSettings}>
           {categories.map((category) => (
@@ -104,15 +91,15 @@ const Categories = () => {
                 })
               }
             >
-              <div className="cursor-pointer group flex flex-col items-center p-4 bg-gradient-to-r from-gray-200 to-white rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
-                <div className="w-40 h-40 mb-2 overflow-hidden">
+              <div className="cursor-pointer group flex flex-col items-center p-4 bg-white/30 backdrop-blur-md rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                <div className="w-40 h-40 mb-2 overflow-hidden rounded-full border-4 border-pink-300 shadow-lg">
                   <img
                     src={`/storage/${category.image}`}
                     alt={category.category_name}
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
                   />
                 </div>
-                <p className="text-lg font-semibold text-white text-center mt-2 group-hover:text-black transition-colors duration-300">
+                <p className="text-lg font-semibold text-pink-700 text-center mt-2 group-hover:text-pink-900 transition-colors duration-300">
                   {category.category_name}
                 </p>
               </div>

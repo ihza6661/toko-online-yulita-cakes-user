@@ -32,10 +32,10 @@ const Orders = () => {
   }, [authFetch]);
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-semibold mb-6">Pesanan Saya</h2>
+    <div className="p-4 bg-pink-100 rounded-lg w-full">
+      <h2 className="text-2xl text-center text-pink-500 font-semibold mb-6">Pesanan Saya</h2>
       {orders.length === 0 ? (
-        <p>Anda belum memiliki pesanan.</p>
+        <p className="text-gray-600 text-center">Anda belum memiliki pesanan.</p>
       ) : (
         <table className="w-full text-left border-collapse">
           <thead>

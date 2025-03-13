@@ -2,6 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import ProductReview from "../components/ProductReview";
+import LatestCollection from "../components/LatestColletion";
+import RelatedProducts from "../components/RelatedProducts";
 
 const Product = () => {
   const { slug } = useParams();
@@ -10,131 +12,112 @@ const Product = () => {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
   const [loading, setLoading] = useState(true);
-
-  const fetchProductData = async () => {
-    try {
-      const response = await fetch(`/api/user/product/${slug}/detail`);
-      if (!response.ok) {
-        throw new Error("Produk tidak ditemukan.");
-      }
-      const data = await response.json();
-      if (data.product) {
-        const product = data.product;
-        setProductData(product);
-        setImages(product.images.map((image) => `/storage/${image.image}`));
-        setSelectedImage(`/storage/${product.images[0]?.image}`);
-      } else {
-        setProductData(null);
-        console.error("Produk tidak ditemukan.");
-      }
-    } catch (error) {
-      console.error("Error fetching product data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [activeTab, setActiveTab] = useState("description");
 
   useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const response = await fetch(`/api/user/product/${slug}/detail`);
+        if (!response.ok) throw new Error("Produk tidak ditemukan.");
+        const data = await response.json();
+        if (data.product) {
+          setProductData(data.product);
+          const imageUrls = data.product.images.map((img) => `/storage/${img.image}`);
+          setImages(imageUrls);
+          setSelectedImage(imageUrls[0]);
+        } else {
+          setProductData(null);
+        }
+      } catch (error) {
+        console.error("Error fetching product data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchProductData();
   }, [slug]);
 
-  if (loading) {
-    return <p className="text-center mt-20">Loading...</p>;
-  }
-  if (!productData) {
-    return <p className="text-center mt-20">Produk tidak ditemukan.</p>;
-  }
-
-  const handleAddToCart = () => {
-    addToCart(productData.id.toString());
-  };
+  if (loading) return <p className="text-center mt-20 text-pink-400 font-semibold">Loading...</p>;
+  if (!productData) return <p className="text-center mt-20 text-pink-400 font-semibold">Produk tidak ditemukan.</p>;
 
   return (
     <div className="pt-36 pb-10 border-t-2">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex flex-col sm:flex-row gap-8">
-          {/* Gambar Produk */}
+        <div className="flex flex-col sm:flex-row gap-10">
+          {/* Image Gallery */}
           <div className="flex flex-col sm:flex-row gap-4 flex-1">
-            <div className="flex sm:flex-col gap-2 overflow-x-auto sm:overflow-y-auto">
+            <div className="flex flex-row sm:flex-col gap-3 sm:w-1/5">
               {images.map((item, index) => (
                 <img
                   key={index}
                   onClick={() => setSelectedImage(item)}
                   src={item}
                   alt={`Product ${index + 1}`}
-                  className={`cursor-pointer rounded-lg border ${
-                    selectedImage === item ? "border-blue-500" : "border-transparent"
-                  } w-20 h-20 object-cover`}
+                  className="w-20 sm:w-full rounded-lg cursor-pointer border-2 border-transparent hover:border-pink-400 transition"
                 />
               ))}
             </div>
             <div className="flex-1">
-              <img
-                className="w-full rounded-lg shadow-lg object-cover"
-                src={selectedImage}
-                alt={productData.product_name}
-              />
+              <img className="w-full rounded-lg shadow-lg object-cover border" src={selectedImage} alt={productData.product_name} />
             </div>
           </div>
-          {/* Detail Produk */}
-          <div className="flex-1">
-            <h1 className="text-3xl font-semibold mb-4">{productData.product_name}</h1>
-            <div className="mb-6">
-              {productData.original_price === productData.sale_price ? (
-                <p className="text-3xl font-bold">
-                  Rp {productData.original_price.toLocaleString("id-ID")}
-                </p>
-              ) : (
-                <>
-                  <p className="text-2xl font-bold text-black">
-                    Rp {productData.sale_price.toLocaleString("id-ID")}
-                  </p>
-                  <p className="text-lg text-red-500 line-through">
-                    Rp {productData.original_price.toLocaleString("id-ID")}
-                  </p>
-                  <p className="mt-2 inline-block bg-red-100 text-red-600 px-3 py-1 rounded">
-                    Diskon{" "}
-                    {(
-                      ((productData.original_price - productData.sale_price) /
-                        productData.original_price) *
-                      100
-                    ).toFixed(2)}{" "}
-                    %
-                  </p>
-                </>
-              )}
-            </div>
-            <div className="mb-6">
-              <p className="mb-2 font-medium">Ukuran:</p>
-              <span className="inline-block px-4 py-2 bg-black text-white rounded">
-                {productData.size}
-              </span>
-            </div>
-            <p className="mb-6 text-gray-600">Stok: {productData.stock}</p>
-            <button
-              onClick={handleAddToCart}
-              className="bg-black text-white px-8 py-3 rounded hover:bg-gray-700 transition-colors"
-            >
-              Tambah ke Keranjang
-            </button>
-          </div>
-        </div>
-        {/* Deskripsi Produk */}
-        <div className="mt-20">
-          <div className="mb-4">
-            <h2 className="inline-block px-5 py-3 border rounded text-lg font-medium">
-              Deskripsi
-            </h2>
-          </div>
-          <div className="border rounded-lg p-6 text-gray-700 leading-relaxed">
-            <div dangerouslySetInnerHTML={{ __html: productData.description }} />
-          </div>
-        </div>
-        {/* Review Produk */}
-        <div className="mt-20">
-          <ProductReview productId={productData.id} />
+
+         {/* Product Details */}
+<div className="flex-1 p-6 bg-white shadow-lg rounded-xl">
+  <h1 className="text-4xl font-bold mb-3 text-gray-800">{productData.product_name}</h1>
+  <div className="flex items-center gap-3">
+    <p className="text-3xl font-semibold text-pink-900">Rp {productData.sale_price.toLocaleString("id-ID")}</p>
+    {productData.original_price !== productData.sale_price && (
+      <p className="text-lg text-gray-500 line-through">Rp {productData.original_price.toLocaleString("id-ID")}</p>
+    )}
+  </div>
+  <p className="mt-2 text-gray-400 font-medium">Stok: <span className="font-semibold">{productData.stock}</span></p>
+
+  <button
+  onClick={() => addToCart(productData.id.toString())}
+  className="mt-5 bg-pink-400 text-white px-6 py-3 rounded-full shadow hover:bg-pink-500 transition duration-300 ease-in-out hover:shadow-lg hover:scale-105"
+>
+  Tambah ke Keranjang
+</button>
+
+
+{/* Description & Reviews */}
+<div className="mt-6 border rounded-xl shadow bg-white overflow-hidden">
+  <div className="flex border-b bg-gray-50">
+    <button
+      className={`relative px-6 py-3 text-sm font-medium flex-1 transition text-gray-600 hover:text-gray-900 ${
+        activeTab === "description" ? "after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-pink-400" : ""
+      }`}
+      onClick={() => setActiveTab("description")}
+    >
+      Deskripsi
+    </button>
+    <button
+      className={`relative px-6 py-3 text-sm font-medium flex-1 transition text-gray-600 hover:text-gray-900 ${
+        activeTab === "reviews" ? "after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-pink-400" : ""
+      }`}
+      onClick={() => setActiveTab("reviews")}
+    >
+      Review
+    </button>
+  </div>
+
+  <div className="p-6 text-gray-600 bg-white ">
+    {activeTab === "description" ? (
+      <div className="bg-pink-50 rounded-lg p-6" dangerouslySetInnerHTML={{ __html: productData.description }} />
+    ) : (
+      <ProductReview productId={productData.id} />
+    )}
+  </div>
+</div>
+
+
+</div>
+
         </div>
       </div>
+      <LatestCollection />
+      <RelatedProducts />
     </div>
   );
 };

@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 const Addresses = () => {
   const { authFetch } = useContext(AppContext);
 
-  // Initial form data structure
   const getInitialFormData = () => ({
     recipient_name: "",
     phone_number: "",
@@ -24,15 +23,13 @@ const Addresses = () => {
   const [editingAddressId, setEditingAddressId] = useState(null);
 
   useEffect(() => {
-    document.title = "AS Denim - Alamat";
+    document.title = "Yulita Cakes - Alamat Pengiriman";
   }, []);
 
-  // Fetch addresses on component mount
   useEffect(() => {
     fetchAddresses();
   }, []);
 
-  // Fetch addresses function with useCallback
   const fetchAddresses = useCallback(async () => {
     try {
       const response = await authFetch("/api/user/addresses");
@@ -50,7 +47,6 @@ const Addresses = () => {
     }
   }, [authFetch]);
 
-  // Handle form input changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -65,232 +61,67 @@ const Addresses = () => {
     }));
   };
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Client-side validation
-    const validationErrors = validateFormData(formData);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-
-    try {
-      const url = editingAddressId
-        ? `/api/user/addresses/${editingAddressId}`
-        : "/api/user/addresses";
-      const method = editingAddressId ? "PUT" : "POST";
-
-      const response = await authFetch(url, {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        toast.success(data.message || "Alamat berhasil disimpan.");
-
-        // Refresh addresses to update default flags and new entries
-        await fetchAddresses();
-
-        resetForm();
-      } else if (response.status === 422) {
-        setErrors(data.errors || {});
-      } else {
-        throw new Error(data.message || "Gagal menyimpan alamat.");
-      }
-    } catch (error) {
-      console.error("Error saving address:", error);
-      toast.error(error.message || "Terjadi kesalahan saat menyimpan alamat.");
-    }
-  };
-
-  // Handle address deletion
-  const handleDelete = async (id) => {
-    if (window.confirm("Apakah Anda yakin ingin menghapus alamat ini?")) {
-      try {
-        const response = await authFetch(`/api/user/addresses/${id}`, {
-          method: "DELETE",
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          toast.success(data.message || "Alamat berhasil dihapus.");
-          // Refresh addresses after deletion
-          await fetchAddresses();
-        } else {
-          throw new Error(data.message || "Gagal menghapus alamat.");
-        }
-      } catch (error) {
-        console.error("Error deleting address:", error);
-        toast.error(
-          error.message || "Terjadi kesalahan saat menghapus alamat."
-        );
-      }
-    }
-  };
-
-  // Handle editing an address
-  const handleEdit = (address) => {
-    setFormData({
-      recipient_name: address.recipient_name,
-      phone_number: address.phone_number,
-      address_line1: address.address_line1,
-      address_line2: address.address_line2 || "",
-      province: address.province,
-      city: address.city,
-      postal_code: address.postal_code,
-      is_default: address.is_default,
-    });
-    setEditingAddressId(address.id);
-    setShowForm(true);
-  };
-
-  // Reset the form to initial state
-  const resetForm = () => {
-    setFormData(getInitialFormData());
-    setEditingAddressId(null);
-    setShowForm(false);
-    setErrors({});
-  };
-
-  // Client-side form validation function
-  const validateFormData = (data) => {
-    const errors = {};
-    if (!data.recipient_name)
-      errors.recipient_name = ["Nama penerima wajib diisi."];
-    if (!data.phone_number)
-      errors.phone_number = ["Nomor telepon wajib diisi."];
-    if (!data.address_line1)
-      errors.address_line1 = ["Alamat baris 1 wajib diisi."];
-    if (!data.province) errors.province = ["Provinsi wajib diisi."];
-    if (!data.city) errors.city = ["Kota wajib diisi."];
-    if (!data.postal_code) errors.postal_code = ["Kode pos wajib diisi."];
-    return errors;
-  };
-
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Alamat Saya</h2>
+    <div className="p-4 rounded-lg mx-auto bg-pink-100 inline-block lg:w-full">
+
+
+      <h2 className="text-2xl font-semibold text-center text-pink-500 mb-4">Alamat Pengiriman</h2>
 
       {!showForm ? (
         <button
           onClick={() => setShowForm(true)}
-          className="mb-4 bg-black text-white px-4 py-2"
+          className="mb-4 bg-pink-500 hover:bg-pink-600 text-white font-semibold px-4 py-2 rounded-lg"
         >
           Tambah Alamat Baru
         </button>
       ) : (
-        <form onSubmit={handleSubmit} className="mb-4 grid gap-4 max-w-md">
-          {renderFormFields()}
-          <div>
-            <button
-              type="submit"
-              className="bg-black text-white px-4 py-2 mr-2"
-            >
-              {editingAddressId ? "Perbarui Alamat" : "Simpan Alamat"}
-            </button>
-            <button
-              type="button"
-              onClick={resetForm}
-              className="bg-gray-500 text-white px-4 py-2"
-            >
-              Batal
-            </button>
-          </div>
-        </form>
+        <form onSubmit={() => {}} className="mb-4 grid gap-4 bg-pink-100 p-6 rounded-xl">
+  <div>
+    <label className="block text-pink-700">Nama Penerima</label>
+    <input 
+      type="text" 
+      name="recipient_name" 
+      className="w-full border border-pink-400 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50"
+    />
+  </div>
+
+  <div>
+    <label className="block text-pink-700">Nomor Telepon</label>
+    <input 
+      type="text" 
+      name="phone_number" 
+      className="w-full border border-pink-400 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50"
+    />
+  </div>
+
+  <button
+    type="submit"
+    className="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-4 py-3 rounded-lg shadow-md transition"
+  >
+    Simpan Alamat
+  </button>
+</form>
+
       )}
 
       {addresses.length === 0 ? (
-        <p>Anda belum menambahkan alamat.</p>
+        <p className="text-gray-600">Anda belum menambahkan alamat.</p>
       ) : (
         <div className="grid gap-4">
           {addresses.map((address) => (
-            <div key={address.id} className="border p-4 rounded">
-              <p className="font-semibold">{address.recipient_name}</p>
+            <div key={address.id} className="border border-pink-300 p-4 rounded-lg bg-white shadow-md">
+              <p className="font-semibold text-pink-700">{address.recipient_name}</p>
               <p>{address.phone_number}</p>
               <p>{address.address_line1}</p>
               {address.address_line2 && <p>{address.address_line2}</p>}
-              <p>
-                {address.city}, {address.province}, {address.postal_code}
-              </p>
-              {address.is_default && (
-                <span className="text-green-500">[Default]</span>
-              )}
-              <div className="mt-2">
-                <button
-                  className="text-blue-500 hover:underline mr-4"
-                  onClick={() => handleEdit(address)}
-                >
-                  Edit
-                </button>
-                <button
-                  className="text-red-500 hover:underline"
-                  onClick={() => handleDelete(address.id)}
-                >
-                  Hapus
-                </button>
-              </div>
+              <p>{address.city}, {address.province}, {address.postal_code}</p>
+              {address.is_default && <span className="text-green-500">[Default]</span>}
             </div>
           ))}
         </div>
       )}
     </div>
   );
-
-  // Render form fields with validation
-  function renderFormFields() {
-    const fields = [
-      { label: "Nama Penerima", name: "recipient_name", type: "text" },
-      { label: "Nomor Telepon", name: "phone_number", type: "text" },
-      { label: "Alamat Baris 1", name: "address_line1", type: "text" },
-      { label: "Alamat Baris 2", name: "address_line2", type: "text" },
-      { label: "Provinsi", name: "province", type: "text" },
-      { label: "Kota", name: "city", type: "text" },
-      { label: "Kode Pos", name: "postal_code", type: "text" },
-    ];
-
-    return (
-      <>
-        {fields.map((field) => (
-          <div key={field.name}>
-            <label htmlFor={field.name} className="block mb-1">
-              {field.label}
-            </label>
-            <input
-              id={field.name}
-              type={field.type}
-              name={field.name}
-              value={formData[field.name]}
-              onChange={handleChange}
-              className="w-full border p-2"
-            />
-            {errors[field.name] && (
-              <p className="text-red-500 text-sm">{errors[field.name][0]}</p>
-            )}
-          </div>
-        ))}
-        <div>
-          <label className="inline-flex items-center">
-            <input
-              type="checkbox"
-              name="is_default"
-              checked={formData.is_default}
-              onChange={handleChange}
-              className="form-checkbox"
-            />
-            <span className="ml-2">Jadikan alamat default</span>
-          </label>
-        </div>
-      </>
-    );
-  }
 };
 
 export default Addresses;

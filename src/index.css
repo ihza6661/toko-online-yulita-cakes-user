@@ -1,15 +1,38 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.navbar {
+  /* background: linear-gradient(90deg, #ffb6c1, #fff5e1); */
+  background: linear-gradient(90deg, #ffb6c1, #fff5e1);
+}
+h3 {
+  padding-bottom: 4px;
+}
 a.active hr {
   display: block;
 }
+.subscribe-button {
+  background: linear-gradient(90deg, #ffb6c1, #fff5e1);
+}
 
 * {
-  font-family: Outfit;
+  /* font-family: Outfit; */
+  /* font-family: "Playfair Display", serif; */
+}
+
+p,
+li {
+  /* font-family: "Pacifico", cursive; */
+  /* font-family: "Dancing Script", cursive; */
+  /* font-family: "Quicksand", sans-serif; */
+  font-weight: bolder;
 }
 
 .prata-regular {
@@ -24,7 +47,27 @@ a.active hr {
 
 @media (max-width: 640px) {
   a.active {
-    background-color: black;
-    color: white;
+    background: linear-gradient(90deg, #ffb6c1, #fff5e1);
+
+    color: black;
   }
+}
+
+.custom-toast-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* Prevents blocking interactions */
+}
+
+.custom-toast {
+  pointer-events: all; /* Allows interaction with the toast */
+  background-color: #ff4d6d !important; /* Custom background */
+  color: white !important;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  text-align: center;
 }

@@ -14,10 +14,9 @@ const AccountDetails = () => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    document.title = "AS Denim - Detail Akun";
+    document.title = "Cake Delights - Detail Akun";
   }, []);
 
-  // Mengambil data pengguna saat komponen dimount
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -42,7 +41,6 @@ const AccountDetails = () => {
     fetchUserData();
   }, [authFetch]);
 
-  // Menangani perubahan input
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -51,31 +49,26 @@ const AccountDetails = () => {
       [name]: value,
     }));
 
-    // Hapus error saat input diubah
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: null,
     }));
   };
 
-  // Menangani submission formulir
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Persiapkan data untuk dikirim
       const updateData = {
         name: userData.name,
         email: userData.email,
       };
 
-      // Sertakan field password jika pengguna ingin mengubah password
       if (userData.password) {
         updateData.password = userData.password;
         updateData.password_confirmation = userData.password_confirmation;
       }
 
-      // Mengirim permintaan ke API
       const response = await authFetch("/api/user/update", {
         method: "PUT",
         headers: {
@@ -88,7 +81,6 @@ const AccountDetails = () => {
 
       if (response.ok) {
         toast.success(data.message || "Profil berhasil diperbarui.");
-        // Hapus field password setelah berhasil update
         setUserData((prevState) => ({
           ...prevState,
           password: "",
@@ -96,7 +88,6 @@ const AccountDetails = () => {
         }));
         setErrors({});
       } else if (response.status === 422) {
-        // Error validasi; pastikan error berbentuk objek dan tampilkan pesan error pertama untuk tiap field
         setErrors(data.errors || {});
       } else {
         toast.error(data.message || "Gagal memperbarui profil.");
@@ -108,78 +99,73 @@ const AccountDetails = () => {
   };
 
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Detail Akun</h2>
-      <form onSubmit={handleSubmit} className="grid gap-4 max-w-md">
-        {/* Field Nama Lengkap */}
-        <div>
-          <label className="block mb-1">Nama Lengkap</label>
-          <input
-            type="text"
-            name="name"
-            value={userData.name}
-            onChange={handleChange}
-            className="w-full border p-2"
-          />
-          {errors.name && (
-            // Tampilkan pesan error pertama jika error.name berupa array
-            <p className="text-red-500 text-sm">{errors.name[0]}</p>
-          )}
-        </div>
+    <div className="p-2 rounded-lg w-full">
 
-        {/* Field email */}
-        <div>
-          <label className="block mb-1">email</label>
-          <input
-            type="text"
-            name="email"
-            value={userData.email}
-            className="w-full border p-2"
-            onChange={handleChange}
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email[0]}</p>
-          )}
-        </div>
+  <h2 className="text-2xl font-semibold text-pink-500 mb-6 text-center">Detail Akun</h2>
+  <form className="grid gap-5 bg-pink-100 p-6 rounded-xl shadow-lg w-full">
 
-        {/* Field Password Baru */}
-        <div>
-          <label className="block mb-1">Password Baru</label>
-          <input
-            type="password"
-            name="password"
-            value={userData.password}
-            onChange={handleChange}
-            className="w-full border p-2"
-          />
-          {errors.password && (
-            <p className="text-red-500 text-sm">{errors.password[0]}</p>
-          )}
-        </div>
 
-        {/* Field Konfirmasi Password Baru */}
-        <div>
-          <label className="block mb-1">Konfirmasi Password Baru</label>
-          <input
-            type="password"
-            name="password_confirmation"
-            value={userData.password_confirmation}
-            onChange={handleChange}
-            className="w-full border p-2"
-          />
-          {errors.password_confirmation && (
-            <p className="text-red-500 text-sm">
-              {errors.password_confirmation[0]}
-            </p>
-          )}
-        </div>
 
-        {/* Tombol Submit */}
-        <button type="submit" className="bg-black text-white px-4 py-2">
-          Simpan Perubahan
-        </button>
-      </form>
-    </div>
+  <div>
+    <label className="block text-pink-700 font-medium mb-2">Nama Lengkap</label>
+    <input
+      type="text"
+      name="name"
+      value={userData.name}
+      onChange={handleChange}
+      className="w-full border border-pink-400 bg-pink-50 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"
+    />
+    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name[0]}</p>}
+  </div>
+
+  <div>
+    <label className="block text-pink-700 font-medium mb-2">Email</label>
+    <input
+      type="email"
+      name="email"
+      value={userData.email}
+      onChange={handleChange}
+      className="w-full border border-pink-400 bg-pink-50 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"
+    />
+    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email[0]}</p>}
+  </div>
+
+  <div>
+    <label className="block text-pink-700 font-medium mb-2">Password Baru</label>
+    <input
+      type="password"
+      name="password"
+      value={userData.password}
+      onChange={handleChange}
+      className="w-full border border-pink-400 bg-pink-50 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"
+    />
+    {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password[0]}</p>}
+  </div>
+
+  <div>
+    <label className="block text-pink-700 font-medium mb-2">Konfirmasi Password Baru</label>
+    <input
+      type="password"
+      name="password_confirmation"
+      value={userData.password_confirmation}
+      onChange={handleChange}
+      className="w-full border border-pink-400 bg-pink-50 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"
+    />
+    {errors.password_confirmation && (
+      <p className="text-red-500 text-sm mt-1">{errors.password_confirmation[0]}</p>
+    )}
+  </div>
+
+  <button
+    type="submit"
+    className="w-full bg-pink-500 text-white py-3 rounded-lg shadow-md hover:bg-pink-600 transition font-medium"
+  >
+    Simpan Perubahan
+  </button>
+</form>
+
+</div>
+
   );
 };
 

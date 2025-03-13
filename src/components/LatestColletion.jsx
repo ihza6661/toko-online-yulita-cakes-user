@@ -10,7 +10,7 @@ const LatestCollection = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/user/get_products');
+        const response = await fetch('/api/user/get_latest_products');
         if (!response.ok) {
           throw new Error('Gagal memuat data produk');
         }
@@ -56,33 +56,38 @@ const LatestCollection = () => {
   }
 
   return (
-    <div className="my-10">
+    <div className="my-10 py-10 rounded-lg">
+
       {/* Judul Koleksi Terbaru */}
-      <div className="text-center py-8 text-3xl">
+      <div className="text-center py-6">
+
         <Title text1={'PRODUK'} text2={'TERBARU'} />
-        <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600">
-          Temukan koleksi produk terbaru kami yang dirancang dengan gaya dan kualitas terbaik.
+        <p className="w-3/4 mx-auto text-sm sm:text-base text-pink-700 font-medium">
+
+        Temukan koleksi terbaru dari kue lezat kami. Manjakan diri Anda dengan rasa yang istimewa! 💕
         </p>
       </div>
-      {/* Daftar Produk Terbaru */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
-        {latestProducts.map((item) => (
-          <div
-            key={item.id}
-            className="transform hover:scale-105 transition-transform duration-300 ease-in-out"
-          >
-            <ProductItem
-              id={item.id}
-              image={item.image}
-              name={item.name}
-              originalPrice={item.original_price}
-              salePrice={item.sale_price}
-              slug={item.slug}
-              stock={item.stock}
-            />
-          </div>
-        ))}
-      </div>
+
+{/* Daftar Produk Terbaru */}
+<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 px-4">
+  {latestProducts.map((item) => (
+    <div
+      key={item.id}
+      className="group relative  rounded-2xl transition-transform"
+    >
+      <ProductItem
+        id={item.id}
+        image={item.image}
+        name={item.name}
+        originalPrice={item.original_price}
+        salePrice={item.sale_price}
+        slug={item.slug}
+        stock={item.stock}
+      />
+    </div>
+  ))}
+</div>
+
     </div>
   );
 };

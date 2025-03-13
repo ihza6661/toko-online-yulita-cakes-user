@@ -10,65 +10,75 @@ const ProductItem = ({
   stock = 1,
 }) => {
   const isOutOfStock = stock === 0;
-
-  // Cek apakah ada diskon
   const hasDiscount = salePrice !== null && salePrice < originalPrice;
   const discountPercentage = hasDiscount
-    ? (((originalPrice - salePrice) / originalPrice) * 100).toFixed(2)
+    ? (((originalPrice - salePrice) / originalPrice) * 100).toFixed(0)
     : 0;
 
   const productContent = (
     <>
-      {/* Container gambar dengan tinggi tetap */}
-      <div className="relative overflow-hidden rounded-lg w-full">
-        {/* Badge diskon dengan z-index agar tetap terlihat */}
+      {/* Product Card with Taller Height */}
+      <div className="relative overflow-hidden rounded-2xl w-full shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col h-[340px]">
+        
+        {/* Discount Badge */}
         {hasDiscount && (
-          <span className="absolute top-2 left-2 z-20 bg-red-500 text-white text-xs px-2 py-1 rounded">
-            Diskon {discountPercentage}%
+          <span className="absolute top-2 left-2 z-20 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-md shadow">
+            -{discountPercentage}%
           </span>
         )}
-        <img
-          className="w-full h-full object-cover transition-transform ease-in-out duration-300 hover:scale-105"
-          src={image}
-          alt={name}
-          onError={(e) => (e.target.src = "/placeholder.jpg")}
-        />
-        {isOutOfStock && (
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-30">
-            <span className="text-white text-sm font-bold">Stok Habis</span>
+
+        {/* Product Image */}
+        <div className="relative">
+          <img
+            className="w-full h-56 object-cover transition-transform duration-300 hover:scale-105 rounded-t-2xl"
+            src={image}
+            alt={name}
+            onError={(e) => (e.target.src = "/placeholder.jpg")}
+          />
+
+          {/* Out of Stock Overlay */}
+          {isOutOfStock && (
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+              <span className="text-white text-sm font-bold">Stok Habis</span>
+            </div>
+          )}
+        </div>
+
+        {/* Product Details */}
+        <div className="flex flex-col flex-grow p-4 text-center">
+          <p className="text-md font-semibold text-gray-800 flex-grow">{name}</p>
+          
+          {/* Pricing */}
+          <div className="mt-auto">
+            {hasDiscount ? (
+              <div>
+                <p className="text-xs text-gray-500 line-through">
+                  Rp{originalPrice.toLocaleString("id-ID")}
+                </p>
+                <p className="text-sm font-bold text-red-600">
+                  Rp{salePrice.toLocaleString("id-ID")}
+                </p>
+              </div>
+            ) : (
+              <p className="text-sm font-bold text-green-600">
+                Rp{originalPrice.toLocaleString("id-ID")}
+              </p>
+            )}
           </div>
-        )}
-      </div>
-      {/* Nama Produk */}
-      <p className="pt-3 pb-1 text-sm font-semibold text-center">{name}</p>
-      {/* Harga Produk */}
-      <div className="flex flex-col items-center">
-        {hasDiscount ? (
-          <>
-            <p className="text-xs text-gray-500 line-through">
-              Rp{originalPrice.toLocaleString("id-ID")}
-            </p>
-            <p className="text-sm font-medium text-green-600">
-              Rp{salePrice.toLocaleString("id-ID")}
-            </p>
-          </>
-        ) : (
-          <p className="text-sm font-medium text-green-600">
-            Rp{originalPrice.toLocaleString("id-ID")}
-          </p>
-        )}
+        </div>
       </div>
     </>
   );
 
   return (
-    <div className="flex flex-col items-center gap-3 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 h-96">
+    <div className="w-full h-auto">
+
       {slug ? (
-        <Link className="text-gray-700 w-full cursor-pointer" to={`/product/${slug}`}>
+        <Link to={`/product/${slug}`} className="block">
           {productContent}
         </Link>
       ) : (
-        <div className="text-gray-700 w-full">{productContent}</div>
+        <div>{productContent}</div>
       )}
     </div>
   );

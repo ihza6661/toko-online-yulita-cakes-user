@@ -2,6 +2,8 @@ import { useContext, useState, useRef, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { ChevronLeft } from "lucide-react";
+
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 
@@ -139,7 +141,8 @@ const Navbar = () => {
                 <div className="flex flex-col text-gray-600 p-6">
                     {/* Back Button */}
                     <div onClick={() => setSidebarVisible(false)} className="flex items-center gap-4 p-3 cursor-pointer hover:bg-pink-200 rounded-lg transition-all duration-200 ease-in-out">
-                        <img className="h-4 rotate-180" src={assets.dropdown_icon} alt="Back Icon" />
+                        {/* <img className="h-4 rotate-180" src={assets.dropdown_icon} alt="Back Icon" /> */}
+                        <ChevronLeft className="h-5 w-5 text-gray-800 stroke-[2]" />
                         <p className="text-gray-800 font-semibold">Kembali</p>
                     </div>
 

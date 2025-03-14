@@ -1,5 +1,6 @@
 import React from 'react';
 import Title from '../components/Title';
+import { Phone, Mail, MapPin, Instagram  } from "lucide-react";
 
 const Contact = () => {
     return (
@@ -19,18 +20,32 @@ const Contact = () => {
                 
                 {/* Contact Info Section */}
 <div className="flex flex-col justify-start md:justify-center items-center md:items-start gap-6 text-center md:text-left max-w-md w-full">
-    <div className="w-full">
+    {/* <div className="w-full">
         <h3 className="font-semibold text-2xl text-pink-900">Toko Kami</h3>
-        <p className="text-pink-500 leading-relaxed">
-            Jl. Manis No. 21, <br /> Komp. Sweet Delights, Jakarta
-        </p>
-    </div>
+        <p className="text-pink-500 leading-relaxed flex flex-col gap-1">
+ 
+  <span className="flex items-center gap-2">
+    <MapPin size={18} /> Jalan Raya Desa Kapur No. 12 Pontianak Barat.
+  </span>
+  <span className="flex items-center gap-2">
+    <MapPin size={18} /> Jalan Prona No. 07 Pontianak Timur.
+  </span>
+</p>
+    </div> */}
     <div className="w-full">
     <h3 className="font-semibold text-2xl text-pink-900">Kontak</h3>
 
-        <p className="text-pink-500 leading-relaxed">
-            +62 (8)1234 567890 <br /> yulita_cake@sweetcakes.com
-        </p>
+    <p className="text-pink-500 leading-relaxed flex flex-col gap-1">
+  <span className="flex items-center gap-2">
+    <Phone size={18} /> +6289603324917
+  </span>
+  <span className="flex items-center gap-2">
+    <Instagram size={18} /> @cakesyulita
+  </span>
+  <span className="flex items-center gap-2">
+    <Mail size={18} /> cakesyulita57@gmail.com
+  </span>
+</p>
     </div>
     <div className="w-full">
     <h3 className="font-semibold text-2xl text-pink-900">Pesanan & Custom Cake</h3>
@@ -38,10 +53,13 @@ const Contact = () => {
         <p className="text-pink-500 leading-relaxed">Dapatkan kue spesial untuk acara Anda</p>
     </div>
     <button 
-        className="w-full md:w-auto border border-black px-8 py-3 text-sm font-medium rounded-lg hover:bg-black hover:text-white transition-all duration-300 shadow-md"
-    >
-        Pesan Sekarang
-    </button>
+    className="w-full md:w-auto bg-pink-500 border border-pink-500 px-8 py-3 text-sm font-medium rounded-lg text-white transition-all duration-300 shadow-md
+               hover:bg-pink-600 hover:shadow-pink-400/50 hover:scale-105 
+               active:scale-95"
+>
+    Pesan Sekarang
+</button>
+
 </div>
 
             </div>

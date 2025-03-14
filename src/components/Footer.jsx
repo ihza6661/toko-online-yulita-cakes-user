@@ -46,13 +46,14 @@ const Footer = () => {
                         <li className="cursor-pointer hover:text-pink-900 transition-all duration-300 hover:translate-x-1">
                             <a href="tel:+6289692070289" className="flex items-center">
                                 <FontAwesomeIcon icon={faPhone} className="mr-2 text-pink-500" />
-                                +62 (8)9692 070289
+                                +6289603324917
+
                             </a>
                         </li>
                         <li className="cursor-pointer hover:text-pink-900 transition-all duration-300 hover:translate-x-1">
                             <a href="mailto:yulita_cakes@gmail.com" className="flex items-center">
                                 <FontAwesomeIcon icon={faEnvelope} className="mr-2 text-pink-500" />
-                                yulita_cakes@gmail.com
+                                cakesyulita57@gmail.com
                             </a>
                         </li>
                     </ul>

@@ -59,7 +59,7 @@ const About = () => {
             <div className='my-10 flex flex-col md:flex-row gap-10 items-center'>
                 <img className='w-full md:max-w-[200px]' src="/yulita_cake.png" alt="Yulita Cake" />
                 <div className="flex flex-col justify-center gap-4 md:w-2/4 text-gray-600 text-center md:text-left">
-                    <p>Terima kasih atas ketertarikan Anda pada produk Yulita Cakes 🍰✨.
+                    <p>Harvest merupakan jaringan toko roti dan kue kering bergaya Eropa terbesar di Indonesia .🍰✨
                         <br /> Di bawah ini adalah alamat toko kami 🏬 yang dapat Anda kunjungi dan tersebar di seluruh Indonesia 🇮🇩🎉
                     </p>
                 </div>

@@ -30,7 +30,7 @@ const ProductItem = ({
         {/* Product Image */}
         <div className="relative">
           <img
-            className="w-full h-56 object-cover transition-transform duration-300 hover:scale-105 rounded-t-2xl"
+            className="w-full h-56 object-contain transition-transform duration-300 hover:scale-105 rounded-t-2xl"
             src={image}
             alt={name}
             onError={(e) => (e.target.src = "/placeholder.jpg")}

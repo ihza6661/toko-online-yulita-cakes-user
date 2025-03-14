@@ -174,14 +174,16 @@ const Collection = () => {
         <Title text1={'SEMUA'} text2={'PRODUK ✨'} />
 
 
-          <select
-                            onChange={(e) => setSortType(e.target.value)}
-                            className="border-2 border-gray-300 text-sm px-2 py-2 w-48 h-10 rounded-md "
-                        >
-            <option value="relevent">Urutkan: Paling Sesuai</option>
-            <option value="low-high">Urutkan: Harga Terendah</option>
-            <option value="high-low">Urutkan: Harga Tertinggi</option>
-          </select>
+        <select
+    onChange={(e) => setSortType(e.target.value)}
+    className="border-2 border-gray-300 text-sm px-2 py-2 w-48 h-10 rounded-md 
+               bg-gradient-to-r from-pink-300 to-pink-400 text-gray-800 shadow-md"
+>
+    <option value="relevent">Urutkan: Paling Sesuai</option>
+    <option value="low-high">Urutkan: Harga Terendah</option>
+    <option value="high-low">Urutkan: Harga Tertinggi</option>
+</select>
+
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">

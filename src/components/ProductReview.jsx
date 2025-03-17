@@ -82,13 +82,18 @@ const ProductReview = ({ productId }) => {
     <div className=" bg-pink-50 rounded-lg p-2 shadow-sm">
       <h3 className="text-lg font-bold text-pink-600 mb-4">🍰 Ulasan Produk</h3>
       {token && eligible && (
-        <form onSubmit={(e) => e.preventDefault()} className="mb-6 bg-white p-4 rounded-lg shadow">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="mb-6 bg-white p-4 rounded-lg shadow"
+        >
           <h3 className="text-xl font-semibold mb-3">Berikan Rating Anda</h3>
           <div className="flex items-center gap-1 mb-3">
             {[1, 2, 3, 4, 5].map((star) => (
               <button key={star} type="button" onClick={() => setRating(star)}>
                 <FaStar
-                  className={`text-3xl ${rating >= star ? "text-yellow-400" : "text-gray-300"}`}
+                  className={`text-3xl ${
+                    rating >= star ? "text-yellow-400" : "text-gray-300"
+                  }`}
                 />
               </button>
             ))}
@@ -109,15 +114,24 @@ const ProductReview = ({ productId }) => {
       <div>
         {reviews.length > 0 ? (
           reviews.map((review) => (
-            <div key={review.id} className="bg-white p-4 rounded-lg shadow-md mb-4">
+            <div
+              key={review.id}
+              className="bg-white p-4 rounded-lg shadow-md mb-4"
+            >
               <div className="flex items-center gap-2 mb-2">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <FaStar
                     key={star}
-                    className={`text-xl ${review.rating >= star ? "text-yellow-400" : "text-gray-300"}`}
+                    className={`text-xl ${
+                      review.rating >= star
+                        ? "text-yellow-400"
+                        : "text-gray-300"
+                    }`}
                   />
                 ))}
-                <span className="text-sm text-gray-600">{review.user?.name || "Anonim"}</span>
+                <span className="text-sm text-gray-600">
+                  {review.user?.name || "Anonim"}
+                </span>
               </div>
               <p className="text-gray-800">{review.review}</p>
             </div>

@@ -65,7 +65,10 @@ const Categories = () => {
     prevArrow: <SamplePrevArrow />,
     responsive: [
       { breakpoint: 1024, settings: { slidesToShow: slidesToShow } },
-      { breakpoint: 768, settings: { slidesToShow: Math.min(2, slidesToShow) } },
+      {
+        breakpoint: 768,
+        settings: { slidesToShow: Math.min(2, slidesToShow) },
+      },
       { breakpoint: 480, settings: { slidesToShow: 1 } },
     ],
   };
@@ -78,7 +81,9 @@ const Categories = () => {
       {loading ? (
         <p className="text-center text-gray-500">Memuat kategori...</p>
       ) : error ? (
-        <p className="text-center text-red-500">Terjadi kesalahan saat mengambil data.</p>
+        <p className="text-center text-red-500">
+          Terjadi kesalahan saat mengambil data.
+        </p>
       ) : (
         <Slider {...sliderSettings}>
           {categories.map((category) => (

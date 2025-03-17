@@ -10,11 +10,10 @@ const Home = () => {
   }, []);
   return (
     <div className="pt-32">
-      <Hero />
+      {/* <Hero /> */}
       <Categories />
       <LatestColletion />
       {/* <NewsletterBox /> */}
-
     </div>
   );
 };

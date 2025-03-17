@@ -121,58 +121,60 @@ const AuthForm = () => {
 
   return (
     <div className="py-24">
-  <form
-    onSubmit={handleSubmit}
-    className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-5 text-gray-700 bg-white p-8 rounded-3xl shadow-lg"
-  >
-    {/* Title Section */}
-    <div className="inline-flex items-center gap-3 mb-4 mt-6">
-      <p className="prata-reguler text-3xl text-pink-600 font-semibold">
-        {isLogin ? "MASUK" : "DAFTAR"}
-      </p>
-      <hr className="border-none h-[2px] w-10 bg-pink-400 rounded-full" />
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-5 text-gray-700 bg-white p-8 rounded-3xl shadow-lg"
+      >
+        {/* Title Section */}
+        <div className="inline-flex items-center gap-3 mb-4 mt-6">
+          <p className="prata-reguler text-3xl text-pink-600 font-semibold">
+            {isLogin ? "MASUK" : "DAFTAR"}
+          </p>
+          <hr className="border-none h-[2px] w-10 bg-pink-400 rounded-full" />
+        </div>
+
+        {/* Error Message */}
+        {errors.global && (
+          <div className="text-red-500 text-sm bg-red-100 px-4 py-2 rounded-md">
+            <p>{errors.global}</p>
+          </div>
+        )}
+
+        {/* Form Fields */}
+        {renderFormFields()}
+
+        {/* Submit Button */}
+        <button className="bg-pink-500 text-white font-medium px-8 py-3 mt-4 rounded-full transition duration-300 hover:bg-pink-600 shadow-md">
+          {isLogin ? "Masuk" : "Daftar"}
+        </button>
+
+        {/* Switch Form Type */}
+        <p className="mt-4 text-sm">
+          {isLogin ? "Belum punya akun?" : "Sudah punya akun?"}{" "}
+          <span
+            className="text-pink-500 cursor-pointer font-semibold"
+            onClick={toggleForm}
+          >
+            {isLogin ? "Daftar" : "Masuk"}
+          </span>
+        </p>
+
+        {/* Forgot Password */}
+        {isLogin && (
+          <p className="mt-2 text-sm">
+            <Link to="/forgot-password" className="text-pink-500 font-medium">
+              Lupa Password?
+            </Link>
+          </p>
+        )}
+      </form>
     </div>
-
-    {/* Error Message */}
-    {errors.global && (
-      <div className="text-red-500 text-sm bg-red-100 px-4 py-2 rounded-md">
-        <p>{errors.global}</p>
-      </div>
-    )}
-
-    {/* Form Fields */}
-    {renderFormFields()}
-
-    {/* Submit Button */}
-    <button className="bg-pink-500 text-white font-medium px-8 py-3 mt-4 rounded-full transition duration-300 hover:bg-pink-600 shadow-md">
-      {isLogin ? "Masuk" : "Daftar"}
-    </button>
-
-    {/* Switch Form Type */}
-    <p className="mt-4 text-sm">
-      {isLogin ? "Belum punya akun?" : "Sudah punya akun?"}{" "}
-      <span className="text-pink-500 cursor-pointer font-semibold" onClick={toggleForm}>
-        {isLogin ? "Daftar" : "Masuk"}
-      </span>
-    </p>
-
-    {/* Forgot Password */}
-    {isLogin && (
-      <p className="mt-2 text-sm">
-        <Link to="/forgot-password" className="text-pink-500 font-medium">
-          Lupa Password?
-        </Link>
-      </p>
-    )}
-  </form>
-</div>
-
   );
 
   // Render form fields with validation
   function renderFormFields() {
     const fields = [];
-  
+
     if (!isLogin) {
       fields.push({
         label: "Nama Lengkap",
@@ -181,12 +183,12 @@ const AuthForm = () => {
         required: true,
       });
     }
-  
+
     fields.push(
       { label: "Email", name: "email", type: "email", required: true },
       { label: "Password", name: "password", type: "password", required: true }
     );
-  
+
     if (!isLogin) {
       fields.push({
         label: "Konfirmasi Password",
@@ -195,7 +197,7 @@ const AuthForm = () => {
         required: true,
       });
     }
-  
+
     return (
       <>
         {fields.map((field) => (
@@ -217,7 +219,6 @@ const AuthForm = () => {
       </>
     );
   }
-  
 };
 
 export default AuthForm;

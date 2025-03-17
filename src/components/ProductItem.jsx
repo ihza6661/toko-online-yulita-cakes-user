@@ -19,7 +19,6 @@ const ProductItem = ({
     <>
       {/* Product Card with Taller Height */}
       <div className="relative overflow-hidden rounded-2xl w-full shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col h-[340px]">
-        
         {/* Discount Badge */}
         {hasDiscount && (
           <span className="absolute top-2 left-2 z-20 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-md shadow">
@@ -46,8 +45,10 @@ const ProductItem = ({
 
         {/* Product Details */}
         <div className="flex flex-col flex-grow p-4 text-center">
-          <p className="text-md font-semibold text-gray-800 flex-grow">{name}</p>
-          
+          <p className="text-md font-semibold text-gray-800 flex-grow">
+            {name}
+          </p>
+
           {/* Pricing */}
           <div className="mt-auto">
             {hasDiscount ? (
@@ -60,7 +61,7 @@ const ProductItem = ({
                 </p>
               </div>
             ) : (
-              <p className="text-sm font-bold text-green-600">
+              <p className="text-sm font-bold text-red-600">
                 Rp{originalPrice.toLocaleString("id-ID")}
               </p>
             )}
@@ -72,7 +73,6 @@ const ProductItem = ({
 
   return (
     <div className="w-full h-auto">
-
       {slug ? (
         <Link to={`/product/${slug}`} className="block">
           {productContent}

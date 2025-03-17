@@ -40,6 +40,12 @@ const Cart = () => {
             );
           }
 
+          // Jika sale_price bernilai 0, gunakan original_price sebagai harga final
+          const finalPrice =
+            Number(productData.sale_price) === 0
+              ? Number(productData.original_price)
+              : Number(productData.sale_price);
+
           return (
             <div
               key={item.id}
@@ -57,10 +63,13 @@ const Cart = () => {
                   alt={productData.product_name || "Product image"}
                 />
                 <div>
-                  <p className="text-lg font-medium">{productData.product_name}</p>
+                  <p className="text-lg font-medium">
+                    {productData.product_name}
+                  </p>
                   <div className="flex items-center justify-center gap-4 mt-2">
                     <p className="text-lg font-semibold text-pink-600">
-                      {currency}{Number(productData.sale_price).toLocaleString("id-ID")}
+                      {currency}
+                      {finalPrice.toLocaleString("id-ID")}
                     </p>
                     {item.size && (
                       <p className="px-3 py-1 border bg-pink-100 text-pink-600 rounded-md">

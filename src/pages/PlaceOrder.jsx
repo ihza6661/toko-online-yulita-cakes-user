@@ -7,7 +7,7 @@ import { FiArrowDown } from "react-icons/fi";
 
 const PlaceOrder = () => {
   useEffect(() => {
-    document.title = "AS Denim - Pembayaran";
+    document.title = "Yulita Cakes - Pembayaran";
   });
 
   useEffect(() => {
@@ -160,7 +160,7 @@ const PlaceOrder = () => {
       const data = await response.json();
       const snapToken = data.snapToken;
 
-      const snapContainer = document.getElementById("snap-container");
+      const snapContainer = document.getElementById("pay-button");
       if (!snapContainer) {
         console.error("Snap container not found.");
         setIsProcessing(false);
@@ -171,12 +171,11 @@ const PlaceOrder = () => {
         window.snap.hide();
       }
 
-      window.snap.embed(snapToken, {
-        embedId: "snap-container",
+      window.snap.pay(snapToken, {
         onSuccess: function () {
           toast.success("Pembayaran berhasil!");
           clearCart();
-          navigate("/payment-success", {state: {paymentSuccess: true}});
+          navigate("/payment-success", { state: { paymentSuccess: true } });
         },
         onPending: function () {
           toast.info("Pembayaran tertunda.");
@@ -221,7 +220,7 @@ const PlaceOrder = () => {
   };
 
   return (
-    <div className="pt-24 sm:pt-36 min-h-screen flex flex-col">
+    <div className="pt-24 mb-10 sm:pt-36 min-h-screen flex flex-col bg-pink-50 rounded-2xl">
       <form
         onSubmit={onSubmitHandler}
         className="flex flex-col sm:flex-row justify-between gap-8 mx-4 sm:mx-16"
@@ -230,38 +229,56 @@ const PlaceOrder = () => {
         <div className="flex flex-col gap-6 w-full sm:w-2/3">
           {/* Shipping Address */}
           <div>
-            <Title text1={"Alamat"} text2={"Pengiriman"} />
+            <Title
+              text1={"Alamat"}
+              text2={"Pengiriman"}
+              className="text-pink-700 font-cursive"
+            />
             {defaultAddress ? (
-              <div className="border border-gray-300 p-4 rounded mt-4">
-                <p className="font-semibold">{defaultAddress.recipient_name}</p>
-                <p>{defaultAddress.phone_number}</p>
-                <p>{defaultAddress.address_line1}</p>
-                {defaultAddress.address_line2 && (
-                  <p>{defaultAddress.address_line2}</p>
-                )}
-                <p>
-                  {defaultAddress.city}, {defaultAddress.province},{" "}
-                  {defaultAddress.postal_code}
-                </p>
-                {/* <p>Nomor HP: {defaultAddress.phone_number}</p> */}
+              <div className="border bg-white border-pink-300 p-6 rounded-2xl shadow-lg mt-6">
+                <div className="space-y-2">
+                  <p className="font-semibold text-pink-700 text-lg">
+                    {defaultAddress.recipient_name}
+                  </p>
+                  <p className="text-gray-700">{defaultAddress.phone_number}</p>
+                  <p className="text-gray-600">
+                    {defaultAddress.address_line1}
+                  </p>
+                  {defaultAddress.address_line2 && (
+                    <p className="text-gray-600">
+                      {defaultAddress.address_line2}
+                    </p>
+                  )}
+                  <p className="text-gray-600">
+                    {defaultAddress.city}, {defaultAddress.province},{" "}
+                    {defaultAddress.postal_code}
+                  </p>
+                </div>
+
                 <button
                   type="button"
                   onClick={() => navigate("/dashboard/addresses")}
-                  className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+                  className="mt-6 bg-pink-600 hover:bg-pink-700 text-white px-5 py-2.5 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:scale-105"
                 >
                   Ubah Alamat
                 </button>
               </div>
             ) : (
-              <p className="mt-4">Memuat alamat...</p>
+              <p className="mt-4 text-gray-600 leading-relaxed">
+                Memuat alamat...
+              </p>
             )}
           </div>
 
           {/* Cart Items */}
           <div>
-            <Title text1={"Produk"} text2={"Pesanan"} />
+            <Title
+              text1={"Produk"}
+              text2={"Pesanan"}
+              className="text-pink-700 font-cursive"
+            />
             {cartItems.length > 0 ? (
-              <div className="border border-gray-300 p-4 rounded mt-4">
+              <div className="border border-pink-300 bg-white p-4 rounded-lg shadow-md mt-4">
                 <ul className="space-y-4">
                   {cartItems.map((cartItem) => (
                     <li key={cartItem.id} className="flex items-center">
@@ -274,46 +291,50 @@ const PlaceOrder = () => {
                         alt={
                           cartItem.productData.product_name || "Product image"
                         }
-                        className="w-20 h-20 object-cover mr-4 rounded"
+                        className="w-20 h-20 object-cover mr-4 rounded-lg border border-pink-300"
                       />
                       <div className="flex-1">
-                        <p className="font-semibold text-lg">
+                        <p className="font-semibold text-lg text-pink-800">
                           {cartItem.productData.product_name}
                         </p>
-                        <p className="text-sm text-gray-600">
-                          Ukuran: {cartItem.productData.size}
+                        {/* <p className="text-sm text-gray-500 font-normal">Ukuran: {cartItem.productData.size}</p> */}
+                        <p className="text-sm text-gray-500 font-normal">
+                          Berat : {cartItem.productData.weight} gram
                         </p>
-                        <p className="text-sm text-gray-600">
-                          Berat: {cartItem.productData.weight} gram
+                        <p className="text-sm text-gray-500 font-normal">
+                          Harga:{" "}
+                          <span className="font-medium text-gray-600">Rp.</span>{" "}
+                          <span className="font-semibold text-gray-700">
+                            {(
+                              cartItem.productData.sale_price ||
+                              cartItem.productData.original_price
+                            ).toLocaleString()}
+                          </span>
                         </p>
-                        <p className="text-sm text-gray-600">
-                          Harga: Rp{" "}
-                          {(
-                            cartItem.productData.sale_price ||
-                            cartItem.productData.original_price
-                          ).toLocaleString()}
-                        </p>
+
                         {/* Quantity controls */}
                         <div className="flex items-center mt-2">
                           <button
                             type="button"
                             onClick={() => handleDecreaseQuantity(cartItem)}
-                            className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-l"
+                            className="px-3 py-1 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-700 font-medium"
                           >
                             -
                           </button>
-                          <span className="px-4 py-1 border-t border-b">
+                          <span className="px-4 py-1 border-t border-b border-pink-300 text-pink-700 font-medium">
                             {cartItem.qty}
                           </span>
                           <button
                             type="button"
                             onClick={() => handleIncreaseQuantity(cartItem)}
-                            className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-r"
+                            className="px-3 py-1 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-700 font-medium"
                           >
                             +
                           </button>
                         </div>
                       </div>
+
+                      
                       {/* Remove item button */}
                       <button
                         type="button"
@@ -327,7 +348,9 @@ const PlaceOrder = () => {
                 </ul>
               </div>
             ) : (
-              <p className="mt-4">Keranjang belanja Anda kosong.</p>
+              <p className="mt-4 text-gray-600">
+                Keranjang belanja Anda kosong.
+              </p>
             )}
           </div>
         </div>
@@ -344,14 +367,18 @@ const PlaceOrder = () => {
 
           {/* Shipping Options */}
           <div>
-            <Title text1={"Metode"} text2={"Pengiriman"} />
+            <Title
+              text1={"Metode"}
+              text2={"Pengiriman"}
+              className="text-pink-700 font-cursive"
+            />
             {shippingOptions.length > 0 ? (
               <div className="relative mt-4">
-                <div className="max-h-60 overflow-y-auto pr-2 border border-gray-200 rounded">
+                <div className="max-h-60 overflow-y-auto pr-2 border border-pink-300 bg-white rounded-lg shadow-md">
                   {shippingOptions.map((option, index) => (
                     <div
                       key={index}
-                      className="flex items-start p-3 border-b border-gray-100 last:border-b-0"
+                      className="flex items-start p-3 border-b border-pink-200 last:border-b-0"
                     >
                       <input
                         type="radio"
@@ -365,7 +392,7 @@ const PlaceOrder = () => {
                         htmlFor={`shippingOption-${index}`}
                         className="ml-3 text-sm leading-tight"
                       >
-                        <span className="font-medium">
+                        <span className="font-medium text-pink-800">
                           {option.name} - {option.service}
                         </span>
                         <br />
@@ -384,29 +411,22 @@ const PlaceOrder = () => {
                     </div>
                   ))}
                 </div>
-                {/* Indikator scroll */}
-                <div className="mt-2 flex items-center justify-center text-gray-500 text-xs space-x-1">
-                  <span>Geser ke bawah untuk melihat lebih banyak opsi</span>
-                  <FiArrowDown className="animate-bounce" />
-                </div>
               </div>
             ) : (
-              <p className="mt-4">Memuat opsi pengiriman...</p>
+              <p className="mt-4 text-gray-600">Memuat opsi pengiriman...</p>
             )}
 
-            <div className="w-full text-center mt-8">
+            <div className="w-full text-center mt-8 mb-8">
               <button
                 type="submit"
-                className="w-full bg-black hover:bg-gray-800 text-white px-4 py-3 text-lg rounded disabled:opacity-50"
+                id="pay-button"
+                className="w-full bg-pink-700 hover:bg-pink-800 text-white px-4 py-3 text-lg rounded-lg shadow-md disabled:opacity-50"
                 disabled={!defaultAddress || isProcessing}
               >
                 {isProcessing ? "Memproses..." : "Bayar Sekarang"}
               </button>
             </div>
           </div>
-
-          {/* Payment Widget */}
-          <div id="snap-container" className="w-full mt-8"></div>
         </div>
       </form>
     </div>

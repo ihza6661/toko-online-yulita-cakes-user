@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import Title from './Title';
-import ProductItem from './ProductItem';
+import { useState, useEffect } from "react";
+import Title from "./Title";
+import ProductItem from "./ProductItem";
 
 const LatestCollection = () => {
   const [latestProducts, setLatestProducts] = useState([]);
@@ -10,15 +10,19 @@ const LatestCollection = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/user/get_latest_products');
+        const response = await fetch("/api/user/get_latest_products");
         if (!response.ok) {
-          throw new Error('Gagal memuat data produk');
+          throw new Error("Gagal memuat data produk");
         }
         const data = await response.json();
         const productsWithImages = data
-          .filter((product) => product.images.some((img) => img.is_primary === 1))
+          .filter((product) =>
+            product.images.some((img) => img.is_primary === 1)
+          )
           .map((product) => {
-            const primaryImage = product.images.find((img) => img.is_primary === 1);
+            const primaryImage = product.images.find(
+              (img) => img.is_primary === 1
+            );
             return {
               id: product.id,
               name: product.product_name,
@@ -57,37 +61,34 @@ const LatestCollection = () => {
 
   return (
     <div className="my-10 py-10 rounded-lg">
-
       {/* Judul Koleksi Terbaru */}
       <div className="text-center py-6">
-
-        <Title text1={'PRODUK'} text2={'TERBARU'} />
+        <Title text1={"PRODUK"} text2={"TERBARU"} />
         <p className="w-3/4 mx-auto text-sm sm:text-base text-pink-700 font-medium">
-
-        Temukan koleksi terbaru dari kue lezat kami. Manjakan diri Anda dengan rasa yang istimewa! 💕
+          Temukan koleksi terbaru dari kue lezat kami. Manjakan diri Anda dengan
+          rasa yang istimewa! 💕
         </p>
       </div>
 
-{/* Daftar Produk Terbaru */}
-<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 px-4">
-  {latestProducts.map((item) => (
-    <div
-      key={item.id}
-      className="group relative  rounded-2xl transition-transform"
-    >
-      <ProductItem
-        id={item.id}
-        image={item.image}
-        name={item.name}
-        originalPrice={item.original_price}
-        salePrice={item.sale_price}
-        slug={item.slug}
-        stock={item.stock}
-      />
-    </div>
-  ))}
-</div>
-
+      {/* Daftar Produk Terbaru */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 px-4">
+        {latestProducts.map((item) => (
+          <div
+            key={item.id}
+            className="group relative  rounded-2xl transition-transform"
+          >
+            <ProductItem
+              id={item.id}
+              image={item.image}
+              name={item.name}
+              originalPrice={item.original_price}
+              salePrice={item.sale_price}
+              slug={item.slug}
+              stock={item.stock}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

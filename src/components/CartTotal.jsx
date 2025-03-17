@@ -1,42 +1,61 @@
-import { useContext } from 'react';
-import Title from './Title';
-import { AppContext } from '../context/AppContext';
+import { useContext } from "react";
+import Title from "./Title";
+import { AppContext } from "../context/AppContext";
 
 const CartTotal = ({ shippingCost }) => {
-    const { currency, getCartAmount } = useContext(AppContext);
+  const { currency, cartItems } = useContext(AppContext);
 
-    const subtotal = getCartAmount();
-    const deliveryFee = shippingCost || 0; // Menggunakan shippingCost dari prop
-    const total = subtotal + deliveryFee;
+  // Menghitung subtotal dengan memperhitungkan jumlah item (qty)
+  const subtotal = cartItems.reduce(
+    (sum, item) =>
+      sum +
+      (item.productData.sale_price || item.productData.original_price) *
+        item.qty,
+    0
+  );
 
-    // Fungsi untuk memformat angka menjadi format mata uang Indonesia
-    const formatCurrency = (amount) => {
-        return currency + amount.toLocaleString('id-ID', { minimumFractionDigits: 0 });
-    };
+  const deliveryFee = shippingCost || 0;
+  const total = subtotal + deliveryFee;
 
+  // Fungsi untuk memformat angka menjadi format mata uang Indonesia
+  const formatCurrency = (amount) => {
     return (
-        <div className='w-full'>
-            <div className="text-2xl">
-                <Title text1={'TOTAL'} text2={'KERANJANG'} />
-            </div>
-            <div className='flex flex-col gap-2 mt-2 text-sm'>
-                <div className="flex justify-between">
-                    <p>Subtotal</p>
-                    <p>{formatCurrency(subtotal)}</p>
-                </div>
-                <hr />
-                <div className="flex justify-between">
-                    <p>Shipping</p>
-                    <p>{formatCurrency(deliveryFee)}</p>
-                </div>
-                <hr />
-                <div className="flex justify-between">
-                    <b className='pr-2'>Total</b>
-                    <b>{formatCurrency(total)}</b>
-                </div>
-            </div>
-        </div>
+      currency + amount.toLocaleString("id-ID", { minimumFractionDigits: 0 })
     );
+  };
+
+  return (
+    <div className="w-full bg-white rounded-2xl p-4 border border-pink-200 shadow-md">
+      <div className="text-2xl">
+        <Title text1={"TOTAL"} text2={"KERANJANG"} />
+      </div>
+      <div className="flex flex-col gap-2 mt-2 text-sm">
+        <div>
+          <p className="font-semibold">Subtotal :</p>
+          <ul className="text-gray-700">
+            {cartItems.map((item) => (
+              <li key={item.id}>
+                {item.qty > 1
+                  ? `${item.productData.product_name} x${item.qty}`
+                  : item.productData.product_name}
+              </li>
+            ))}
+          </ul>
+          <p className="font-semibold mt-1">{formatCurrency(subtotal)}</p>
+        </div>
+        <hr />
+        <div className="flex justify-between">
+          <p>Shipping</p>
+          <p>{formatCurrency(deliveryFee)}</p>
+        </div>
+        <hr />
+        <div className="flex justify-between">
+          <b className="pr-2">Total :</b>
+          <b>{formatCurrency(total)}</b>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default CartTotal;

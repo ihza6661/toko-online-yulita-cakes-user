@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import Title from './Title';
-import ProductItem from './ProductItem';
+import { useState, useEffect } from "react";
+import Title from "./Title";
+import ProductItem from "./ProductItem";
 
 const RelatedProducts = ({ category, subCategory }) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
@@ -8,17 +8,24 @@ const RelatedProducts = ({ category, subCategory }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    console.log("Category yang diterima:", category);
     const fetchRelatedProducts = async () => {
       try {
-        const response = await fetch(`/api/user/get_related_products?category=${category}&subCategory=${subCategory}`);
+        const response = await fetch(
+          `/api/user/get_related_products?category_id=${category}`
+        );
         if (!response.ok) {
-          throw new Error('Gagal memuat data produk terkait');
+          throw new Error("Gagal memuat data produk terkait");
         }
         const data = await response.json();
         const productsWithImages = data
-          .filter((product) => product.images.some((img) => img.is_primary === 1))
+          .filter((product) =>
+            product.images.some((img) => img.is_primary === 1)
+          )
           .map((product) => {
-            const primaryImage = product.images.find((img) => img.is_primary === 1);
+            const primaryImage = product.images.find(
+              (img) => img.is_primary === 1
+            );
             return {
               id: product.id,
               name: product.product_name,
@@ -39,7 +46,7 @@ const RelatedProducts = ({ category, subCategory }) => {
     };
 
     fetchRelatedProducts();
-  }, [category, subCategory]);
+  }, [category]);
 
   if (loading) {
     return (
@@ -60,7 +67,7 @@ const RelatedProducts = ({ category, subCategory }) => {
   return (
     <div className="my-24">
       <div className="text-center py-8 text-3xl">
-        <Title text1={'PRODUK'} text2={'TERKAIT'} />
+        <Title text1={"PRODUK"} text2={"TERKAIT"} />
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
         {relatedProducts.map((item) => (

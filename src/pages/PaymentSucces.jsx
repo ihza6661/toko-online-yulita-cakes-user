@@ -6,6 +6,10 @@ const PaymentSuccess = () => {
   const location = useLocation();
 
   useEffect(() => {
+    document.title = "Yulita Cakes - Pembayaran";
+  }, []);
+
+  useEffect(() => {
     if (!location.state || !location.state.paymentSuccess) {
       navigate('/', { replace: true });
     }

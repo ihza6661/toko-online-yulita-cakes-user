@@ -10,7 +10,7 @@ const ResetPassword = () => {
   const email = query.get("email");
 
   useEffect(() => {
-    document.title = "AS Denim - Reset Password";
+    document.title = "Yulita Cakes - Reset Password";
     // Jika token atau email tidak ada, redirect ke halaman login
     if (!token || !email) {
       toast.error("Link reset password tidak valid.");

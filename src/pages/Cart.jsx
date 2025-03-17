@@ -6,7 +6,7 @@ import { AppContext } from "../context/AppContext";
 
 const Cart = () => {
   useEffect(() => {
-    document.title = "Sweet Treats - Keranjang";
+    document.title = "Yulita Cakes - Keranjang";
   }, []);
 
   const { currency, cartItems, updateQuantity, removeFromCart, navigate } =

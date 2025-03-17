@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   useEffect(() => {
-    document.title = "Sweet Treats - Dashboard";
+    document.title = " Yulita Cakes - Dashboard";
   }, []);
 
   const tabs = [

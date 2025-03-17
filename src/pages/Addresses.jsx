@@ -24,7 +24,7 @@ const Addresses = () => {
   const [editingAddressId, setEditingAddressId] = useState(null);
 
   useEffect(() => {
-    document.title = "AS Denim - Alamat";
+    document.title = "Yulita Cakes - Alamat";
   }, []);
 
   // Fetch addresses on component mount

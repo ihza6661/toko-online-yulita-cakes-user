@@ -14,7 +14,7 @@ const AccountDetails = () => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    document.title = "Cake Delights - Detail Akun";
+    document.title = "Yulita Cakes - Detail Akun";
   }, []);
 
   useEffect(() => {

@@ -7,6 +7,11 @@ import { toast } from "react-toastify";
 import html2canvas from "html2canvas";
 
 const OrderDetail = () => {
+
+  useEffect(() => {
+    document.title = "Yulita Cakes - Detil Order";
+  }, []);
+
   const { authFetch } = useContext(AppContext);
   const { id: orderId } = useParams();
   const [order, setOrder] = useState(null);

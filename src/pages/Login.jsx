@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const AuthForm = () => {
   useEffect(() => {
     let judul = isLogin ? "Masuk" : "Register";
-    document.title = `AS Denim - ${judul}`;
+    document.title = `Yulita Cakes - ${judul}`;
   });
   const { setToken } = useContext(AppContext);
   const navigate = useNavigate();

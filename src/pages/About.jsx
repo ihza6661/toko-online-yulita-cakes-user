@@ -1,6 +1,8 @@
 import React from "react";
 import Title from "../components/Title";
 import NewsletterBox from "../components/NewsletterBox";
+import { useContext, useEffect, useState } from "react";
+
 
 const locations = [
   {
@@ -11,6 +13,11 @@ const locations = [
 ];
 
 const About = () => {
+
+    useEffect(() => {
+      document.title = "Yulita Cakes - About";
+    }, []);
+  
   return (
     <div className="pt-36">
       {/* Section Title */}

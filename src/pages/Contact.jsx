@@ -1,8 +1,17 @@
 import React from "react";
 import Title from "../components/Title";
 import { Phone, Mail, MapPin, Instagram } from "lucide-react";
+import { useEffect } from "react";
+
+
+
+
 
 const Contact = () => {
+  useEffect(() => {
+    document.title = "Yulita Cakes - Kontak";
+  }, []);
+  
   return (
     <div className="container mx-auto px-6 lg:px-12 max-w-screen-xl">
       <div className="text-center text-2xl border-t pt-24 lg:pt-36">

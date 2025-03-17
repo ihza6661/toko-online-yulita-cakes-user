@@ -22,7 +22,7 @@ const Collection = () => {
   const baseImageUrl = "/storage/";
 
   useEffect(() => {
-    document.title = "AS Denim - Koleksi";
+    document.title = "Yulita Cakes - Koleksi";
   }, []);
 
   // Reset search state on component mount

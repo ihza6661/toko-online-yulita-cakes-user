@@ -15,6 +15,10 @@ const Product = () => {
   const [activeTab, setActiveTab] = useState("description");
 
   useEffect(() => {
+    document.title = "Yulita Cakes - Produk";
+  }, []);
+
+  useEffect(() => {
     const fetchProductData = async () => {
       try {
         const response = await fetch(`/api/user/product/${slug}/detail`);

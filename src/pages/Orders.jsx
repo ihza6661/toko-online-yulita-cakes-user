@@ -10,7 +10,7 @@ const Orders = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = "AS Denim - Pesanan";
+    document.title = "Yulita Cakes - Pesanan";
   }, []);
 
   useEffect(() => {

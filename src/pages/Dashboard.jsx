@@ -14,7 +14,7 @@ const Dashboard = () => {
 
   return (
     <div className="pt-24 px-6 sm:px-10 md:px-32 pb-10 min-h-screen flex flex-col items-center">
-      <h1 className="text-4xl font-serif font-extrabold text-pink-700 tracking-wide mb-6 mt-6">
+      <h1 className="text-3xl sm:text-4xl font-serif font-extrabold text-pink-700 my-6">
         ― Dashboard ―
       </h1>
 

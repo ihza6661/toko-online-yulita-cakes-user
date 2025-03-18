@@ -9,8 +9,8 @@ const Home = () => {
     document.title = "Yulita Cakes";
   }, []);
   return (
-    <div className="pt-32">
-      {/* <Hero /> */}
+    <div className="pt-28">
+      <Hero />
       <Categories />
       <LatestColletion />
       {/* <NewsletterBox /> */}

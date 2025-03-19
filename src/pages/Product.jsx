@@ -114,8 +114,8 @@ const Product = () => {
             </button>
 
             {/* Description & Reviews */}
-            <div className="mt-6 border rounded-xl shadow bg-white overflow-hidden">
-              <div className="flex border-b bg-gray-50">
+            <div className="mt-6 rounded-xl shadow bg-white border border-slate-300 overflow-hidden">
+              <div className="flex border-b">
                 <button
                   className={`relative px-6 py-3 text-sm font-medium flex-1 transition text-gray-600 hover:text-gray-900 ${
                     activeTab === "description"
@@ -138,10 +138,10 @@ const Product = () => {
                 </button>
               </div>
 
-              <div className="p-6 text-gray-600 bg-white ">
+              <div className="p-6 text-gray-600">
                 {activeTab === "description" ? (
                   <div
-                    className="bg-pink-50 rounded-lg p-6"
+                    className="rounded-lg p-6"
                     dangerouslySetInnerHTML={{
                       __html: productData.description,
                     }}

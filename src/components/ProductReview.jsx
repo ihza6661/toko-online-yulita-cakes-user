@@ -2,6 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import { FaStar } from "react-icons/fa";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
+import Title from "./Title";
+
 
 const ProductReview = ({ productId }) => {
   const { authFetch, token } = useContext(AppContext);
@@ -79,8 +81,10 @@ const ProductReview = ({ productId }) => {
   }, [authFetch, productId, token]);
 
   return (
-    <div className=" bg-pink-50 rounded-lg p-2 shadow-sm">
-      <h3 className="text-lg font-bold text-pink-600 mb-4">🍰 Ulasan Produk</h3>
+    <div className="rounded-lg p-6">
+        <Title text1={"🍰 Ulasan"} text2={"Produk"} />
+      
+      {/* <h3 className="text-lg font-bold text-pink-600 mb-4">🍰 Ulasan Produk</h3> */}
       {token && eligible && (
         <form
           onSubmit={(e) => e.preventDefault()}

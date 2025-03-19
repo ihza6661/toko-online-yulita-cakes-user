@@ -147,11 +147,14 @@ const Collection = () => {
 
         {/* Search and Filter Controls */}
         <div
-          className={`border border-gray-300 p-5 mb-5 rounded-lg bg-cream shadow-md ${
+          className={`border b-pink-300  p-5 mb-5 rounded-lg bg-white shadow-md ${
             showFilter ? "" : "hidden sm:block"
           }`}
         >
-          <p className="mb-3 text-sm font-bold">KATEGORI</p>
+          <p className="mb-3 text-md font-bold">KATEGORI</p>
+    
+
+
 
           <div className="flex flex-col gap-2 text-sm font-medium text-gray-700">
             {uniqueCategories.map((item, index) => (

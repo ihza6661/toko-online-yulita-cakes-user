@@ -175,7 +175,7 @@ const Addresses = () => {
 
   return (
     <div className="p-4 rounded-lg mx-auto inline-block lg:w-full">
-      <h2 className="text-2xl font-normal text-center text-pink-500 mb-4">
+      <h2 className="text-2xl pt-6 font-semibold text-pink-500 mb-6 text-center">
         Alamat Pengiriman
       </h2>
 
@@ -189,133 +189,134 @@ const Addresses = () => {
       
       ) : (
         <form
-          onSubmit={handleSubmit}
-          className="mb-4 grid gap-4 bg-pink-100 p-6 rounded-xl"
-        >
-          <div>
-            <label className="block text-pink-700">Nama Penerima</label>
-            <input
-              type="text"
-              name="recipient_name"
-              value={formData.recipient_name}
-              onChange={handleChange}
-              className="w-full border border-pink-400 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50"
-            />
-            {errors.recipient_name && (
-              <p className="text-red-500 text-sm">{errors.recipient_name[0]}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-pink-700">Nomor Telepon</label>
-            <input
-              type="text"
-              name="phone_number"
-              value={formData.phone_number}
-              onChange={handleChange}
-              className="w-full border border-pink-400 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50"
-            />
-            {errors.phone_number && (
-              <p className="text-red-500 text-sm">{errors.phone_number[0]}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-pink-700">Alamat Baris 1</label>
-            <input
-              type="text"
-              name="address_line1"
-              value={formData.address_line1}
-              onChange={handleChange}
-              className="w-full border border-pink-400 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50"
-            />
-            {errors.address_line1 && (
-              <p className="text-red-500 text-sm">{errors.address_line1[0]}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-pink-700">Alamat Baris 2</label>
-            <input
-              type="text"
-              name="address_line2"
-              value={formData.address_line2}
-              onChange={handleChange}
-              className="w-full border border-pink-400 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50"
-            />
-          </div>
-
-          <div>
-            <label className="block text-pink-700">Provinsi</label>
-            <input
-              type="text"
-              name="province"
-              value={formData.province}
-              onChange={handleChange}
-              className="w-full border border-pink-400 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50"
-            />
-            {errors.province && (
-              <p className="text-red-500 text-sm">{errors.province[0]}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-pink-700">Kota</label>
-            <input
-              type="text"
-              name="city"
-              value={formData.city}
-              onChange={handleChange}
-              className="w-full border border-pink-400 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50"
-            />
-            {errors.city && (
-              <p className="text-red-500 text-sm">{errors.city[0]}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-pink-700">Kode Pos</label>
-            <input
-              type="text"
-              name="postal_code"
-              value={formData.postal_code}
-              onChange={handleChange}
-              className="w-full border border-pink-400 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50"
-            />
-            {errors.postal_code && (
-              <p className="text-red-500 text-sm">{errors.postal_code[0]}</p>
-            )}
-          </div>
-
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              name="is_default"
-              checked={formData.is_default}
-              onChange={handleChange}
-              className="mr-2"
-            />
-            <label className="text-pink-700">Jadikan alamat default</label>
-          </div>
-
-          <div className="flex gap-2">
+        onSubmit={handleSubmit}
+        className="mb-4 grid gap-4 bg-pink-100 p-6 rounded-xl"
+      >
+        <div>
+          <label className="block text-pink-700">Nama Penerima</label>
+          <input
+            type="text"
+            name="recipient_name"
+            value={formData.recipient_name}
+            onChange={handleChange}
+            className="w-full border border-pink-300 p-1 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none"
+          />
+          {errors.recipient_name && (
+            <p className="text-red-500 text-sm">{errors.recipient_name[0]}</p>
+          )}
+        </div>
+      
+        <div>
+          <label className="block text-pink-700">Nomor Telepon</label>
+          <input
+            type="text"
+            name="phone_number"
+            value={formData.phone_number}
+            onChange={handleChange}
+            className="w-full border border-pink-300 p-1 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none"
+          />
+          {errors.phone_number && (
+            <p className="text-red-500 text-sm">{errors.phone_number[0]}</p>
+          )}
+        </div>
+      
+        <div>
+          <label className="block text-pink-700">Alamat Baris 1</label>
+          <input
+            type="text"
+            name="address_line1"
+            value={formData.address_line1}
+            onChange={handleChange}
+            className="w-full border border-pink-300 p-1 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none"
+          />
+          {errors.address_line1 && (
+            <p className="text-red-500 text-sm">{errors.address_line1[0]}</p>
+          )}
+        </div>
+      
+        <div>
+          <label className="block text-pink-700">Alamat Baris 2</label>
+          <input
+            type="text"
+            name="address_line2"
+            value={formData.address_line2}
+            onChange={handleChange}
+            className="w-full border border-pink-300 p-1 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none"
+          />
+        </div>
+      
+        <div>
+          <label className="block text-pink-700">Provinsi</label>
+          <input
+            type="text"
+            name="province"
+            value={formData.province}
+            onChange={handleChange}
+            className="w-full border border-pink-300 p-1 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none"
+          />
+          {errors.province && (
+            <p className="text-red-500 text-sm">{errors.province[0]}</p>
+          )}
+        </div>
+      
+        <div>
+          <label className="block text-pink-700">Kota</label>
+          <input
+            type="text"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            className="w-full border border-pink-300 p-1 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none"
+          />
+          {errors.city && (
+            <p className="text-red-500 text-sm">{errors.city[0]}</p>
+          )}
+        </div>
+      
+        <div>
+          <label className="block text-pink-700">Kode Pos</label>
+          <input
+            type="text"
+            name="postal_code"
+            value={formData.postal_code}
+            onChange={handleChange}
+            className="w-full border border-pink-300 p-1 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none"
+          />
+          {errors.postal_code && (
+            <p className="text-red-500 text-sm">{errors.postal_code[0]}</p>
+          )}
+        </div>
+      
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            name="is_default"
+            checked={formData.is_default}
+            onChange={handleChange}
+            className="mr-2"
+          />
+          <label className="text-pink-700">Jadikan alamat utama</label>
+        </div>
+      
+        <div className="flex gap-2">
+          <button
+            type="submit"
+            className="bg-pink-500 hover:bg-pink-600 text-white font-normal px-4 py-3 rounded-lg shadow-md transition"
+          >
+            {editingAddressId ? "Perbarui Alamat" : "Simpan Alamat"}
+          </button>
+          {editingAddressId && (
             <button
-              type="submit"
-              className="bg-pink-500 hover:bg-pink-600 text-white font-normal px-4 py-3 rounded-lg shadow-md transition"
+              type="button"
+              onClick={resetForm}
+              className="bg-gray-400 hover:bg-gray-500 text-white font-normal px-4 py-3 rounded-lg shadow-md transition"
             >
-              {editingAddressId ? "Perbarui Alamat" : "Simpan Alamat"}
+              Batal
             </button>
-            {editingAddressId && (
-              <button
-                type="button"
-                onClick={resetForm}
-                className="bg-gray-400 hover:bg-gray-500 text-white font-normal px-4 py-3 rounded-lg shadow-md transition"
-              >
-                Batal
-              </button>
-            )}
-          </div>
-        </form>
+          )}
+        </div>
+      </form>
+      
       )}
 
       {addresses.length === 0 ? (
@@ -344,7 +345,7 @@ const Addresses = () => {
                   onClick={() => handleEdit(address)}
                   className="bg-pink-500 hover:bg-pink-600 text-white font-normal px-3 py-1 rounded"
                 >
-                  Edit
+                  Ubah
                 </button>
 
                 <button

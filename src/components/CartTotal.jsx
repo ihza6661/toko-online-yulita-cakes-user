@@ -25,7 +25,7 @@ const CartTotal = ({ shippingCost }) => {
   };
 
   return (
-    <div className="w-full bg-white rounded-2xl p-4 border border-pink-300 shadow-md">
+    <div className="w-full bg-white rounded-2xl p-4 b-pink-300 shadow-md">
       <div className="text-2xl">
         <Title text1={"TOTAL"} text2={"KERANJANG"} />
       </div>

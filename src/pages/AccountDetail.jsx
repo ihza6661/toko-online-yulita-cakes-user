@@ -14,7 +14,7 @@ const AccountDetails = () => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    document.title = "Yulita Cakes - Detail Akun";
+    document.title = "Yulita Cakes - Informasi Akun";
   }, []);
 
   useEffect(() => {
@@ -101,80 +101,75 @@ const AccountDetails = () => {
   return (
     <div className="rounded-lg w-full">
       <h2 className="text-2xl pt-6 font-semibold text-pink-500 mb-6 text-center">
-        Detail Akun
+        Informasi Akun
       </h2>
-      <form className="grid gap-5  p-6 rounded-xl shadow-lg w-full">
-        <div>
-          <label className="block text-pink-700 font-medium mb-2">
-            Nama Lengkap
-          </label>
-          <input
-            type="text"
-            name="name"
-            value={userData.name}
-            onChange={handleChange}
-            className="w-full border border-pink-400 bg-pink-50 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"
-          />
-          {errors.name && (
-            <p className="text-red-500 text-sm mt-1">{errors.name[0]}</p>
-          )}
-        </div>
+      <div className="p-4">
+      <form className="grid gap-4 bg-pink-100 p-6 rounded-xl w-full"
+      >
+  <div>
+    <label className="block text-pink-700 font-medium mb-2">Nama Lengkap</label>
+    <input
+      type="text"
+      name="name"
+      value={userData.name}
+      onChange={handleChange}
+      className="w-full border border-pink-300 p-2 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none transition"
+    />
+    {errors.name && (
+      <p className="text-red-500 text-sm mt-1">{errors.name[0]}</p>
+    )}
+  </div>
 
-        <div>
-          <label className="block text-pink-700 font-medium mb-2">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={userData.email}
-            onChange={handleChange}
-            className="w-full border border-pink-400 bg-pink-50 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm mt-1">{errors.email[0]}</p>
-          )}
-        </div>
+  <div>
+    <label className="block text-pink-700 font-medium mb-2">Email</label>
+    <input
+      type="email"
+      name="email"
+      value={userData.email}
+      onChange={handleChange}
+      className="w-full border border-pink-300 p-2 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none transition"
+    />
+    {errors.email && (
+      <p className="text-red-500 text-sm mt-1">{errors.email[0]}</p>
+    )}
+  </div>
 
-        <div>
-          <label className="block text-pink-700 font-medium mb-2">
-            Password Baru
-          </label>
-          <input
-            type="password"
-            name="password"
-            value={userData.password}
-            onChange={handleChange}
-            className="w-full border border-pink-400 bg-pink-50 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"
-          />
-          {errors.password && (
-            <p className="text-red-500 text-sm mt-1">{errors.password[0]}</p>
-          )}
-        </div>
+  <div>
+    <label className="block text-pink-700 font-medium mb-2">Password Baru</label>
+    <input
+      type="password"
+      name="password"
+      value={userData.password}
+      onChange={handleChange}
+      className="w-full border border-pink-300 p-2 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none transition"
+    />
+    {errors.password && (
+      <p className="text-red-500 text-sm mt-1">{errors.password[0]}</p>
+    )}
+  </div>
 
-        <div>
-          <label className="block text-pink-700 font-medium mb-2">
-            Konfirmasi Password Baru
-          </label>
-          <input
-            type="password"
-            name="password_confirmation"
-            value={userData.password_confirmation}
-            onChange={handleChange}
-            className="w-full border border-pink-400 bg-pink-50 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"
-          />
-          {errors.password_confirmation && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.password_confirmation[0]}
-            </p>
-          )}
-        </div>
+  <div>
+    <label className="block text-pink-700 font-medium mb-2">Konfirmasi Password Baru</label>
+    <input
+      type="password"
+      name="password_confirmation"
+      value={userData.password_confirmation}
+      onChange={handleChange}
+      className="w-full border border-pink-300 p-2 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none transition"
+    />
+    {errors.password_confirmation && (
+      <p className="text-red-500 text-sm mt-1">{errors.password_confirmation[0]}</p>
+    )}
+  </div>
 
-        <button
-          type="submit"
-          className="w-full bg-pink-500 text-white py-3 rounded-lg shadow-md hover:bg-pink-600 transition font-medium"
-        >
-          Simpan Perubahan
-        </button>
-      </form>
+  <button
+    type="submit"
+    className="w-full bg-pink-500 text-white py-3 rounded-lg shadow-md hover:bg-pink-600 transition font-medium"
+  >
+    Simpan Perubahan
+  </button>
+</form>
+</div>
     </div>
   );
 };

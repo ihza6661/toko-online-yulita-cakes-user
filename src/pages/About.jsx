@@ -1,15 +1,8 @@
 import React from "react";
-import Title from "../components/Title";
+import { motion } from "framer-motion";
 import NewsletterBox from "../components/NewsletterBox";
 import { useContext, useEffect, useState } from "react";
-
-const locations = [
-  {
-    city: "Kubu Raya",
-    // location: "Kubu Raya ",
-    // direction: "12 km"
-  },
-];
+import Title from "../components/Title";
 
 const About = () => {
   useEffect(() => {
@@ -18,68 +11,113 @@ const About = () => {
 
   return (
     <div className="section-padding min-h-screen">
-      {/* Section Title
-      // <div className="text-2xl text-center">
-      //   <Title text1={"LOKASI"} text2={"TOKO"} />
-      // </div> */}
-
-      {/* Intro Section */}
-      <div className="my-10 flex flex-col md:flex-row gap-10 items-center px-0 sm:px-36 p-6 rounded-xl">
-        <img
-          className="w-full md:max-w-[200px] bg-pink-50 dark:bg-gray-300 p-5 rounded-3xl shadow-sm"
-          src="/yulita_cake.png"
-          alt="Yulita Cake"
-        />
-        <div className="flex flex-col justify-center gap-4 md:w-2/4 text-gray-700 text-center md:text-left text-xl md:text-2xl leading-relaxed">
-          <p className="font-normal">
-            <span className="text-pink-600 text-3xl font-semibold font-serif">
-              Yulita Cakes
-            </span>{" "}
-            Toko Roti dan Kue kering bergaya Eropa yang ada di Kubu
-            Raya Kalimantan Barat. 🍰✨
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-4xl mx-auto"
+      >
+        <div className="prose prose-pink dark:prose-invert lg:prose-lg max-w-none">
+          <Title text1="Yulita" text2="Cakes" />
+          <p className="text-xl text-gray-700 dark:text-gray-300 mb-6">
+            Telah membuat kue dan Roti sejak 2010. Apa yang awalnya dimulai
+            sebagai hobi keluarga kecil kini telah berkembang menjadi toko roti
+            yang dicintai, dikenal karena kualitas, kreativitas, dan rasa yang
+            lezat.
           </p>
-        </div>
-      </div>
-
-      {/* Outlet Section Title */}
-      <div className="text-xl py-6 text-center text-pink-800">
-        <Title text1={"Kunjungi Toko"} text2={"Kami"} />
-      </div>
-
-      {/* Outlet Section */}
-      <div className="flex flex-col md:flex-row mb-20 gap-8  px-0 sm:px-36">
-        {/* Google Maps Iframe Column */}
-        <div className="flex justify-center md:w-1/2 bg-white dark:bg-gray-300 p-4 rounded-xl shadow-md">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.815387737623!2d109.38512177507026!3d-0.06946849992984418!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d5752ef0719af%3A0xc40b57fad7df9bd7!2sJl.%20Prona%20Desa%20Kapur%2C%20Kapur%2C%20Kec.%20Sungai%20Raya%2C%20Kabupaten%20Kubu%20Raya%2C%20Kalimantan%20Barat%2078235!5e0!3m2!1sid!2sid!4v1742050633918!5m2!1sid!2sid"
-            width="100%"
-            height="450"
-            style={{ border: 0, borderRadius: "16px" }}
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
-
-        {/* Locations Grid Column */}
-        <div className=" flex flex-col md:flex-row flex-wrap  items-center gap-6 text-sm md:w-1/2">
-          {locations.map(({ city, location, direction }, index) => (
-            <div
-              key={index}
-              className="border-2 border-pink-400 dark:border-gray-600 rounded-2xl shadow-lg px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-4 max-w-xs sm:w-auto bg-pink-50 dark:bg-gray-900 hover:shadow-2xl transition-all duration-300"
-            >
-              <Title text1={"Kabupaten"} text2={city} />
-              <p className="text-gray-800 text-base">
-                Jl. Raya Desa Kapur. Gg. Prona No. 07
+          <div className="grid md:grid-cols-2 gap-8 my-12">
+            <div className="bg-pink-50 dark:bg-pink-900/20 p-8 rounded-lg">
+              <h2 className="text-2xl font-serif text-pink-600 dark:text-pink-400 mb-4">
+                Misi Kami
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300">
+                Kami percaya bahwa setiap Acara dan Perayaan layak mendapatkan
+                sesuatu yang manis dan istimewa. Misi kami adalah menciptakan
+                hidangan penutup yang berkesan dengan menggunakan hanya
+                bahan-bahan terbaik, dibuat dengan penuh perhatian dan
+                ketelitian.
               </p>
-              <p className="text-gray-600 text-sm">{location} Kalimantan Barat</p>
-              <div className="text-pink-600 font-semibold">
-                <h5>{direction}</h5>
-              </div>
             </div>
-          ))}
+
+            <div className="bg-pink-50 dark:bg-pink-900/20 p-8 rounded-lg">
+              <h2 className="text-2xl font-serif text-pink-600 dark:text-pink-400 mb-4">
+                Visi Kami
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300">
+                Menjadi destinasi utama untuk kue dan makanan penutup kustom,
+                membawa kebahagiaan dan manisnya dalam setiap momen spesial
+                kehidupan, sambil tetap berkomitmen pada kualitas dan inovasi.
+              </p>
+            </div>
+          </div>
+          <h2 className="text-3xl font-serif text-pink-600 dark:text-pink-400 mt-8 mb-6">
+            Kisah Kami
+          </h2>
+          <p className="mb-4">
+            Yulita Cakes bermula dari dapur pendirinya, Yulita. Apa yang awalnya
+            hanya berupa kegiatan memanggang untuk teman dan keluarga segera
+            berkembang ketika kabar tentang kelezatan kuenya menyebar. Dalam
+            waktu satu tahun, Yulita membuka toko roti kecil pertama kami.
+          </p>
+          <p className="mb-4">
+            Selama bertahun-tahun, kami telah memperluas tim kami dengan para
+            pastry chef dan dekorator kue berbakat yang memiliki semangat yang
+            sama dalam menciptakan hidangan penutup yang indah dan lezat. Saat
+            ini, kami melayani pelanggan baik secara lokal maupun nasional
+            melalui layanan pemesanan dan pengiriman online kami.
+          </p>
+          <p className="mb-8">
+            Meskipun kami telah berkembang, komitmen kami terhadap kualitas
+            tetap tidak berubah. Kami masih menggunakan resep asli Yulita,
+            bahan-bahan lokal saat memungkinkan, dan memastikan setiap kue
+            dibuat dengan penuh perhatian dan ketelitian.
+          </p>
+          <h2 className="text-3xl font-serif text-pink-600 dark:text-pink-400 mt-8 mb-6">
+            Team Kami
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            <div className="text-center">
+              <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-pink-200 dark:bg-pink-800 flex items-center justify-center">
+                <span className="text-3xl text-pink-600 dark:text-pink-400">
+                  Y
+                </span>
+              </div>
+              <h3 className="text-xl font-medium text-pink-600 dark:text-pink-400">
+                Yulita
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Pendiri & Pembuat Kue
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-pink-200 dark:bg-pink-800 flex items-center justify-center">
+                <span className="text-3xl text-pink-600 dark:text-pink-400">
+                  M
+                </span>
+              </div>
+              <h3 className="text-xl font-medium text-pink-600 dark:text-pink-400">
+                Micheal
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Koki Pastry Utama
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-pink-200 dark:bg-pink-800 flex items-center justify-center">
+                <span className="text-3xl text-pink-600 dark:text-pink-400">
+                  V
+                </span>
+              </div>
+              <h3 className="text-xl font-medium text-pink-600 dark:text-pink-400">
+                Venia
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">Desainer Kue</p>
+            </div>
+          </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

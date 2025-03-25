@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import Title from "./Title";
 import ProductItem from "./ProductItem";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const LatestCollection = () => {
   const [latestProducts, setLatestProducts] = useState([]);
@@ -60,35 +63,49 @@ const LatestCollection = () => {
   }
 
   return (
-      <section className="section-padding bg-white dark:bg-black">
+    <section className="section-padding">
       {/* Judul Koleksi Terbaru */}
-      <div className="text-center py-6">
-        <Title text1={"PRODUK"} text2={"TERBARU"} />
-        <p className="w-3/4 mx-auto text-sm sm:text-base font-medium">
+      <motion.div
+        className="container mx-auto text-center"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        <Title text1={"Kue"} text2={"Terbaru"} />
+        <p className="w-3/4 mx-auto text-sm sm:text-base font-medium pb-4">
           Temukan koleksi terbaru dari kue lezat kami. Manjakan diri Anda dengan
           rasa yang istimewa! 💕
         </p>
-      </div>
 
-      {/* Daftar Produk Terbaru */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-4 gap-x-2">
-        {latestProducts.map((item) => (
-          <div
-            key={item.id}
-            className="group relative  rounded-2xl transition-transform"
-          >
-            <ProductItem
-              id={item.id}
-              image={item.image}
-              name={item.name}
-              originalPrice={item.original_price}
-              salePrice={item.sale_price}
-              slug={item.slug}
-              stock={item.stock}
-            />
-          </div>
-        ))}
-      </div>
+        {/* Daftar Produk Terbaru */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-4 md:gap-x-6 px-4 sm:py-10">
+          {latestProducts.slice(0, 4).map((item) => (
+            <div
+              key={item.id}
+              className="group relative  rounded-2xl transition-transform"
+            >
+              <ProductItem
+                id={item.id}
+                image={item.image}
+                name={item.name}
+                originalPrice={item.original_price}
+                salePrice={item.sale_price}
+                slug={item.slug}
+                stock={item.stock}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-6 text-center">
+          <Link to="/collection">
+            <button className="bg-pink-600 hover:bg-pink-700 text-white py-2 px-4 rounded-full">
+              Lihat Semua Kue
+            </button>
+          </Link>
+        </div>
+      </motion.div>
     </section>
   );
 };

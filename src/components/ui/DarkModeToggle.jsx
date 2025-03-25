@@ -19,7 +19,7 @@ export default function DarkModeToggle() {
   return (
     <button
       onClick={() => setDarkMode(!darkMode)}
-      className="p-2 rounded-full text-gray-800 dark:text-gray-300 transition"
+      className=" rounded-full text-gray-800 dark:text-gray-300 transition"
     >
       {darkMode ? (
         <MoonIcon className="w-6 h-6" />

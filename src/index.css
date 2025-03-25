@@ -70,28 +70,37 @@
   h4,
   h5,
   h6 {
-    @apply font-serif ;
+    @apply font-serif;
   }
 
-  p,li {
+  p {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+
+  li {
     @apply text-muted-foreground leading-relaxed text-xs;
   }
 
-  .dark p {
+  .dark li {
     @apply text-muted-dark-foreground;
   }
-
 }
 
 @layer utilities {
   @layer utilities {
     .accent {
+      @apply bg-pink-50 dark:bg-pink-900/20;
+    }
+    .bg-accent {
+      @apply bg-pink-50 dark:bg-pink-900/20;
+    }
+    /* .accent {
       @apply bg-pink-50;
     }
 
     .dark .accent {
       @apply bg-pink-950;
-    }
+    } */
 
     .btn {
       @apply rounded-full shadow-lg transition-all
@@ -154,11 +163,19 @@ h3 {
 
 h1,
 h2 {
-  color: #ec4899; /* Pink-500 */
+  color: #910048;
   font-weight: bold;
-  text-shadow: 2px 2px 5px rgba(236, 72, 153, 0.5);
+  text-shadow: 1px 1px 3px rgba(218, 0, 109, 0.789);
   letter-spacing: 2px;
 }
+
+/* @media (prefers-color-scheme: dark) {
+  h1 {
+    color: #f472b6;
+    text-shadow: 2px 2px 5px rgba(244, 114, 182, 0.6);
+  }
+} */
+
 a.active hr {
   display: block;
 }

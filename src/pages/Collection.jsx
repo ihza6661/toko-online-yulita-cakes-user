@@ -5,6 +5,7 @@ import ProductItem from "../components/ProductItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { AppContext } from "../context/AppContext";
+import { motion } from "framer-motion";
 
 const Collection = () => {
   const { search, setSearch, showSearch, setShowSearch } =
@@ -122,107 +123,128 @@ const Collection = () => {
   const uniqueCategories = [...new Set(products.map((item) => item.category))];
 
   return (
-    <div className="container mx-auto px-4 py-6">
-    <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-0 sm:pt-6 mt-10 pb-10 px-2">
-      
-      {/* Sticky Sidebar */}
-      <div className="min-w-60 pt-8 sm:pt-20 sm:sticky top-0 sm:h-screen overflow-hidden">
-
-
-        <p className=" text-lg text-pink-900 flex items-center gap-2 cursor-pointer">
-          CARI
-          <FontAwesomeIcon
-            onClick={() => setShowSearch(true)}
-            icon={faSearch}
-            className="cursor-pointer text-gray-700 dark:text-gray-400"
-          />  
-        </p>
-        <p
-          className="my-2 text-lg text-pink-900 flex items-center gap-2 cursor-pointer"
-          onClick={() => setShowFilter((prev) => !prev)}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="container mx-auto px-4 py-6"
+    >
+      <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-0 sm:pt-6 mt-10 pb-10 px-2">
+        {/* Sticky Sidebar */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="min-w-60 pt-8 sm:pt-20 sm:sticky top-0 sm:h-screen overflow-hidden"
         >
-          FILTER
-          <FontAwesomeIcon
-            icon={faArrowRight}
-            className={`h-6 sm:hidden cursor-pointer text-gray-700 dark:text-gray-400 ${
-              showFilter ? "rotate-90" : ""
-            } transform transition-transform duration-300`}
-          />
-        </p>
-  
-        {/* Search and Filter Controls */}
-        <div
-          className={`p-6 mb-5 rounded-xl bg-pink-50 dark:bg-gray-900 shadow-sm transition-all ${
-            showFilter ? "" : "hidden sm:block"
-          }`}
-        >
-          <h3 className="mb-4 text-lg font-semibold tracking-wide">KATEGORI</h3>
-  
-          <div className="flex flex-col gap-3 text-md font-medium text-gray-700">
-            {uniqueCategories.map((item, index) => (
-              <label
-                key={index}
-                className="flex items-center gap-3 cursor-pointer text-gray-700 dark:text-gray-400"
-              >
-                <input
-                  type="checkbox"
-                  className="w-4 h-4 accent-pink-600 cursor-pointer"
-                  value={item}
-                  checked={category.includes(item)}
-                  onChange={() => toggleFilter(item, "category")}
-                />
-                <span className="hover:text-pink-700 transition-all">
-                  {item}
-                </span>
-              </label>
-            ))}
-          </div>
-        </div>
-  
-        <hr />
-      </div>
-  
-      {/* Product Section */}
-      <div className="flex-1">
-        <div className="flex justify-between text-base sm:text-2xl mb-4 px-4">
-          <Title text1={"SEMUA"} text2={"PRODUK ✨"} />
-  
-          <select
-            onChange={(e) => setSortType(e.target.value)}
-            className="border-2 border-gray-300 text-sm px-2 py-2 w-48 h-10 rounded-md 
-            bg-gradient-to-r from-pink-500 to-pink-700 text-gray-200 shadow-md"
-          >
-            <option value="relevent" className="text-black">
-              Urutkan: Paling Sesuai
-            </option>
-            <option value="low-high" className="text-black">
-              Urutkan: Harga Terendah
-            </option>
-            <option value="high-low" className="text-black">
-              Urutkan: Harga Tertinggi
-            </option>
-          </select>
-        </div>
-  
-        {/* Product Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
-          {filterProducts.map((item, index) => (
-            <ProductItem
-              key={index}
-              id={item.id}
-              name={item.name}
-              originalPrice={item.original_price}
-              salePrice={item.sale_price}
-              image={item.image}
-              slug={item.slug}
-              stock={item.stock}
+          <p className="text-lg text-pink-900 dark:text-pink-400 flex items-center gap-2 cursor-pointer">
+            CARI
+            <FontAwesomeIcon
+              onClick={() => setShowSearch(true)}
+              icon={faSearch}
+              className="cursor-pointer text-gray-700 dark:text-pink-400"
             />
-          ))}
-        </div>
+          </p>
+          <p
+            className="my-2 text-lg text-pink-900 dark:text-pink-400 flex items-center gap-2 cursor-pointer"
+            onClick={() => setShowFilter((prev) => !prev)}
+          >
+            FILTER
+            <FontAwesomeIcon
+              icon={faArrowRight}
+              className={`h-6 sm:hidden cursor-pointer text-gray-700 dark:text-gray-400 ${
+                showFilter ? "rotate-90" : ""
+              } transform transition-transform duration-300`}
+            />
+          </p>
+
+          {/* Search and Filter Controls */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className={`p-6 mb-5 rounded-xl bg-accent shadow-sm transition-all ${
+              showFilter ? "" : "hidden sm:block"
+            }`}
+          >
+            <h2 className="text-2xl font-serif text-pink-600 dark:text-pink-400 mb-4">
+              Kategori
+            </h2>
+
+            <div className="flex flex-col gap-3 text-md font-medium text-gray-700">
+              {uniqueCategories.map((item, index) => (
+                <label
+                  key={index}
+                  className="flex items-center gap-3 cursor-pointer text-gray-700 dark:text-gray-400"
+                >
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 accent-pink-600 cursor-pointer"
+                    value={item}
+                    checked={category.includes(item)}
+                    onChange={() => toggleFilter(item, "category")}
+                  />
+                  <span className="hover:text-pink-700 transition-all">
+                    {item}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </motion.div>
+
+          <hr />
+        </motion.div>
+
+        {/* Product Section */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex-1"
+        >
+          <div className="flex justify-between text-base sm:text-2xl mb-4 px-4 pt-2">
+            <Title text1={"Semua Koleksi"} text2={"Kue ✨"} />
+
+            <select
+              onChange={(e) => setSortType(e.target.value)}
+              className="text-sm px-2 py-2 w-48 h-10 rounded-md 
+            bg-accent shadow-md"
+            >
+              <option value="relevent" className="text-black">
+                Urutkan: Paling Sesuai
+              </option>
+              <option value="low-high" className="text-black">
+                Urutkan: Harga Terendah
+              </option>
+              <option value="high-low" className="text-black">
+                Urutkan: Harga Tertinggi
+              </option>
+            </select>
+          </div>
+
+          {/* Product Grid */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 gap-y-6"
+          >
+            {filterProducts.map((item, index) => (
+              <ProductItem
+                key={index}
+                id={item.id}
+                name={item.name}
+                originalPrice={item.original_price}
+                salePrice={item.sale_price}
+                image={item.image}
+                slug={item.slug}
+                stock={item.stock}
+              />
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
-    </div>
-  </div>
-  
+    </motion.div>
   );
 };
 

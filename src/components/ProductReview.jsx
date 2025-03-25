@@ -81,8 +81,8 @@ const ProductReview = ({ productId }) => {
   }, [authFetch, productId, token]);
 
   return (
-    <div className="rounded-lg p-6">
-        <Title text1={"🍰 Ulasan"} text2={"Produk"} />
+    <div className="rounded-lg p-2">
+        <Title text1={"Ulasan"} text2={"Produk"} />
       
       {/* <h3 className="text-lg font-bold text-pink-600 mb-4">🍰 Ulasan Produk</h3> */}
       {token && eligible && (
@@ -141,7 +141,7 @@ const ProductReview = ({ productId }) => {
             </div>
           ))
         ) : (
-          <p className="text-gray-500">Belum ada review untuk produk ini.</p>
+          <p className="text-gray-500">Belum ada ulasan untuk produk ini.</p>
         )}
       </div>
     </div>

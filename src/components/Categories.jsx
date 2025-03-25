@@ -83,17 +83,17 @@ const Categories = () => {
     prevArrow: <SamplePrevArrow />,
     responsive: [
       { breakpoint: 1280, settings: { slidesToShow: 3, centerMode: false } },
-      { breakpoint: 1024, settings: { slidesToShow: 2, centerMode: false } },
-      { breakpoint: 768, settings: { slidesToShow: 1, centerMode: true } },
+      { breakpoint: 1024, settings: { slidesToShow: 3, centerMode: false } },
+      { breakpoint: 768, settings: { slidesToShow: 2, centerMode: false } },
       { breakpoint: 480, settings: { slidesToShow: 1, centerMode: true } },
     ],
   };
 
   return (
-    <div className="py-16 px-4 sm:px-6 lg:px-12 xl:px-20 bg-pink-50 dark:bg-gray-950">
+    <div className="py-16 px-4 sm:px-6 lg:px-12 xl:px-20">
       {/* Title */}
       <div className="text-center text-2xl pb-6">
-        <Title text1={"Kategori"} text2={"Produk"} />
+        <Title text1={"Kategori"} text2={"Kue"} />
       </div>
 
       {/* Loading & Error Messages */}
@@ -124,8 +124,8 @@ const Categories = () => {
             bg-white dark:bg-gray-900 backdrop-blur-md rounded-3xl
             border border-gray-300 dark:border-gray-700 
   shadow-sm
-            transform transition-all duration-300 w-full 
-            max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[240px]"
+            transform transition-all duration-300
+          w-[180px] sm:w-[200px] md:w-[220px] lg:w-[240px]"
                   >
                     {/* Image */}
                     <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-3 overflow-hidden rounded-full border-4 border-pink-300 shadow-lg">

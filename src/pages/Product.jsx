@@ -45,9 +45,7 @@ const Product = () => {
 
   if (loading)
     return (
-      <p className="text-center mt-20 text-pink-400 font-semibold">
-        Loading...
-      </p>
+      <p className="text-center mt-20 text-pink-400 font-semibold">Memuat...</p>
     );
   if (!productData)
     return (
@@ -83,17 +81,17 @@ const Product = () => {
           </div>
 
           {/* Product Details */}
-          <div className="flex-1 p-6 bg-white shadow-md rounded-xl">
-            <h1 className="text-4xl font-bold mb-3 text-gray-800">
+          <div className="flex-1 p-2 sm:p-6 rounded-xl">
+            <h1 className="text-2xl sm:text-4xl font-bold mb-3 dark:text-gray-300">
               {productData.product_name}
             </h1>
             <div className="flex items-center gap-3">
-              <p className="text-3xl font-semibold text-pink-900">
-                Rp{" "}
+              <h3 className="text-3xl font-semibold font-sans text-gray-700 dark:text-pink-500">
+                Rp.{" "}
                 {(
                   productData.sale_price ?? productData.original_price
                 ).toLocaleString("id-ID")}
-              </p>
+              </h3>
               {productData.sale_price !== null &&
                 productData.original_price !== productData.sale_price && (
                   <p className="text-lg text-gray-500 line-through">
@@ -108,18 +106,18 @@ const Product = () => {
 
             <button
               onClick={() => addToCart(productData.id.toString())}
-              className="mt-5 bg-gradient-to-r from-pink-500 to-pink-700 text-white px-6 py-3 rounded-full hover:bg-pink-500 transition duration-300 ease-in-out hover:shadow-md hover:scale-105"
+              className="mt-2 bg-gradient-to-r from-pink-500 to-pink-700 text-gray-50 dark:text-gray-200 px-4 py-2 rounded-full hover:bg-pink-500 transition duration-300 ease-in-out hover:shadow-md hover:scale-105 text-sm"
             >
               Tambah ke Keranjang
             </button>
 
             {/* Description & Reviews */}
-            <div className="mt-6 rounded-xl shadow bg-white border border-slate-300 overflow-hidden">
-              <div className="flex border-b">
+            <div className="mt-4 rounded-xl shadow bg-white dark:bg-gray-900 overflow-hidden">
+              <div className="flex">
                 <button
-                  className={`relative px-6 py-3 text-sm font-medium flex-1 transition text-gray-600 hover:text-gray-900 ${
+                  className={`relative px-6 py-3 text-sm font-medium flex-1 transition ${
                     activeTab === "description"
-                      ? "after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-pink-400"
+                      ? "after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-pink-900"
                       : ""
                   }`}
                   onClick={() => setActiveTab("description")}
@@ -127,21 +125,20 @@ const Product = () => {
                   Deskripsi
                 </button>
                 <button
-                  className={`relative px-6 py-3 text-sm font-medium flex-1 transition text-gray-600 hover:text-gray-900 ${
+                  className={`relative px-6 py-3 text-sm font-medium flex-1 transition ${
                     activeTab === "reviews"
-                      ? "after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-pink-400"
+                      ? "after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-pink-900"
                       : ""
                   }`}
                   onClick={() => setActiveTab("reviews")}
                 >
-                  Review
+                  Ulasan
                 </button>
               </div>
 
-              <div className="p-6 text-gray-600">
+              <div className="p-6">
                 {activeTab === "description" ? (
                   <div
-                    className="rounded-lg p-6"
                     dangerouslySetInnerHTML={{
                       __html: productData.description,
                     }}

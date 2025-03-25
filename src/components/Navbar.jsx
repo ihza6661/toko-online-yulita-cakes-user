@@ -53,26 +53,17 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 p-4 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "py-2 sm:py-3 shadow-md bg-gray-100 dark:bg-black md:dark:bg-black/50 md:backdrop-blur-lg"
-          : " py-4 sm:py-4  shadow-md bg-gray-100/50 dark:bg-black/50"
+          ? "py-4 sm:py-4 shadow-md bg-gray-100 dark:bg-black md:dark:bg-black/50 md:backdrop-blur-lg"
+          : " py-6 sm:py-4  shadow-md bg-gray-100/50 dark:bg-black/50"
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <div className="flex flex-col">
-          <Link
-            to="/"
-            className="text-xl font-serif font-bold text-pink-600 dark:text-pink-400 px-2"
-          >
-            Yulita Cakes
-            {/* <img
-              src="/yulita_cake.png"
-              className="w-20 transition-transform transform hover:scale-110 
-    dark:brightness-90 dark:contrast-125 dark:drop-shadow-lg"
-              alt="Logo"
-            /> */}
+          <Link to="/" className="text-xl sm:text-2xl font-serif font-bold">
+            <h2 className="dark:text-gray-300">Yulita Cakes</h2>
           </Link>
         </div>
 
@@ -89,11 +80,11 @@ const Navbar = () => {
               {({ isActive }) => (
                 <>
                   <p
-                    className={` text-gray-900 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out font-semibold text-lg md:text-base whitespace-nowrap md:mr-5 ${
+                    className={`text-gray-900 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out font-semibold text-lg md:text-base whitespace-nowrap md:mr-5 ${
                       isActive ? "text-pink-700 dark:text-pink-400" : ""
                     }`}
                   >
-                    {["Beranda", "Produk", "Lokasi Toko", "Kontak"][index]}
+                    {["Beranda", "Produk", "Tentang Kami", "Kontak"][index]}
                   </p>
                   <div
                     className={`w-1/2 h-[2px] bg-pink-900 dark:bg-pink-400 transition-all duration-500 ease-in-out transform scale-x-0 group-hover:scale-x-100 origin-left ${
@@ -107,11 +98,13 @@ const Navbar = () => {
         </ul>
 
         {/* Icons Section */}
-        <div className="flex items-center gap-6">
-          <DarkModeToggle />
-
+        <div className="flex items-center gap-4">
           {/* User Icon with Dropdown */}
-          <div className="relative" ref={profileRef}>
+          <div
+            className="relative flex gap-4 items-center justify-center"
+            ref={profileRef}
+          >
+            <DarkModeToggle />
             {token ? (
               <>
                 <FontAwesomeIcon
@@ -119,34 +112,36 @@ const Navbar = () => {
                   className="cursor-pointer text-xl text-gray-800 dark:text-gray-300"
                   onClick={() => setShowProfileDropdown((prev) => !prev)}
                 />
-                {showProfileDropdown && (
-                  <div
-                    className="absolute right-0 mt-2 w-40 bg-white dark:bg-[#442231] border border-gray-200 dark:border-pink-800 rounded-md shadow-lg transition-opacity duration-200"
-                    style={{ zIndex: 1000 }}
-                  >
-                    <div className="py-2 bg-gradient-to-r from-pink-100 to-pink-200 dark:from-[#3B1E2E] dark:to-[#552839] rounded-lg shadow-md">
-                      <Link
-                        to="/dashboard"
-                        onClick={() => setShowProfileDropdown(false)}
-                        className="block px-4 py-2 font-semibold hover:bg-pink-300 dark:hover:bg-[#5A2A3A] hover:text-pink-900 dark:hover:text-white rounded-md transition"
-                      >
-                        🎂 Dashboard
-                      </Link>
-                      <button
-                        onClick={() => {
-                          handleLogout();
-                          setShowProfileDropdown(false);
-                        }}
-                        className="w-full text-left block px-4 py-2 font-semibold hover:bg-pink-300 dark:hover:bg-[#5A2A3A] hover:text-pink-900 dark:hover:text-white rounded-md transition"
-                      >
-                        🍰 Keluar
-                      </button>
-                    </div>
+                <div
+                  className={`absolute right-2 top-8 mt-2 w-40 glass rounded-md shadow-lg transition-all duration-100 ease-in-out transform ${
+                    showProfileDropdown
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-95 pointer-events-none"
+                  }`}
+                  style={{ zIndex: 1000 }}
+                >
+                  <div className="text-sm py-2 glass] rounded-lg shadow-md">
+                    <Link
+                      to="/dashboard"
+                      onClick={() => setShowProfileDropdown(false)}
+                      className="block px-4 py-2 font-semibold hover:bg-pink-300 dark:hover:bg-[#5A2A3A] hover:text-pink-900 dark:hover:text-white rounded-md transition"
+                    >
+                      🎂 Dasbor
+                    </Link>
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        setShowProfileDropdown(false);
+                      }}
+                      className="w-full text-left block px-4 py-2 font-semibold hover:bg-pink-300 dark:hover:bg-[#5A2A3A] hover:text-pink-900 dark:hover:text-white rounded-md transition"
+                    >
+                      🍰 Keluar
+                    </button>
                   </div>
-                )}
+                </div>
               </>
             ) : (
-              <Link to="/login" className="btn py-2 px-4">
+              <Link to="/login" className="hidden sm:block btn py-2 px-4">
                 MASUK
               </Link>
             )}
@@ -171,36 +166,45 @@ const Navbar = () => {
             alt="menu icon"
           />
         </div>
+      </div>
 
-        {/* Sidebar Menu */}
-        <div
-          className={`fixed top-0 right-0 bottom-0 w-full md:hidden glass shadow-xl transition-all duration-300 ease-in-out transform ${
-            sidebarVisible ? "translate-x-0" : "translate-x-full"
-          }`}
-          style={{ zIndex: 999 }}
-        >
-          <div className="fixed inset-0 w-full h-full flex flex-col p-6 bg-white/50 dark:bg-black/50 backdrop-blur-lg z-50">
-            {/* Back Button */}
-            <div
-              onClick={() => setSidebarVisible(false)}
-              className="flex items-center gap-4 p-3 cursor-pointer hover:bg-pink-200 dark:hover:bg-[#5A2A3A] rounded-lg transition-all duration-200 ease-in-out"
-            >
-              <ChevronLeft className="h-5 w-5 stroke-[2]" />
-              <p className="font-semibold">Kembali</p>
-            </div>
-
-            {/* Sidebar Links */}
-            {["/", "/collection", "/about", "/contact"].map((path, index) => (
-              <NavLink
-                key={index}
-                onClick={() => setSidebarVisible(false)}
-                className="py-3 pl-6 border-b border-pink-300 dark:border-pink-800 hover:bg-pink-200 dark:hover:bg-[#5A2A3A] rounded-lg font-medium transition-all duration-200 ease-in-out"
-                to={path}
-              >
-                {["BERANDA", "PRODUK", "LOKASI TOKO", "KONTAK"][index]}
-              </NavLink>
-            ))}
+      {/* Sidebar Menu */}
+      <div
+        className={`fixed top-0 right-0 bottom-0 w-full md:hidden glass shadow-xl transition-all duration-300 ease-in-out transform ${
+          sidebarVisible ? "translate-x-0" : "translate-x-full"
+        }`}
+        style={{ zIndex: 999 }}
+      >
+        <div className="fixed inset-0 w-full h-full flex flex-col p-6 bg-white/50 dark:bg-black/50 backdrop-blur-lg z-50">
+          <div
+            onClick={() => setSidebarVisible(false)}
+            className="flex items-center gap-4 p-3 cursor-pointer hover:bg-pink-200 dark:hover:bg-[#5A2A3A] rounded-lg transition-all duration-200 ease-in-out"
+          >
+            <ChevronLeft className="h-5 w-5 stroke-[2]" />
+            <p className="font-semibold">Kembali</p>
           </div>
+
+          {/* Sidebar Links */}
+          {["/", "/collection", "/about", "/contact"].map((path, index) => (
+            <NavLink
+              key={index}
+              onClick={() => setSidebarVisible(false)}
+              className="py-3 pl-6 border-b border-pink-300 dark:border-pink-800 hover:bg-pink-200 dark:hover:bg-[#5A2A3A] rounded-lg font-medium transition-all duration-200 ease-in-out"
+              to={path}
+            >
+              {["BERANDA", "PRODUK", "LOKASI TOKO", "KONTAK"][index]}
+            </NavLink>
+          ))}
+
+          {!token && (
+            <Link
+              to="/login"
+              className="mt-4 py-3 pl-6 text-center border border-pink-500 dark:border-pink-400 bg-pink-500 dark:bg-pink-400 text-white rounded-lg font-semibold transition-all duration-200 ease-in-out hover:bg-pink-600 dark:hover:bg-pink-500"
+              onClick={() => setSidebarVisible(false)}
+            >
+              MASUK
+            </Link>
+          )}
         </div>
       </div>
     </header>

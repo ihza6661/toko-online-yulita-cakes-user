@@ -13,7 +13,7 @@ const ResetPassword = () => {
     document.title = "Yulita Cakes - Reset Password";
     // Jika token atau email tidak ada, redirect ke halaman login
     if (!token || !email) {
-      toast.error("Link reset password tidak valid.");
+      toast.error("Link reset password tidak valid."), { className: "toast-custom" };
       navigate("/login");
     }
   }, [token, email, navigate]);
@@ -55,15 +55,15 @@ const ResetPassword = () => {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(data.message || "Password berhasil direset.");
+        toast.success(data.message || "Password berhasil direset."), { className: "toast-custom" };
         navigate("/login");
       } else if (response.status === 422) {
         setErrors(data.errors || {});
       } else {
-        toast.error(data.message || "Terjadi kesalahan, silakan coba lagi.");
+        toast.error(data.message || "Terjadi kesalahan, silakan coba lagi."), { className: "toast-custom" };
       }
     } catch (error) {
-      toast.error("Terjadi kesalahan jaringan, silakan coba lagi.");
+      toast.error("Terjadi kesalahan jaringan, silakan coba lagi."), { className: "toast-custom" };
     }
   };
 

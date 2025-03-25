@@ -122,77 +122,90 @@ const Collection = () => {
   const uniqueCategories = [...new Set(products.map((item) => item.category))];
 
   return (
-    <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 mt-16 border-t pb-10">
-      <div className="min-w-60">
-        <p className="my-2 text-lg text-gray-900 flex items-center gap-2 cursor-pointer">
+    <div className="container mx-auto px-4 py-6">
+    <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-0 sm:pt-6 mt-10 pb-10 px-2">
+      
+      {/* Sticky Sidebar */}
+      <div className="min-w-60 pt-8 sm:pt-20 sm:sticky top-0 sm:h-screen overflow-hidden">
+
+
+        <p className=" text-lg text-pink-900 flex items-center gap-2 cursor-pointer">
           CARI
           <FontAwesomeIcon
             onClick={() => setShowSearch(true)}
             icon={faSearch}
-            className="cursor-pointer text-gray-900"
-          />
+            className="cursor-pointer text-gray-700 dark:text-gray-400"
+          />  
         </p>
         <p
-          className="my-2 text-lg text-gray-900 flex items-center gap-2 cursor-pointer"
+          className="my-2 text-lg text-pink-900 flex items-center gap-2 cursor-pointer"
           onClick={() => setShowFilter((prev) => !prev)}
         >
           FILTER
           <FontAwesomeIcon
             icon={faArrowRight}
-            className={`h-6 sm:hidden cursor-pointer text-gray-900 ${
+            className={`h-6 sm:hidden cursor-pointer text-gray-700 dark:text-gray-400 ${
               showFilter ? "rotate-90" : ""
             } transform transition-transform duration-300`}
           />
         </p>
-
+  
         {/* Search and Filter Controls */}
         <div
-          className={`border b-pink-300  p-5 mb-5 rounded-lg bg-white shadow-md ${
+          className={`p-6 mb-5 rounded-xl bg-pink-50 dark:bg-gray-900 shadow-sm transition-all ${
             showFilter ? "" : "hidden sm:block"
           }`}
         >
-          <p className="mb-3 text-md font-bold">KATEGORI</p>
-    
-
-
-
-          <div className="flex flex-col gap-2 text-sm font-medium text-gray-700">
+          <h3 className="mb-4 text-lg font-semibold tracking-wide">KATEGORI</h3>
+  
+          <div className="flex flex-col gap-3 text-md font-medium text-gray-700">
             {uniqueCategories.map((item, index) => (
-              <p key={index} className="flex gap-2">
+              <label
+                key={index}
+                className="flex items-center gap-3 cursor-pointer text-gray-700 dark:text-gray-400"
+              >
                 <input
-                  className="w-3"
                   type="checkbox"
+                  className="w-4 h-4 accent-pink-600 cursor-pointer"
                   value={item}
                   checked={category.includes(item)}
                   onChange={() => toggleFilter(item, "category")}
-                />{" "}
-                {item}
-              </p>
+                />
+                <span className="hover:text-pink-700 transition-all">
+                  {item}
+                </span>
+              </label>
             ))}
           </div>
         </div>
-        <div></div>
+  
         <hr />
       </div>
-
+  
+      {/* Product Section */}
       <div className="flex-1">
-        <div className="flex justify-between text-base sm:text-2xl mb-4 px-4 ">
+        <div className="flex justify-between text-base sm:text-2xl mb-4 px-4">
           <Title text1={"SEMUA"} text2={"PRODUK ✨"} />
-
+  
           <select
             onChange={(e) => setSortType(e.target.value)}
             className="border-2 border-gray-300 text-sm px-2 py-2 w-48 h-10 rounded-md 
-               bg-gradient-to-r from-pink-300 to-pink-400 text-gray-800 shadow-md"
+            bg-gradient-to-r from-pink-500 to-pink-700 text-gray-200 shadow-md"
           >
-            <option value="relevent">Urutkan: Paling Sesuai</option>
-            <option value="low-high">Urutkan: Harga Terendah</option>
-            <option value="high-low">Urutkan: Harga Tertinggi</option>
+            <option value="relevent" className="text-black">
+              Urutkan: Paling Sesuai
+            </option>
+            <option value="low-high" className="text-black">
+              Urutkan: Harga Terendah
+            </option>
+            <option value="high-low" className="text-black">
+              Urutkan: Harga Tertinggi
+            </option>
           </select>
         </div>
-
+  
+        {/* Product Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
-          {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 px-4"> */}
-
           {filterProducts.map((item, index) => (
             <ProductItem
               key={index}
@@ -208,6 +221,8 @@ const Collection = () => {
         </div>
       </div>
     </div>
+  </div>
+  
   );
 };
 

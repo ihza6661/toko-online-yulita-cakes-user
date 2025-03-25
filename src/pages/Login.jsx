@@ -5,10 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const AuthForm = () => {
-  useEffect(() => {
-    let judul = isLogin ? "Masuk" : "Register";
-    document.title = `Yulita Cakes - ${judul}`;
-  });
   const { setToken } = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -24,6 +20,11 @@ const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState(getInitialFormData());
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    let judul = isLogin ? "Masuk" : "Register";
+    document.title = `Yulita Cakes - ${judul}`;
+  }, [isLogin]);
 
   // Handle form input changes
   const handleChange = (e) => {
@@ -62,6 +63,7 @@ const AuthForm = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     // Client-side validation
     const validationErrors = validateFormData(formData);
     if (Object.keys(validationErrors).length > 0) {
@@ -85,25 +87,23 @@ const AuthForm = () => {
       if (response.ok) {
         if (isLogin) {
           setToken(data.token);
-          toast.success("Login berhasil!");
+          toast.success("Login berhasil!", { className: "toast-custom" });
           navigate("/");
         } else {
-          toast.success("Registrasi berhasil! Silakan login.");
+          toast.success("Registrasi berhasil! Silakan login.", { className: "toast-custom" });
           resetForm();
           setIsLogin(true);
         }
       } else if (response.status === 422) {
         setErrors(data.errors || {});
       } else {
-        throw new Error(
-          data.message || "Terjadi kesalahan, silakan coba lagi."
-        );
+        throw new Error(data.message || "Terjadi kesalahan, silakan coba lagi.");
       }
     } catch (error) {
       console.error("Error during authentication:", error);
-      toast.error(
-        error.message || "Terjadi kesalahan jaringan, silakan coba lagi."
-      );
+      toast.error(error.message || "Terjadi kesalahan jaringan, silakan coba lagi.", {
+        className: "toast-custom",
+      });
     }
   };
 

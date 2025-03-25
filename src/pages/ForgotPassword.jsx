@@ -29,15 +29,15 @@ const ForgotPassword = () => {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(data.message || "Link reset password telah dikirim.");
+        toast.success(data.message || "Link reset password telah dikirim."), { className: "toast-custom" };
         setMessage(data.message);
       } else {
         setError(data.message || "Terjadi kesalahan, silakan coba lagi.");
-        toast.error(data.message || "Terjadi kesalahan, silakan coba lagi.");
+        toast.error(data.message || "Terjadi kesalahan, silakan coba lagi."), { className: "toast-custom" };
       }
     } catch (err) {
       setError("Terjadi kesalahan jaringan, silakan coba lagi.", err);
-      toast.error("Terjadi kesalahan jaringan, silakan coba lagi.");
+      toast.error("Terjadi kesalahan jaringan, silakan coba lagi."), { className: "toast-custom" };
     }
   };
 

@@ -45,7 +45,7 @@ const Addresses = () => {
     } catch (error) {
       console.error("Error fetching addresses:", error);
       toast.error(
-        error.message || "Terjadi kesalahan saat mengambil data alamat."
+        error.message || "Terjadi kesalahan saat mengambil data alamat.", { className: "toast-custom" }
       );
     }
   }, [authFetch]);
@@ -93,7 +93,7 @@ const Addresses = () => {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(data.message || "Alamat berhasil disimpan.");
+        toast.success(data.message || "Alamat berhasil disimpan."), { className: "toast-custom" };
         // Refresh addresses to update default flags and new entries
         await fetchAddresses();
         resetForm();
@@ -104,7 +104,7 @@ const Addresses = () => {
       }
     } catch (error) {
       console.error("Error saving address:", error);
-      toast.error(error.message || "Terjadi kesalahan saat menyimpan alamat.");
+      toast.error(error.message || "Terjadi kesalahan saat menyimpan alamat."), { className: "toast-custom" };
     }
   };
 
@@ -119,7 +119,7 @@ const Addresses = () => {
         const data = await response.json();
 
         if (response.ok) {
-          toast.success(data.message || "Alamat berhasil dihapus.");
+          toast.success(data.message || "Alamat berhasil dihapus."), { className: "toast-custom" };
           // Refresh addresses after deletion
           await fetchAddresses();
         } else {
@@ -128,7 +128,7 @@ const Addresses = () => {
       } catch (error) {
         console.error("Error deleting address:", error);
         toast.error(
-          error.message || "Terjadi kesalahan saat menghapus alamat."
+          error.message || "Terjadi kesalahan saat menghapus alamat.", { className: "toast-custom" }
         );
       }
     }

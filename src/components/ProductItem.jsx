@@ -8,6 +8,7 @@ const ProductItem = ({
   salePrice = null,
   slug = null,
   stock = 1,
+  label = null, // New prop for labels like "Bestseller"
 }) => {
   const isOutOfStock = stock === 0;
   const hasDiscount = salePrice !== null && salePrice < originalPrice;
@@ -15,73 +16,80 @@ const ProductItem = ({
     ? (((originalPrice - salePrice) / originalPrice) * 100).toFixed(0)
     : 0;
 
-  const productContent = (
-    <>
-      {/* Product Card with Taller Height */}
-      <div className="relative overflow-hidden rounded-2xl w-full shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col h-[340px]">
-        {/* Discount Badge */}
-        {hasDiscount && (
-          <span className="absolute top-2 left-2 z-20 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-md shadow">
-            -{discountPercentage}%
-          </span>
-        )}
-
+    const productContent = (
+      <div className="min-h-[18rem] sm:min-h-max relative bg-white dark:bg-[#101010] text-black dark:text-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col w-full max-w-[90%] sm:max-w-sm md:max-w-md lg:max-w-[280px] xl:max-w-[300px] px-3 sm:p-4 transform hover:scale-105 gap-4">
         {/* Product Image */}
-        <div className="relative">
+        <div className="relative flex justify-center items-center w-full aspect-[4/3] rounded-md mt-2 sm:mt-4">
           <img
-            className="w-full h-56 object-contain transition-transform duration-300 hover:scale-105 rounded-t-2xl"
+            className="w-full h-full object-contain rounded-md opacity-90 dark:opacity-75 p-2"
             src={image}
             alt={name}
             onError={(e) => (e.target.src = "/placeholder.jpg")}
           />
-
-          {/* Out of Stock Overlay */}
-          {isOutOfStock && (
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-              <span className="text-white text-sm font-bold">Stok Habis</span>
-            </div>
-          )}
         </div>
-
+    
         {/* Product Details */}
-        <div className="flex flex-col flex-grow p-4 text-center">
-          <p className="text-md font-semibold text-gray-800 flex-grow">
+        <div className="flex flex-col flex-grow text-center">
+          <p className="text-base sm:text-md font-semibold tracking-wide text-gray-700 dark:text-gray-400">
             {name}
           </p>
-
+    
+          {/* <p className="text-xs sm:text-xs text-gray-600 dark:text-gray-400 mt-1">
+            {isOutOfStock ? "" : "Tersedia"}
+          </p>
+     */}
           {/* Pricing */}
-          <div className="mt-auto">
+          <div className="mt-1 sm:mt-2">
             {hasDiscount ? (
               <div>
-                <p className="text-xs text-gray-500 line-through">
-                  Rp{originalPrice.toLocaleString("id-ID")}
+                <p className="text-xs sm:text-xs text-gray-500 dark:text-gray-600 line-through">
+                  Rp.{" "}
+                  {originalPrice.toLocaleString(undefined, {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  })}
                 </p>
-                <p className="text-sm font-bold text-red-600">
-                  Rp{salePrice.toLocaleString("id-ID")}
+                <p className="text-md sm:text-md font-bold text-pink-900 dark:text-gray-400">
+                  Rp.{" "}
+                  {salePrice.toLocaleString(undefined, {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  })}
                 </p>
               </div>
             ) : (
-              <p className="text-sm font-bold text-red-600">
-                Rp{originalPrice.toLocaleString("id-ID")}
+              <p className="text-md sm:text-lg font-bold text-pink-900">
+                Rp.{" "}
+                {originalPrice.toLocaleString(undefined, {
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                })}
               </p>
             )}
           </div>
+    
+          {/* Label (like Bestseller, Wedding, etc.) */}
+          {label && (
+            <span className="mt-2 px-3 py-1 text-xs sm:text-sm font-bold bg-pink-600 text-white rounded-full">
+              {label}
+            </span>
+          )}
         </div>
       </div>
-    </>
-  );
-
-  return (
-    <div className="w-full h-auto">
-      {slug ? (
-        <Link to={`/product/${slug}`} className="block">
-          {productContent}
-        </Link>
-      ) : (
-        <div>{productContent}</div>
-      )}
-    </div>
-  );
+    );
+    
+    return (
+      <div className="w-full flex justify-center">
+        {slug ? (
+          <Link to={`/product/${slug}`} className="block">
+            {productContent}
+          </Link>
+        ) : (
+          productContent
+        )}
+      </div>
+    );
+    
 };
 
 ProductItem.propTypes = {
@@ -91,6 +99,7 @@ ProductItem.propTypes = {
   salePrice: PropTypes.number,
   slug: PropTypes.string,
   stock: PropTypes.number,
+  label: PropTypes.string,
 };
 
 export default ProductItem;

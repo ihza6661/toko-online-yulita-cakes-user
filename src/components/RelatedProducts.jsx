@@ -65,15 +65,17 @@ const RelatedProducts = ({ category, subCategory }) => {
   }
 
   return (
-    <div className="my-24">
+    <section className="section-padding">
+
+    {/* <div className="my-24"> */}
       <div className="text-center py-8 text-3xl">
-        <Title text1={"PRODUK"} text2={"TERKAIT"} />
+        <Title text1={"Produk"} text2={"Terkait"} />
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
         {relatedProducts.map((item) => (
           <div
             key={item.id}
-            className="transform hover:scale-105 transition-transform duration-300 ease-in-out"
+            className="group relative rounded-2xl transition-transform"
           >
             <ProductItem
               id={item.id}
@@ -87,7 +89,8 @@ const RelatedProducts = ({ category, subCategory }) => {
           </div>
         ))}
       </div>
-    </div>
+    {/* </div> */}
+    </section>
   );
 };
 

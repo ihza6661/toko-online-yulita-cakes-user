@@ -41,7 +41,7 @@ const OrderDetail = () => {
   const copyTrackingNumber = () => {
     if (order.shipment?.tracking_number) {
       navigator.clipboard.writeText(order.shipment.tracking_number);
-      toast.success("Nomor resi berhasil disalin");
+      toast.success("Nomor resi berhasil disalin"), { className: "toast-custom" };
     }
   };
 

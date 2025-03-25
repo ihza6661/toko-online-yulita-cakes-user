@@ -30,11 +30,11 @@ const AccountDetails = () => {
             email: data.email,
           }));
         } else {
-          toast.error(data.message || "Gagal mengambil data pengguna.");
+          toast.error(data.message || "Gagal mengambil data pengguna."), { className: "toast-custom" };
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
-        toast.error("Terjadi kesalahan saat mengambil data pengguna.");
+        toast.error("Terjadi kesalahan saat mengambil data pengguna."), { className: "toast-custom" };
       }
     };
 
@@ -80,7 +80,7 @@ const AccountDetails = () => {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(data.message || "Profil berhasil diperbarui.");
+        toast.success(data.message || "Profil berhasil diperbarui."), { className: "toast-custom" };
         setUserData((prevState) => ({
           ...prevState,
           password: "",
@@ -90,11 +90,11 @@ const AccountDetails = () => {
       } else if (response.status === 422) {
         setErrors(data.errors || {});
       } else {
-        toast.error(data.message || "Gagal memperbarui profil.");
+        toast.error(data.message || "Gagal memperbarui profil."), { className: "toast-custom" };
       }
     } catch (error) {
       console.error("Error updating user data:", error);
-      toast.error("Terjadi kesalahan saat memperbarui profil.");
+      toast.error("Terjadi kesalahan saat memperbarui profil."), { className: "toast-custom" };
     }
   };
 

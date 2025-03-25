@@ -60,18 +60,18 @@ const LatestCollection = () => {
   }
 
   return (
-    <div className="my-10 py-10 rounded-lg">
+      <section className="section-padding bg-white dark:bg-black">
       {/* Judul Koleksi Terbaru */}
       <div className="text-center py-6">
         <Title text1={"PRODUK"} text2={"TERBARU"} />
-        <p className="w-3/4 mx-auto text-sm sm:text-base text-pink-700 font-medium">
+        <p className="w-3/4 mx-auto text-sm sm:text-base font-medium">
           Temukan koleksi terbaru dari kue lezat kami. Manjakan diri Anda dengan
           rasa yang istimewa! 💕
         </p>
       </div>
 
       {/* Daftar Produk Terbaru */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 px-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-4 gap-x-2">
         {latestProducts.map((item) => (
           <div
             key={item.id}
@@ -89,7 +89,7 @@ const LatestCollection = () => {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

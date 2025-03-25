@@ -10,10 +10,18 @@ function SampleNextArrow(props) {
   const { onClick } = props;
   return (
     <div
-      className="absolute top-1/2 right-2 transform -translate-y-1/2 text-white text-4xl cursor-pointer z-10 hover:scale-110 transition-all duration-300 drop-shadow-lg"
+      className="absolute top-1/2 right-2 transform -translate-y-1/2 
+                 text-white text-4xl cursor-pointer z-10 
+                 hover:scale-110 transition-all duration-300 drop-shadow-lg"
       onClick={onClick}
     >
-      <FaArrowCircleRight className="bg-pink-500 rounded-full p-1 hover:bg-pink-700 transition-colors duration-300" />
+      <FaArrowCircleRight
+        className="bg-pink-500 dark:bg-[#3B0D28] rounded-full p-1 
+                                     hover:bg-pink-700 dark:hover:bg-[#621640] 
+                                     transition-colors duration-300 
+                                     shadow-lg shadow-pink-500/50 dark:shadow-[#3B0D28]/50 
+                                     hover:shadow-pink-700/60 dark:hover:shadow-[#621640]/60"
+      />
     </div>
   );
 }
@@ -22,10 +30,18 @@ function SamplePrevArrow(props) {
   const { onClick } = props;
   return (
     <div
-      className="absolute top-1/2 left-2 transform -translate-y-1/2 text-white text-4xl cursor-pointer z-10 hover:scale-110 transition-all duration-300 drop-shadow-lg"
+      className="absolute top-1/2 left-2 transform -translate-y-1/2 
+                 text-white text-4xl cursor-pointer z-10 
+                 hover:scale-110 transition-all duration-300 drop-shadow-lg"
       onClick={onClick}
     >
-      <FaArrowCircleLeft className="bg-pink-500 rounded-full p-1 hover:bg-pink-700 transition-colors duration-300" />
+      <FaArrowCircleLeft
+        className="bg-pink-500 dark:bg-[#3B0D28] rounded-full p-1 
+                                    hover:bg-pink-700 dark:hover:bg-[#621640] 
+                                    transition-colors duration-300 
+                                    shadow-lg shadow-pink-500/50 dark:shadow-[#3B0D28]/50 
+                                    hover:shadow-pink-700/60 dark:hover:shadow-[#621640]/60"
+      />
     </div>
   );
 }
@@ -55,29 +71,32 @@ const Categories = () => {
 
   const sliderSettings = {
     dots: false,
-    infinite: categories.length > slidesToShow,
+    infinite: categories.length > Math.min(slidesToShow, 4),
     speed: 600,
-    slidesToShow: slidesToShow,
+    slidesToShow: Math.min(slidesToShow, 4),
     slidesToScroll: 1,
-    autoplay: autoplay,
+    autoplay: false,
     autoplaySpeed: 4000,
+    centerMode: true, // Ensures the active item is centered
+    variableWidth: false, // Keeps consistent item sizes
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: slidesToShow } },
-      {
-        breakpoint: 768,
-        settings: { slidesToShow: Math.min(2, slidesToShow) },
-      },
-      { breakpoint: 480, settings: { slidesToShow: 1 } },
+      { breakpoint: 1280, settings: { slidesToShow: 3, centerMode: false } },
+      { breakpoint: 1024, settings: { slidesToShow: 2, centerMode: false } },
+      { breakpoint: 768, settings: { slidesToShow: 1, centerMode: true } },
+      { breakpoint: 480, settings: { slidesToShow: 1, centerMode: true } },
     ],
   };
 
   return (
-    <div className="py-8 px-4 sm:px-6 lg:px-8">
-      <div className="text-center text-2xl pb-4">
-        <Title text1={"KATEGORI"} text2={"PRODUK"} />
+    <div className="py-16 px-4 sm:px-6 lg:px-12 xl:px-20 bg-pink-50 dark:bg-gray-950">
+      {/* Title */}
+      <div className="text-center text-2xl pb-6">
+        <Title text1={"Kategori"} text2={"Produk"} />
       </div>
+
+      {/* Loading & Error Messages */}
       {loading ? (
         <p className="text-center text-gray-500">Memuat kategori...</p>
       ) : error ? (
@@ -85,32 +104,48 @@ const Categories = () => {
           Terjadi kesalahan saat mengambil data.
         </p>
       ) : (
-        <Slider {...sliderSettings}>
-          {categories.map((category) => (
-            <div
-              key={category.id}
-              className="px-2"
-              onClick={() =>
-                navigate("/collection", {
-                  state: { selectedCategory: category.category_name },
-                })
-              }
-            >
-              <div className="cursor-pointer group flex flex-col items-center p-4 bg-white/30 backdrop-blur-md rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
-                <div className="w-40 h-40 mb-2 overflow-hidden rounded-full border-4 border-pink-300 shadow-lg">
-                  <img
-                    src={`/storage/${category.image}`}
-                    alt={category.category_name}
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
-                  />
+        <div className="mx-auto w-full max-w-7xl px-2 sm:px-6 lg:px-8 py-4">
+          {/* Centered Slider Wrapper */}
+          <div className="flex justify-center">
+            <Slider {...sliderSettings} className="w-full max-w-5xl">
+              {categories.map((category) => (
+                <div
+                  key={category.id}
+                  className="flex justify-center px-2 sm:px-4 lg:px-5"
+                  onClick={() =>
+                    navigate("/collection", {
+                      state: { selectedCategory: category.category_name },
+                    })
+                  }
+                >
+                  {/* Category Card */}
+                  <div
+                    className="cursor-pointer group flex flex-col items-center p-4 pt-8
+            bg-white dark:bg-gray-900 backdrop-blur-md rounded-3xl
+            border border-gray-300 dark:border-gray-700 
+  shadow-sm
+            transform transition-all duration-300 w-full 
+            max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[240px]"
+                  >
+                    {/* Image */}
+                    <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-3 overflow-hidden rounded-full border-4 border-pink-300 shadow-lg">
+                      <img
+                        src={`/storage/${category.image}`}
+                        alt={category.category_name}
+                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+
+                    {/* Category Name */}
+                    <p className="text-lg font-semibold text-pink-700 text-center mt-2 group-hover:text-pink-900 transition-colors duration-300">
+                      {category.category_name}
+                    </p>
+                  </div>
                 </div>
-                <p className="text-lg font-semibold text-pink-700 text-center mt-2 group-hover:text-pink-900 transition-colors duration-300">
-                  {category.category_name}
-                </p>
-              </div>
-            </div>
-          ))}
-        </Slider>
+              ))}
+            </Slider>
+          </div>
+        </div>
       )}
     </div>
   );

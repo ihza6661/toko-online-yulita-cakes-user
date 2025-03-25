@@ -57,12 +57,12 @@ const Product = () => {
     );
 
   return (
-    <div className="pt-36 pb-10 border-t-2">
+    <div className="pt-24 sm:pt-36 pb-10 border-t-2">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex flex-col sm:flex-row gap-10">
+        <div className="flex flex-col sm:flex-row gap-4">
           {/* Image Gallery */}
           <div className="flex flex-col sm:flex-row gap-4 flex-1">
-            <div className="flex flex-row sm:flex-col gap-3 sm:w-1/5">
+            <div className="flex flex-row sm:flex-col gap-4 sm:w-1/5">
               {images.map((item, index) => (
                 <img
                   key={index}
@@ -75,7 +75,7 @@ const Product = () => {
             </div>
             <div className="flex-1">
               <img
-                className="w-full rounded-lg shadow-lg object-cover border"
+                className="w-full rounded-lg shadow-md object-cover border"
                 src={selectedImage}
                 alt={productData.product_name}
               />
@@ -83,7 +83,7 @@ const Product = () => {
           </div>
 
           {/* Product Details */}
-          <div className="flex-1 p-6 bg-white shadow-lg rounded-xl">
+          <div className="flex-1 p-6 bg-white shadow-md rounded-xl">
             <h1 className="text-4xl font-bold mb-3 text-gray-800">
               {productData.product_name}
             </h1>
@@ -108,7 +108,7 @@ const Product = () => {
 
             <button
               onClick={() => addToCart(productData.id.toString())}
-              className="mt-5 bg-pink-400 text-white px-6 py-3 rounded-full shadow hover:bg-pink-500 transition duration-300 ease-in-out hover:shadow-lg hover:scale-105"
+              className="mt-5 bg-gradient-to-r from-pink-500 to-pink-700 text-white px-6 py-3 rounded-full hover:bg-pink-500 transition duration-300 ease-in-out hover:shadow-md hover:scale-105"
             >
               Tambah ke Keranjang
             </button>

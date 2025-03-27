@@ -25,11 +25,9 @@ const CartTotal = ({ shippingCost }) => {
   };
 
   return (
-<div className="bg-white rounded-2xl sm:rounded-xl p-4 border border-pink-300 shadow-md">
-
-
-      <div className="text-2xl">
-        <Title text1={"TOTAL"} text2={"KERANJANG"} />
+    <div className="bg-pink-50 dark:bg-gray-900 rounded-2xl sm:rounded-xl p-4 shadow-md">
+      <div className="text-xl overflow-hidden">
+        <Title text1={"Total"} text2={"Keranjang"} />
       </div>
       <div className="flex flex-col gap-2 mt-2 text-sm">
         <div>

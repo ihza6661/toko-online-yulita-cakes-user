@@ -55,8 +55,9 @@ const Product = () => {
     );
 
   return (
-    <div className="pt-24 sm:pt-36 pb-10 border-t-2">
-      <div className="max-w-6xl mx-auto px-4">
+    // <div className="pt-24 sm:pt-36 pb-10 border-t-2">
+    <div className="section-padding">
+      <div className="max-w-6xl mx-auto px-4 pt-6">
         <div className="flex flex-col sm:flex-row gap-4">
           {/* Image Gallery */}
           <div className="flex flex-col sm:flex-row gap-4 flex-1">

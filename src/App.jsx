@@ -28,33 +28,33 @@ import ForgotPassword from "./pages/ForgotPassword";
 import FeaturesSection from "./components/FeaturesSection";
 import Testimonials from "./components/Testimonials";
 import CallToAction from "./components/CallToAction";
+import { ScrollToTop } from "./components/ScrollToTop";
 
+// function ScrollToTop() {
+//   const navigationType = useNavigationType();
 
-function ScrollToTop() {
-  const navigationType = useNavigationType();
+//   useEffect(() => {
+//     if (navigationType === "POP") {
+//       const savedScroll = sessionStorage.getItem("scrollPosition");
+//       if (savedScroll) {
+//         window.scrollTo(0, parseInt(savedScroll, 10));
+//       }
+//     } else {
+//       window.scrollTo(0, 0);
+//     }
 
-  useEffect(() => {
-    if (navigationType === "POP") {
-      const savedScroll = sessionStorage.getItem("scrollPosition");
-      if (savedScroll) {
-        window.scrollTo(0, parseInt(savedScroll, 10));
-      }
-    } else {
-      window.scrollTo(0, 0);
-    }
+//     const handleScroll = () => {
+//       sessionStorage.setItem("scrollPosition", window.scrollY);
+//     };
 
-    const handleScroll = () => {
-      sessionStorage.setItem("scrollPosition", window.scrollY);
-    };
+//     window.addEventListener("scroll", handleScroll);
+//     return () => {
+//       window.removeEventListener("scroll", handleScroll);
+//     };
+//   }, [navigationType]);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [navigationType]);
-
-  return null;
-}
+//   return null;
+// }
 
 const Home = () => {
   useEffect(() => {
@@ -62,13 +62,13 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="page-transition">
       <Hero />
       <LatestColletion />
-      <FeaturesSection/>
       <Categories />
-      <Testimonials/>
-      <CallToAction/>
+      <FeaturesSection />
+      <Testimonials />
+      <CallToAction />
     </div>
   );
 };
@@ -76,10 +76,9 @@ const Home = () => {
 const App = () => {
   return (
     <>
-      <ScrollToTop />
       <ToastContainer
         position="top-left"
-        autoClose={2000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={true}
         closeOnClick
@@ -88,12 +87,14 @@ const App = () => {
         draggable
         pauseOnHover
         theme="light"
-        toastClassName="custom-toast"
+        toastClassName={() => "custom-toast"}
         progressClassName="custom-progress"
       />
+
       <Navbar />
       <SearchBar />
 
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/collection" element={<Collection />} />

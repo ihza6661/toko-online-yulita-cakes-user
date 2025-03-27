@@ -170,7 +170,7 @@ const Navbar = () => {
 
       {/* Sidebar Menu */}
       <div
-        className={`fixed top-0 right-0 bottom-0 w-full md:hidden glass shadow-xl transition-all duration-300 ease-in-out transform ${
+        className={`fixed top-0 right-0 bottom-0 w-60 md:hidden glass shadow-xl transition-all duration-300 ease-in-out transform ${
           sidebarVisible ? "translate-x-0" : "translate-x-full"
         }`}
         style={{ zIndex: 999 }}
@@ -189,7 +189,7 @@ const Navbar = () => {
             <NavLink
               key={index}
               onClick={() => setSidebarVisible(false)}
-              className="py-3 pl-6 border-b border-pink-300 dark:border-pink-800 hover:bg-pink-200 dark:hover:bg-[#5A2A3A] rounded-lg font-medium transition-all duration-200 ease-in-out"
+              className="py-4 pl-6 mb-2 border-b border-pink-300 dark:border-pink-800 hover:accent rounded-lg font-medium transition-all duration-200 ease-in-out"
               to={path}
             >
               {["BERANDA", "PRODUK", "LOKASI TOKO", "KONTAK"][index]}

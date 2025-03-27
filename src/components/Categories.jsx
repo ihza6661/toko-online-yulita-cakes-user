@@ -90,7 +90,7 @@ const Categories = () => {
   };
 
   return (
-    <div className="py-16 px-4 sm:px-6 lg:px-12 xl:px-20">
+    <div className="pt-2 pb-10 px-4 sm:px-6 lg:px-12 xl:px-20">
       {/* Title */}
       <div className="text-center text-2xl pb-6">
         <Title text1={"Kategori"} text2={"Kue"} />

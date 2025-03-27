@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import NewsletterBox from "../components/NewsletterBox";
-import { useContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 import Title from "../components/Title";
 
 const About = () => {
@@ -17,7 +16,7 @@ const About = () => {
         transition={{ duration: 0.5 }}
         className="max-w-4xl mx-auto"
       >
-        <div className="prose prose-pink dark:prose-invert lg:prose-lg max-w-none">
+        <div className="prose prose-pink dark:prose-invert lg:prose-lg max-w-none pt-10">
           <Title text1="Yulita" text2="Cakes" />
           <p className="text-xl text-gray-700 dark:text-gray-300 mb-6">
             Telah membuat kue dan Roti sejak 2010. Apa yang awalnya dimulai

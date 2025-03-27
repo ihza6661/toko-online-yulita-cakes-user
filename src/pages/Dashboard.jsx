@@ -21,7 +21,7 @@ const Dashboard = () => {
       <div className="w-full max-w-6xl flex flex-col md:flex-row md:gap-12 lg:gap-16 items-start justify-center mx-auto p-4">
         {/* Sidebar Navigation */}
         <div className="w-full md:w-1/4 lg:w-1/5">
-          <nav className="bg-white shadow-lg rounded-2xl p-5 mb-5">
+          <nav className="bg-pink-50 dark:bg-gray-900 shadow-lg rounded-2xl p-5 mb-5">
             <ul className="space-y-4">
               {tabs.map((tab) => (
                 <li key={tab.path}>
@@ -30,8 +30,8 @@ const Dashboard = () => {
                     className={({ isActive }) =>
                       `block px-6 py-3 rounded-lg text-lg font-medium transition duration-300 ${
                         isActive
-                          ? "bg-pink-500 text-white shadow-md"
-                          : "bg-pink-100 text-pink-600 hover:bg-pink-200"
+                          ? "bg-pink-400 dark:bg-pink-700 text-white dark:text-gray-200 shadow-md"
+                          : "bg-pink-100 dark:bg-gray-900 text-gray-800 dark:text-gray-300 hover:bg-pink-200"
                       }`
                     }
                   >
@@ -45,7 +45,7 @@ const Dashboard = () => {
 
         {/* Content Area */}
         <div className="w-full md:w-3/4 lg:w-4/5 flex items-center justify-center">
-          <div className="bg-white flex items-center justify-center shadow-lg rounded-2xl w-full">
+          <div className=" flex items-center justify-center shadow-lg rounded-2xl w-full">
             <Outlet />
           </div>
         </div>

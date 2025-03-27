@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
+import { Button } from "../components/ui/button";
 
 const AccountDetails = () => {
   const { authFetch } = useContext(AppContext);
@@ -30,11 +31,13 @@ const AccountDetails = () => {
             email: data.email,
           }));
         } else {
-          toast.error(data.message || "Gagal mengambil data pengguna."), { className: "toast-custom" };
+          toast.error(data.message || "Gagal mengambil data pengguna."),
+            { className: "toast-custom" };
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
-        toast.error("Terjadi kesalahan saat mengambil data pengguna."), { className: "toast-custom" };
+        toast.error("Terjadi kesalahan saat mengambil data pengguna."),
+          { className: "toast-custom" };
       }
     };
 
@@ -80,7 +83,8 @@ const AccountDetails = () => {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(data.message || "Profil berhasil diperbarui."), { className: "toast-custom" };
+        toast.success(data.message || "Profil berhasil diperbarui."),
+          { className: "toast-custom" };
         setUserData((prevState) => ({
           ...prevState,
           password: "",
@@ -90,86 +94,55 @@ const AccountDetails = () => {
       } else if (response.status === 422) {
         setErrors(data.errors || {});
       } else {
-        toast.error(data.message || "Gagal memperbarui profil."), { className: "toast-custom" };
+        toast.error(data.message || "Gagal memperbarui profil."),
+          { className: "toast-custom" };
       }
     } catch (error) {
       console.error("Error updating user data:", error);
-      toast.error("Terjadi kesalahan saat memperbarui profil."), { className: "toast-custom" };
+      toast.error("Terjadi kesalahan saat memperbarui profil."),
+        { className: "toast-custom" };
     }
   };
 
   return (
-    <div className="rounded-lg w-full">
-      <h2 className="text-2xl pt-6 font-semibold text-pink-500 mb-6 text-center">
+    <div className="rounded-xl dark:bg-gray-950 shadow-md w-full lg:w-3/4 mx-auto p-6">
+      <h2 className="text-2xl font-semibold text-pink-600 dark:text-pink-400 text-center mb-6">
         Informasi Akun
       </h2>
-      <div className="p-4">
-      <form className="grid gap-4 bg-pink-100 p-6 rounded-xl w-full"
-      >
-  <div>
-    <label className="block text-pink-700 font-medium mb-2">Nama Lengkap</label>
-    <input
-      type="text"
-      name="name"
-      value={userData.name}
-      onChange={handleChange}
-      className="w-full border border-pink-300 p-2 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none transition"
-    />
-    {errors.name && (
-      <p className="text-red-500 text-sm mt-1">{errors.name[0]}</p>
-    )}
-  </div>
 
-  <div>
-    <label className="block text-pink-700 font-medium mb-2">Email</label>
-    <input
-      type="email"
-      name="email"
-      value={userData.email}
-      onChange={handleChange}
-      className="w-full border border-pink-300 p-2 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none transition"
-    />
-    {errors.email && (
-      <p className="text-red-500 text-sm mt-1">{errors.email[0]}</p>
-    )}
-  </div>
+      <form className="grid gap-4 bg-pink-50 dark:bg-accent p-6 rounded-xl shadow-md">
+        {[
+          { label: "Nama Lengkap", name: "name", type: "text" },
+          { label: "Email", name: "email", type: "email" },
+          { label: "Password Baru", name: "password", type: "password" },
+          {
+            label: "Konfirmasi Password Baru",
+            name: "password_confirmation",
+            type: "password",
+          },
+        ].map(({ label, name, type }) => (
+          <div key={name}>
+            <label className="block font-medium mb-2">{label}</label>
+            <input
+              type={type}
+              name={name}
+              value={userData[name]}
+              onChange={handleChange}
+              className="w-full  dark:border-pink-600 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500  dark:bg-gray-800 text-gray-900 dark:text-white outline-none transition"
+            />
+            {errors[name] && (
+              <p className="text-red-500 text-sm mt-1">{errors[name][0]}</p>
+            )}
+          </div>
+        ))}
 
-  <div>
-    <label className="block text-pink-700 font-medium mb-2">Password Baru</label>
-    <input
-      type="password"
-      name="password"
-      value={userData.password}
-      onChange={handleChange}
-      className="w-full border border-pink-300 p-2 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none transition"
-    />
-    {errors.password && (
-      <p className="text-red-500 text-sm mt-1">{errors.password[0]}</p>
-    )}
-  </div>
-
-  <div>
-    <label className="block text-pink-700 font-medium mb-2">Konfirmasi Password Baru</label>
-    <input
-      type="password"
-      name="password_confirmation"
-      value={userData.password_confirmation}
-      onChange={handleChange}
-      className="w-full border border-pink-300 p-2 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none transition"
-    />
-    {errors.password_confirmation && (
-      <p className="text-red-500 text-sm mt-1">{errors.password_confirmation[0]}</p>
-    )}
-  </div>
-
-  <button
-    type="submit"
-    className="w-full bg-pink-500 text-white py-3 rounded-lg shadow-md hover:bg-pink-600 transition font-medium"
-  >
-    Simpan Perubahan
-  </button>
-</form>
-</div>
+        <Button
+          type="submit"
+          className="w-full font-medium py-6 rounded-lg shadow-md transition duration-300"
+        >
+          Simpan Perubahan
+        </Button>
+      </form>
     </div>
   );
 };

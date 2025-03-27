@@ -4,6 +4,7 @@ import CartTotal from "../components/CartTotal";
 import { toast } from "react-toastify";
 import { AppContext } from "../context/AppContext";
 import { FiArrowDown } from "react-icons/fi";
+import { Button } from "../components/ui/button";
 
 const PlaceOrder = () => {
   useEffect(() => {
@@ -220,7 +221,7 @@ const PlaceOrder = () => {
   };
 
   return (
-    <div className="pt-24 mb-10 sm:pt-36 min-h-screen flex flex-col bg-pink-50 rounded-2xl">
+    <div className="pt-24 mb-10 sm:pt-36 min-h-screen flex flex-col rounded-2xl">
       <form
         onSubmit={onSubmitHandler}
         className="flex flex-col sm:flex-row justify-between gap-8 mx-4 sm:mx-16"
@@ -235,7 +236,7 @@ const PlaceOrder = () => {
               className="text-pink-700 font-cursive"
             />
             {defaultAddress ? (
-              <div className="border bg-white border-pink-300 p-6 rounded-2xl shadow-lg mt-6">
+              <div className="bg-pink-50 dark:bg-gray-900 p-6 rounded-2xl shadow-lg mt-6">
                 <div className="space-y-2">
                   <p className="font-semibold text-pink-700 text-lg">
                     {defaultAddress.recipient_name}
@@ -278,7 +279,7 @@ const PlaceOrder = () => {
               className="text-pink-700 font-cursive"
             />
             {cartItems.length > 0 ? (
-              <div className="border border-pink-300 bg-white p-4 rounded-lg shadow-md mt-4">
+              <div className="bg-pink-50 dark:bg-gray-900 p-4 rounded-lg shadow-md mt-4">
                 <ul className="space-y-4">
                   {cartItems.map((cartItem) => (
                     <li key={cartItem.id} className="flex items-center">
@@ -291,7 +292,7 @@ const PlaceOrder = () => {
                         alt={
                           cartItem.productData.product_name || "Product image"
                         }
-                        className="w-20 h-20 object-cover mr-4 rounded-lg border border-pink-300"
+                        className="w-20 h-20 object-cover mr-4 rounded-lg"
                       />
                       <div className="flex-1">
                         <p className="font-semibold text-lg text-pink-800">
@@ -317,32 +318,31 @@ const PlaceOrder = () => {
                           <button
                             type="button"
                             onClick={() => handleDecreaseQuantity(cartItem)}
-                            className="px-3 py-1 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-700 font-medium"
+                            className="px-3 py-1 accent rounded-full text-pink-500 font-medium"
                           >
                             -
                           </button>
-                          <span className="px-4 py-1 border-t border-b border-pink-300 text-pink-700 font-medium">
+                          <span className="px-4 py-1 border-t border-b border-pink-300 text-pink-500 font-medium">
                             {cartItem.qty}
                           </span>
                           <button
                             type="button"
                             onClick={() => handleIncreaseQuantity(cartItem)}
-                            className="px-3 py-1 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-700 font-medium"
+                            className="px-3 py-1 accent rounded-full text-pink-500 font-medium"
                           >
                             +
                           </button>
                         </div>
                       </div>
 
-                      
                       {/* Remove item button */}
-                      <button
+                      <Button
                         type="button"
                         onClick={() => handleRemoveItem(cartItem)}
-                        className="text-red-500 hover:text-red-600 ml-4"
+                        className="bg-pink-700 hover:bg-pink-800 ml-2"
                       >
                         Hapus
-                      </button>
+                      </Button>
                     </li>
                   ))}
                 </ul>
@@ -374,7 +374,7 @@ const PlaceOrder = () => {
             />
             {shippingOptions.length > 0 ? (
               <div className="relative mt-4">
-                <div className="max-h-60 overflow-y-auto pr-2 border border-pink-300 bg-white rounded-lg shadow-md">
+                <div className="max-h-60 overflow-y-auto pr-2 bg-pink-50 dark:bg-gray-900 rounded-lg shadow-md">
                   {shippingOptions.map((option, index) => (
                     <div
                       key={index}
@@ -392,21 +392,17 @@ const PlaceOrder = () => {
                         htmlFor={`shippingOption-${index}`}
                         className="ml-3 text-sm leading-tight"
                       >
-                        <span className="font-medium text-pink-800">
+                        <span className="font-medium">
                           {option.name} - {option.service}
                         </span>
                         <br />
-                        <span className="text-gray-600 text-xs">
-                          {option.description}
-                        </span>
+                        <span className="text-xs">{option.description}</span>
                         <br />
-                        <span className="text-gray-800 font-semibold">
+                        <span className="font-semibold">
                           Biaya: Rp {option.cost.toLocaleString()}
                         </span>
                         <br />
-                        <span className="text-gray-600 text-xs">
-                          Estimasi: {option.etd}
-                        </span>
+                        <span className="text-xs">Estimasi: {option.etd}</span>
                       </label>
                     </div>
                   ))}

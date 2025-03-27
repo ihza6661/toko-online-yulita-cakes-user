@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext, useCallback } from "react";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
+import { Button } from "@/components/ui/button";
 
 const Addresses = () => {
   const { authFetch } = useContext(AppContext);
@@ -45,7 +46,8 @@ const Addresses = () => {
     } catch (error) {
       console.error("Error fetching addresses:", error);
       toast.error(
-        error.message || "Terjadi kesalahan saat mengambil data alamat.", { className: "toast-custom" }
+        error.message || "Terjadi kesalahan saat mengambil data alamat.",
+        { className: "toast-custom" }
       );
     }
   }, [authFetch]);
@@ -93,7 +95,8 @@ const Addresses = () => {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(data.message || "Alamat berhasil disimpan."), { className: "toast-custom" };
+        toast.success(data.message || "Alamat berhasil disimpan."),
+          { className: "toast-custom" };
         // Refresh addresses to update default flags and new entries
         await fetchAddresses();
         resetForm();
@@ -104,7 +107,8 @@ const Addresses = () => {
       }
     } catch (error) {
       console.error("Error saving address:", error);
-      toast.error(error.message || "Terjadi kesalahan saat menyimpan alamat."), { className: "toast-custom" };
+      toast.error(error.message || "Terjadi kesalahan saat menyimpan alamat."),
+        { className: "toast-custom" };
     }
   };
 
@@ -119,7 +123,8 @@ const Addresses = () => {
         const data = await response.json();
 
         if (response.ok) {
-          toast.success(data.message || "Alamat berhasil dihapus."), { className: "toast-custom" };
+          toast.success(data.message || "Alamat berhasil dihapus."),
+            { className: "toast-custom" };
           // Refresh addresses after deletion
           await fetchAddresses();
         } else {
@@ -128,7 +133,8 @@ const Addresses = () => {
       } catch (error) {
         console.error("Error deleting address:", error);
         toast.error(
-          error.message || "Terjadi kesalahan saat menghapus alamat.", { className: "toast-custom" }
+          error.message || "Terjadi kesalahan saat menghapus alamat.",
+          { className: "toast-custom" }
         );
       }
     }
@@ -174,183 +180,123 @@ const Addresses = () => {
   };
 
   return (
-    <div className="p-4 rounded-lg mx-auto inline-block lg:w-full">
-      <h2 className="text-2xl pt-6 font-semibold text-pink-500 mb-6 text-center">
+    <div className="p-6 rounded-xl bg-white dark:bg-gray-950 shadow-md mx-auto w-full lg:w-3/4">
+      <h2 className="text-2xl font-semibold text-pink-600 dark:text-pink-400 mb-6">
         Alamat Pengiriman
       </h2>
 
       {!showForm ? (
-        <button
-        onClick={() => setShowForm(true)}
-        className="mb-4 bg-pink-500 hover:bg-pink-600 text-white font-normal px-4 py-2 rounded-lg flex mx-auto"
-      >
-        Tambah Alamat Baru
-      </button>
-      
+        <Button
+          onClick={() => setShowForm(true)}
+          className="mb-4 font-medium px-6 py-3 rounded-lg flex shadow-md transition duration-300"
+        >
+          Tambah Alamat Baru
+        </Button>
       ) : (
         <form
-        onSubmit={handleSubmit}
-        className="mb-4 grid gap-4 bg-pink-100 p-6 rounded-xl"
-      >
-        <div>
-          <label className="block text-pink-700">Nama Penerima</label>
-          <input
-            type="text"
-            name="recipient_name"
-            value={formData.recipient_name}
-            onChange={handleChange}
-            className="w-full border border-pink-300 p-1 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none"
-          />
-          {errors.recipient_name && (
-            <p className="text-red-500 text-sm">{errors.recipient_name[0]}</p>
-          )}
-        </div>
-      
-        <div>
-          <label className="block text-pink-700">Nomor Telepon</label>
-          <input
-            type="text"
-            name="phone_number"
-            value={formData.phone_number}
-            onChange={handleChange}
-            className="w-full border border-pink-300 p-1 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none"
-          />
-          {errors.phone_number && (
-            <p className="text-red-500 text-sm">{errors.phone_number[0]}</p>
-          )}
-        </div>
-      
-        <div>
-          <label className="block text-pink-700">Alamat Baris 1</label>
-          <input
-            type="text"
-            name="address_line1"
-            value={formData.address_line1}
-            onChange={handleChange}
-            className="w-full border border-pink-300 p-1 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none"
-          />
-          {errors.address_line1 && (
-            <p className="text-red-500 text-sm">{errors.address_line1[0]}</p>
-          )}
-        </div>
-      
-        <div>
-          <label className="block text-pink-700">Alamat Baris 2</label>
-          <input
-            type="text"
-            name="address_line2"
-            value={formData.address_line2}
-            onChange={handleChange}
-            className="w-full border border-pink-300 p-1 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none"
-          />
-        </div>
-      
-        <div>
-          <label className="block text-pink-700">Provinsi</label>
-          <input
-            type="text"
-            name="province"
-            value={formData.province}
-            onChange={handleChange}
-            className="w-full border border-pink-300 p-1 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none"
-          />
-          {errors.province && (
-            <p className="text-red-500 text-sm">{errors.province[0]}</p>
-          )}
-        </div>
-      
-        <div>
-          <label className="block text-pink-700">Kota</label>
-          <input
-            type="text"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            className="w-full border border-pink-300 p-1 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none"
-          />
-          {errors.city && (
-            <p className="text-red-500 text-sm">{errors.city[0]}</p>
-          )}
-        </div>
-      
-        <div>
-          <label className="block text-pink-700">Kode Pos</label>
-          <input
-            type="text"
-            name="postal_code"
-            value={formData.postal_code}
-            onChange={handleChange}
-            className="w-full border border-pink-300 p-1 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-pink-50 outline-none"
-          />
-          {errors.postal_code && (
-            <p className="text-red-500 text-sm">{errors.postal_code[0]}</p>
-          )}
-        </div>
-      
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            name="is_default"
-            checked={formData.is_default}
-            onChange={handleChange}
-            className="mr-2"
-          />
-          <label className="text-pink-700">Jadikan alamat utama</label>
-        </div>
-      
-        <div className="flex gap-2">
-          <button
-            type="submit"
-            className="bg-pink-500 hover:bg-pink-600 text-white font-normal px-4 py-3 rounded-lg shadow-md transition"
-          >
-            {editingAddressId ? "Perbarui Alamat" : "Simpan Alamat"}
-          </button>
-          {editingAddressId && (
-            <button
-              type="button"
-              onClick={resetForm}
-              className="bg-gray-400 hover:bg-gray-500 text-white font-normal px-4 py-3 rounded-lg shadow-md transition"
+          onSubmit={handleSubmit}
+          className="grid gap-4 accent p-6 rounded-top-xl"
+        >
+          {[
+            { label: "Nama Penerima", name: "recipient_name" },
+            { label: "Nomor Telepon", name: "phone_number" },
+            { label: "Alamat Baris 1", name: "address_line1" },
+            { label: "Alamat Baris 2 (Opsional)", name: "address_line2" },
+            { label: "Provinsi", name: "province" },
+            { label: "Kota", name: "city" },
+            { label: "Kode Pos", name: "postal_code" },
+          ].map(({ label, name }) => (
+            <div key={name}>
+              <label className="block font-medium">{label}</label>
+              <input
+                type="text"
+                name={name}
+                value={formData[name]}
+                onChange={handleChange}
+                className="w-full p-2 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-white dark:bg-gray-900 text-gray-900 dark:text-white outline-none transition"
+              />
+              {errors[name] && (
+                <p className="text-red-500 text-sm">{errors[name][0]}</p>
+              )}
+            </div>
+          ))}
+
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              name="is_default"
+              checked={formData.is_default}
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <label className="text-pink-700 dark:text-pink-300 font-medium">
+              Jadikan alamat utama
+            </label>
+          </div>
+
+          <div className="flex gap-4">
+            <Button
+              type="submit"
+              className="font-medium px-6 py-3 rounded-lg shadow-md transition duration-300"
             >
-              Batal
-            </button>
-          )}
-        </div>
-      </form>
-      
+              {editingAddressId ? "Perbarui Alamat" : "Simpan Alamat"}
+            </Button>
+            {editingAddressId && (
+              <Button
+                type="button"
+                onClick={resetForm}
+                className="bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 font-medium rounded-lg shadow-md transition duration-300"
+              >
+                Batal
+              </Button>
+            )}
+          </div>
+        </form>
       )}
 
       {addresses.length === 0 ? (
-        <p className="text-gray-600">Anda belum menambahkan alamat.</p>
+        <p className="text-gray-600 dark:text-gray-300 text-center">
+          Anda belum menambahkan alamat.
+        </p>
       ) : (
         <div className="grid gap-4">
           {addresses.map((address) => (
             <div
               key={address.id}
-              className="border border-pink-300 p-4 rounded-lg font-light bg-white shadow-md leading-relaxed"
+              className=" p-4 bg-white dark:bg-gray-900 leading-relaxed"
             >
-              <p className="font-normal text-pink-700">
+              <p className="font-semibold text-pink-700 dark:text-pink-300">
                 {address.recipient_name}
               </p>
-              <p>{address.phone_number}</p>
-              <p>{address.address_line1}</p>
-              {address.address_line2 && <p>{address.address_line2}</p>}
-              <p>
+              <p className="text-gray-600 dark:text-gray-300">
+                {address.phone_number}
+              </p>
+              <p className="text-gray-600 dark:text-gray-300">
+                {address.address_line1}
+              </p>
+              {address.address_line2 && (
+                <p className="text-gray-600 dark:text-gray-300">
+                  {address.address_line2}
+                </p>
+              )}
+              <p className="text-gray-600 dark:text-gray-300">
                 {address.city}, {address.province}, {address.postal_code}
               </p>
               {address.is_default && (
-                <span className="text-red-500">[Default]</span>
+                <span className="text-red-500 dark:text-red-400 font-semibold">
+                  [Default]
+                </span>
               )}
-              <div className="mt-2 flex gap-2">
-                <button
+              <div className="mt-3 flex gap-2">
+                <Button
                   onClick={() => handleEdit(address)}
-                  className="bg-pink-500 hover:bg-pink-600 text-white font-normal px-3 py-1 rounded"
+                  className="font-medium px-4 py-2 rounded-lg shadow-md transition duration-300"
                 >
                   Ubah
-                </button>
-
+                </Button>
                 <button
                   onClick={() => handleDelete(address.id)}
-                  className="bg-red-500 hover:bg-red-600 text-white font-normal px-3 py-1 rounded"
+                  className="bg-red-500 hover:bg-red-600 text-white font-medium px-4 py-2 rounded-lg shadow-md transition duration-300"
                 >
                   Hapus
                 </button>

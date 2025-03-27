@@ -87,26 +87,17 @@
 }
 
 @layer utilities {
-  @layer utilities {
-    .accent {
-      @apply bg-pink-50 dark:bg-pink-900/20;
-    }
-    .bg-accent {
-      @apply bg-pink-50 dark:bg-pink-900/20;
-    }
-    /* .accent {
-      @apply bg-pink-50;
-    }
+  .accent {
+    @apply bg-pink-50 dark:bg-pink-900/20;
+  }
+  .bg-accent {
+    @apply bg-pink-50 dark:bg-pink-900/20;
+  }
 
-    .dark .accent {
-      @apply bg-pink-950;
-    } */
-
-    .btn {
-      @apply rounded-full shadow-lg transition-all
+  .btn {
+    @apply rounded-full shadow-lg transition-all
         bg-pink-500 hover:bg-pink-600 text-white 
         dark:bg-pink-700 dark:hover:bg-pink-600 dark:text-pink-100;
-    }
   }
   .glass {
     @apply backdrop-blur-md bg-white/70 dark:bg-black/40 border dark:border-white/10 border-black/5 shadow-[0_4px_30px_rgba(0,0,0,0.1)];
@@ -145,8 +136,21 @@
   }
 }
 .custom-toast {
-  background-color: gray !important;
-  color: white !important;
+  background-color: #ffffff !important; /* Clean white background */
+  color: #333333 !important; /* Dark gray for better readability */
+  text-transform: lowercase;
+  padding: 12px 16px; /* More padding for a balanced look */
+  border-radius: 8px; /* Smooth rounded corners */
+  font-size: 16px; /* Slightly larger text for readability */
+  font-weight: 500; /* Medium font weight */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  border: 1px solid #ddd; /* Light border for subtle contrast */
+}
+
+.custom-progress {
+  background-color: #4caf50 !important; /* Green progress bar */
+  height: 4px !important;
+  border-radius: 2px;
 }
 
 .custom-progress {
@@ -168,13 +172,6 @@ h2 {
   text-shadow: 1px 1px 3px rgba(218, 0, 109, 0.789);
   letter-spacing: 2px;
 }
-
-/* @media (prefers-color-scheme: dark) {
-  h1 {
-    color: #f472b6;
-    text-shadow: 2px 2px 5px rgba(244, 114, 182, 0.6);
-  }
-} */
 
 a.active hr {
   display: block;

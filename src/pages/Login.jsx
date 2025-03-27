@@ -3,6 +3,15 @@ import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const AuthForm = () => {
   const { setToken } = useContext(AppContext);
@@ -63,7 +72,7 @@ const AuthForm = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Client-side validation
     const validationErrors = validateFormData(formData);
     if (Object.keys(validationErrors).length > 0) {
@@ -87,23 +96,25 @@ const AuthForm = () => {
       if (response.ok) {
         if (isLogin) {
           setToken(data.token);
-          toast.success("Login berhasil!", { className: "toast-custom" });
+          toast.success("Login berhasil!");
           navigate("/");
         } else {
-          toast.success("Registrasi berhasil! Silakan login.", { className: "toast-custom" });
+          toast.success("Registrasi berhasil! Silakan login.");
           resetForm();
           setIsLogin(true);
         }
       } else if (response.status === 422) {
         setErrors(data.errors || {});
       } else {
-        throw new Error(data.message || "Terjadi kesalahan, silakan coba lagi.");
+        throw new Error(
+          data.message || "Terjadi kesalahan, silakan coba lagi."
+        );
       }
     } catch (error) {
       console.error("Error during authentication:", error);
-      toast.error(error.message || "Terjadi kesalahan jaringan, silakan coba lagi.", {
-        className: "toast-custom",
-      });
+      toast.error(
+        error.message || "Terjadi kesalahan jaringan, silakan coba lagi."
+      );
     }
   };
 
@@ -120,54 +131,73 @@ const AuthForm = () => {
   };
 
   return (
-    <div className="py-24">
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-5 text-gray-700 bg-white p-8 rounded-3xl shadow-lg"
-      >
-        {/* Title Section */}
-        <div className="inline-flex items-center gap-3 mb-4 mt-6">
-          <p className="prata-reguler text-3xl text-pink-600 font-semibold">
-            {isLogin ? "MASUK" : "DAFTAR"}
-          </p>
-          <hr className="border-none h-[2px] w-10 bg-pink-400 rounded-full" />
-        </div>
+    <div className="container mx-auto px-4 py-32 flex justify-center items-center min-h-[calc(100vh-10rem)]">
+      <Card className="w-full max-w-md dark:bg-gray-900">
+        <CardHeader className="space-y-1 text-center">
+          {/* Title Section */}
+          <CardTitle className="text-2xl font-serif">
+            <h1 className="dark:text-pink-500 text-4xl">
+              {isLogin ? "Masuk" : "Daftar"}
+            </h1>
+          </CardTitle>
+          <CardDescription>
+            Masukkan Email dan Password Anda untuk masuk.
+            {/* Error Message */}
+            {errors.global && (
+              <div className="text-red-500 text-sm bg-red-100 px-4 py-2 rounded-md">
+                <p>{errors.global}</p>
+              </div>
+            )}
+          </CardDescription>
+        </CardHeader>
 
-        {/* Error Message */}
-        {errors.global && (
-          <div className="text-red-500 text-sm bg-red-100 px-4 py-2 rounded-md">
-            <p>{errors.global}</p>
-          </div>
-        )}
-
-        {/* Form Fields */}
-        {renderFormFields()}
-
-        {/* Submit Button */}
-        <button className="bg-pink-500 text-white font-medium px-8 py-3 mt-4 rounded-full transition duration-300 hover:bg-pink-600 shadow-md">
-          {isLogin ? "Masuk" : "Daftar"}
-        </button>
-
-        {/* Switch Form Type */}
-        <p className="mt-4 text-sm">
-          {isLogin ? "Belum punya akun?" : "Sudah punya akun?"}{" "}
-          <span
-            className="text-pink-500 cursor-pointer font-semibold"
-            onClick={toggleForm}
+        <CardContent>
+          <form
+            onSubmit={handleSubmit}
+            className="accent flex flex-col items-center w-[90%] sm:max-w-96 m-auto gap-5 text-gray-700 bg-white p-8 rounded-3xl shadow-lg"
           >
-            {isLogin ? "Daftar" : "Masuk"}
-          </span>
-        </p>
+            {/* Form Fields */}
+            {renderFormFields()}
 
-        {/* Forgot Password */}
-        {isLogin && (
-          <p className="mt-2 text-sm">
-            <Link to="/forgot-password" className="text-pink-500 font-medium">
-              Lupa Password?
-            </Link>
+            {/* Submit Button */}
+            <Button className="font-medium px-8 py-3 mt-4 rounded-full transition duration-300 shadow-md dark:bg-pink-600">
+              {isLogin ? "Masuk" : "Daftar"}
+            </Button>
+          </form>
+        </CardContent>
+        <CardFooter className="flex flex-col space-y-4">
+          {/* Switch Form Type */}
+          <p className="mt-4 text-sm">
+            {isLogin ? "Belum punya akun?" : "Sudah punya akun?"}{" "}
+            <span
+              className="text-pink-500 cursor-pointer font-semibold"
+              onClick={toggleForm}
+            >
+              {isLogin ? "Daftar" : "Masuk"}
+            </span>
           </p>
-        )}
-      </form>
+          <div className="text-xs text-center text-gray-500 dark:text-gray-400">
+            Dengan masuk, Anda menyetujui{" "}
+            <Link to="/terms" className="underline">
+              Syarat Layanan
+            </Link>{" "}
+            dan{" "}
+            <Link to="/privacy" className="underline">
+              Kebijakan Privasi
+            </Link>{" "}
+            Kami
+          </div>
+
+          {/* Forgot Password */}
+          {isLogin && (
+            <p className="mt-2 text-sm">
+              <Link to="/forgot-password" className="text-pink-500 font-medium">
+                Lupa Password?
+              </Link>
+            </p>
+          )}
+        </CardFooter>
+      </Card>
     </div>
   );
 
@@ -207,7 +237,8 @@ const AuthForm = () => {
               onChange={handleChange}
               value={formData[field.name]}
               type={field.type}
-              className="w-full px-3 py-2 border border-pink-500 rounded-lg"
+              className="w-full px-3 py-2 bg-white dark:bg-pink-50 text-gray-800 border border-pink-500 rounded-lg 
+                     placeholder-gray-400 dark:placeholder-gray-600"
               placeholder={field.label}
               required={field.required}
             />

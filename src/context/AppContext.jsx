@@ -215,9 +215,24 @@ const AppProvider = ({ children }) => {
     [authFetch, fetchCartItems]
   );
 
-  const clearCart = useCallback(() => {
-    setCartItems([]);
-  }, []);
+  const clearCart = useCallback(async () => {
+    try {
+      const response = await authFetch("/api/user/shopping_cart/clear", {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        setCartItems([]); // Kosongkan state lokal setelah backend dikosongkan
+        toast.success("Keranjang berhasil dikosongkan");
+      } else {
+        const data = await response.json();
+        toast.error(data.message || "Gagal mengosongkan keranjang");
+      }
+    } catch (error) {
+      console.error("Error clearing cart:", error);
+      toast.error("Terjadi kesalahan saat mengosongkan keranjang");
+    }
+  }, [authFetch]);
 
   const getCartCount = () =>
     cartItems.reduce((total, item) => total + item.qty, 0);

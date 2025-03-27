@@ -3,7 +3,6 @@ import Title from "./Title";
 import ProductItem from "./ProductItem";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
 
 const LatestCollection = () => {
   const [latestProducts, setLatestProducts] = useState([]);
@@ -49,7 +48,19 @@ const LatestCollection = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <p className="text-xl text-gray-500">Loading...</p>
+        <motion.div
+          className="flex flex-col items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 0.5,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        >
+          <div className="w-10 h-10 border-4 border-pink-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-xl text-gray-500 mt-3">Memuat Produk...</p>
+        </motion.div>
       </div>
     );
   }
@@ -57,7 +68,25 @@ const LatestCollection = () => {
   if (error) {
     return (
       <div className="flex justify-center items-center h-64">
-        <p className="text-red-500">{error}</p>
+        <motion.div
+          className="flex flex-col items-center"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <motion.p
+            className="text-red-500 text-lg"
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1.1 }}
+            transition={{
+              duration: 0.5,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          >
+            ⚠️ {error}
+          </motion.p>
+        </motion.div>
       </div>
     );
   }

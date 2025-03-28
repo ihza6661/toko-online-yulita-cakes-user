@@ -23,10 +23,10 @@ const ProductItem = ({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="group relative bg-pink-50 dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+      className="group relative accent rounded-2xl overflow-hidden shadow-md transition-shadow flex flex-col"
     >
       {/* Product Image */}
-      <div className="aspect-square overflow-hidden">
+      <div className=" overflow-hidden relative">
         <motion.img
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.6 }}
@@ -34,11 +34,16 @@ const ProductItem = ({
           alt={name}
           className="w-full h-full object-cover"
         />
+        {isOutOfStock && (
+          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+            <span className="text-white font-bold text-lg">Stok Habis</span>
+          </div>
+        )}
       </div>
 
       {/* Product Details */}
       <div className="p-5">
-        <h3 className=" text-start font-serif text-lg font-medium text-gray-900 dark:text-gray-100">
+        <h3 className=" text-start font-serif text-lg font-medium text-gray-900 dark:text-gray-100 tracking-wide">
           {name}
         </h3>
 
@@ -72,26 +77,28 @@ const ProductItem = ({
           )}
         </div>
       </div>
-      <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-        <Button
-          size="sm"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            // Instead of adding to cart directly, redirect to product detail page
-            // for selecting variants and adding notes
-            window.location.href = `${`/product/${slug}`}`;
-          }}
-          className="bg-pink-600 hover:bg-pink-700 text-white rounded-full w-10 h-10 flex items-center justify-center"
-        >
-          <ShoppingBag size={16} />
-        </Button>
-      </div>
+
+      {/* Add to Cart Button */}
+      {!isOutOfStock && (
+        <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+          <Button
+            size="sm"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              window.location.href = `${`/product/${slug}`}`;
+            }}
+            className="bg-pink-600 hover:bg-pink-700 text-white rounded-full w-10 h-10 flex items-center justify-center"
+          >
+            <ShoppingBag size={16} />
+          </Button>
+        </div>
+      )}
     </motion.div>
   );
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full">
       {slug ? (
         <Link to={`/product/${slug}`} className="block">
           {productContent}

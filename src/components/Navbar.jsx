@@ -120,13 +120,13 @@ const Navbar = () => {
                   }`}
                   style={{ zIndex: 1000 }}
                 >
-                  <div className="text-sm py-2 glass] rounded-lg shadow-md">
+                  <div className="text-sm rounded-lg shadow-md">
                     <Link
                       to="/dashboard"
                       onClick={() => setShowProfileDropdown(false)}
                       className="block px-4 py-2 font-semibold hover:bg-pink-300 dark:hover:bg-[#5A2A3A] hover:text-pink-900 dark:hover:text-white rounded-md transition"
                     >
-                      🎂 Dasbor
+                      🎂 Dashboard
                     </Link>
                     <button
                       onClick={() => {

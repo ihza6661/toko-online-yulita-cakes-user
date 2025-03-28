@@ -3,6 +3,7 @@ import Title from "./Title";
 import ProductItem from "./ProductItem";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const LatestCollection = () => {
   const [latestProducts, setLatestProducts] = useState([]);
@@ -129,9 +130,7 @@ const LatestCollection = () => {
 
         <div className="mt-6 text-center">
           <Link to="/collection">
-            <button className="bg-pink-600 hover:bg-pink-700 text-white py-2 px-4 rounded-full">
-              Lihat Semua Kue
-            </button>
+            <Button className="py-2 px-4 rounded-full">Lihat Semua Kue</Button>
           </Link>
         </div>
       </motion.div>

@@ -1,11 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Button } from "./ui/button";
 
 const CallToAction = () => {
   return (
     <>
       {/* Call to Action */}
-      <section className="section-padding bg-pink-50 dark:accent">
+      <section className="section-padding dark:bg-gray-900">
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -21,18 +22,13 @@ const CallToAction = () => {
               acara spesial Anda.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/collection"
-                className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-md font-medium transition-colors"
-              >
+              <Button href="/collection" size="lg">
                 Belanja Sekarang
-              </a>
-              <a
-                href="/contact"
-                className="bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 px-6 py-3 rounded-md font-medium transition-colors"
-              >
+              </Button>
+
+              <Button href="/contact" size="lg" variant="secondary">
                 Kontak Kami
-              </a>
+              </Button>
             </div>
           </motion.div>
         </div>

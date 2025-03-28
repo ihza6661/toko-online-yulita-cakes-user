@@ -3,7 +3,6 @@ import { AppContext } from "../context/AppContext";
 import format from "date-fns/format";
 import id from "date-fns/locale/id";
 import { useNavigate } from "react-router-dom";
-import Title from "../components/Title";
 
 const Orders = () => {
   const { authFetch } = useContext(AppContext);
@@ -33,9 +32,9 @@ const Orders = () => {
   }, [authFetch]);
 
   return (
-    <div className="p-4  rounded-2xl w-full dark:bg-gray-950">
-      {/* <h2 className="text-2xl text-center font-semibold mb-6">Pesanan Saya</h2> */}
-      <Title text1={"Pesanan"} text2={"Anda"} />
+    <div className="p-4  rounded-2xl w-full dark:bg-gray-900">
+      <h3 className="text-2xl font-semibold mb-6">Pesanan Anda</h3>
+
       {orders.length === 0 ? (
         <p className="text-center">Anda belum memiliki pesanan.</p>
       ) : (

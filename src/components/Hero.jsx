@@ -1,3 +1,5 @@
+import { Button } from "./ui/button";
+
 const HeroSection = () => {
   return (
     <section className="relative overflow-hidden">
@@ -21,13 +23,9 @@ const HeroSection = () => {
             Nikmati kelezatan kue terbaik yang dibuat dengan cinta dan bahan
             segar, cocok untuk setiap momen spesial.
           </p>
-          <button
-            className="px-6 py-3 text-lg font-semibold rounded-full shadow-lg transition-all
-                           bg-pink-500 hover:bg-pink-600 text-white 
-                           dark:bg-pink-700 dark:hover:bg-pink-600"
-          >
+          <Button className="font-semibold rounded-full" size="lg">
             Pesan Sekarang
-          </button>
+          </Button>
         </div>
       </div>
     </section>

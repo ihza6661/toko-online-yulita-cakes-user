@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import Title from "../components/Title";
 
 const Dashboard = () => {
   useEffect(() => {
@@ -14,9 +15,7 @@ const Dashboard = () => {
 
   return (
     <div className="pt-24 px-6 sm:px-10 md:px-32 pb-10 min-h-screen flex flex-col items-center">
-      <h1 className="text-3xl sm:text-4xl font-serif font-extrabold text-pink-700 my-6">
-        ― Dashboard ―
-      </h1>
+      <Title text1={"Dashboard"} text2={"Anda"} />
 
       <div className="w-full max-w-6xl flex flex-col md:flex-row md:gap-12 lg:gap-16 items-start justify-center mx-auto p-4">
         {/* Sidebar Navigation */}
@@ -45,7 +44,7 @@ const Dashboard = () => {
 
         {/* Content Area */}
         <div className="w-full md:w-3/4 lg:w-4/5 flex items-center justify-center">
-          <div className=" flex items-center justify-center shadow-lg rounded-2xl w-full">
+          <div className=" flex items-center justify-center rounded-2xl w-full">
             <Outlet />
           </div>
         </div>

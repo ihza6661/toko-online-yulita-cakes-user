@@ -180,10 +180,8 @@ const Addresses = () => {
   };
 
   return (
-    <div className="p-6 rounded-xl bg-white dark:bg-gray-950 shadow-md mx-auto w-full lg:w-3/4">
-      <h2 className="text-2xl font-semibold text-pink-600 dark:text-pink-400 mb-6">
-        Alamat Pengiriman
-      </h2>
+    <div className="p-6 rounded-xl accent dark:bg-gray-900 mx-auto w-full lg:w-3/4">
+      <h3 className="text-2xl font-semibold mb-6">Alamat Pengiriman</h3>
 
       {!showForm ? (
         <Button
@@ -195,7 +193,7 @@ const Addresses = () => {
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="grid gap-4 accent p-6 rounded-top-xl"
+          className="grid gap-4 bg-pink-100 dark:bg-gray-800 p-6 rounded-lg"
         >
           {[
             { label: "Nama Penerima", name: "recipient_name" },
@@ -207,7 +205,7 @@ const Addresses = () => {
             { label: "Kode Pos", name: "postal_code" },
           ].map(({ label, name }) => (
             <div key={name}>
-              <label className="block font-medium">{label}</label>
+              <label className="block p-2 font-medium">{label}</label>
               <input
                 type="text"
                 name={name}
@@ -263,43 +261,63 @@ const Addresses = () => {
           {addresses.map((address) => (
             <div
               key={address.id}
-              className=" p-4 bg-white dark:bg-gray-900 leading-relaxed"
+              className=" p-4 bg-white dark:bg-gray-800 rounded-xl leading-relaxed"
             >
-              <p className="font-semibold text-pink-700 dark:text-pink-300">
-                {address.recipient_name}
-              </p>
-              <p className="text-gray-600 dark:text-gray-300">
-                {address.phone_number}
-              </p>
-              <p className="text-gray-600 dark:text-gray-300">
-                {address.address_line1}
-              </p>
-              {address.address_line2 && (
-                <p className="text-gray-600 dark:text-gray-300">
-                  {address.address_line2}
+              <div className="space-y-1 text-gray-700 dark:text-gray-300">
+                <p className="font-semibold text-pink-700 dark:text-pink-300">
+                  <span className="text-gray-800 dark:text-white font-medium">
+                    Nama:
+                  </span>{" "}
+                  {address.recipient_name}
                 </p>
-              )}
-              <p className="text-gray-600 dark:text-gray-300">
-                {address.city}, {address.province}, {address.postal_code}
-              </p>
+
+                <p className="text-gray-700 dark:text-gray-300">
+                  <span className="text-gray-800 dark:text-white font-medium">
+                    No. Telepon:
+                  </span>{" "}
+                  {address.phone_number}
+                </p>
+
+                <p className="text-gray-700 dark:text-gray-300">
+                  <span className="text-gray-800 dark:text-white font-medium">
+                    Alamat:
+                  </span>{" "}
+                  {address.address_line1}
+                </p>
+
+                {address.address_line2 && (
+                  <p className="text-gray-700 dark:text-gray-300">
+                    {address.address_line2}
+                  </p>
+                )}
+
+                <p className="text-gray-700 dark:text-gray-300">
+                  <span className="text-gray-800 dark:text-white font-medium">
+                    Kota:
+                  </span>{" "}
+                  {address.city}, {address.province}, {address.postal_code}
+                </p>
+              </div>
+
               {address.is_default && (
-                <span className="text-red-500 dark:text-red-400 font-semibold">
-                  [Default]
-                </span>
+                <span className="text-red-500 font-semibold">[Utama]</span>
               )}
               <div className="mt-3 flex gap-2">
                 <Button
                   onClick={() => handleEdit(address)}
-                  className="font-medium px-4 py-2 rounded-lg shadow-md transition duration-300"
+                  className=""
+                  size="sm"
+                  variant="secondary"
                 >
                   Ubah
                 </Button>
-                <button
+                <Button
                   onClick={() => handleDelete(address.id)}
-                  className="bg-red-500 hover:bg-red-600 text-white font-medium px-4 py-2 rounded-lg shadow-md transition duration-300"
+                  className="bg-red-400 hover:bg-red-500 dark:bg-red-900 dark:hover:bg-red-800"
+                  size="sm"
                 >
                   Hapus
-                </button>
+                </Button>
               </div>
             </div>
           ))}

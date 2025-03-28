@@ -105,12 +105,13 @@ const AccountDetails = () => {
   };
 
   return (
-    <div className="rounded-xl dark:bg-gray-950 shadow-md w-full lg:w-3/4 mx-auto p-6">
-      <h2 className="text-2xl font-semibold text-pink-600 dark:text-pink-400 text-center mb-6">
-        Informasi Akun
-      </h2>
+    <div className="rounded-xl dark:bg-gray-900 w-full lg:w-3/4 p-6">
+      <h3 className="text-2xl font-semibold mb-6">Informasi Akun</h3>
 
-      <form className="grid gap-4 bg-pink-50 dark:bg-accent p-6 rounded-xl shadow-md">
+      <form
+        onSubmit={handleSubmit}
+        className="grid gap-4 bg-pink-100 dark:bg-gray-800 p-6 rounded-lg"
+      >
         {[
           { label: "Nama Lengkap", name: "name", type: "text" },
           { label: "Email", name: "email", type: "email" },
@@ -128,8 +129,9 @@ const AccountDetails = () => {
               name={name}
               value={userData[name]}
               onChange={handleChange}
-              className="w-full  dark:border-pink-600 p-3 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500  dark:bg-gray-800 text-gray-900 dark:text-white outline-none transition"
+              className="w-full bg-white dark:bg-gray-900 p-3 rounded-lg focus:ring-1 focus:ring-pink-500 focus:border-pink-500 text-gray-900 dark:text-white outline-none transition"
             />
+
             {errors[name] && (
               <p className="text-red-500 text-sm mt-1">{errors[name][0]}</p>
             )}

@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 
@@ -6,7 +5,7 @@ const CallToAction = () => {
   return (
     <>
       {/* Call to Action */}
-      <section className="section-padding dark:bg-gray-900">
+      <section className="section-padding bg-pink-200 dark:bg-pink-950">
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}

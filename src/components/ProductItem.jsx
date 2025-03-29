@@ -11,13 +11,14 @@ const ProductItem = ({
   salePrice = null,
   slug = null,
   stock = 1,
-  label = null, // New prop for labels like "Bestseller"
+  label = null,
 }) => {
   const isOutOfStock = stock === 0;
   const hasDiscount = salePrice !== null && salePrice < originalPrice;
-  const discountPercentage = hasDiscount
-    ? (((originalPrice - salePrice) / originalPrice) * 100).toFixed(0)
-    : 0;
+
+  // const discountPercentage = hasDiscount
+  //   ? (((originalPrice - salePrice) / originalPrice) * 100).toFixed(0)
+  //   : 0;
 
   const productContent = (
     <motion.div
@@ -76,11 +77,16 @@ const ProductItem = ({
             </p>
           )}
         </div>
+        <div className="absolute bottom-4 right-4">
+          <p className=" text-end text-xs  text-gray-800 dark:text-gray-200">
+            {label}
+          </p>
+        </div>
       </div>
 
       {/* Add to Cart Button */}
       {!isOutOfStock && (
-        <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute bottom-16 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
           <Button
             size="sm"
             onClick={(e) => {

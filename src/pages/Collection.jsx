@@ -8,8 +8,7 @@ import { AppContext } from "../context/AppContext";
 import { motion } from "framer-motion";
 
 const Collection = () => {
-  const { search, setSearch, showSearch, setShowSearch } =
-    useContext(AppContext);
+  const { search, showSearch, setShowSearch } = useContext(AppContext);
   const [products, setProducts] = useState([]);
   const location = useLocation();
 
@@ -60,6 +59,7 @@ const Collection = () => {
             description: item.description,
             slug: item.slug,
             stock: item.stock, // Menambahkan properti stok
+            label: item.label,
           };
         });
         setProducts(formattedProducts);
@@ -239,6 +239,7 @@ const Collection = () => {
                 image={item.image}
                 slug={item.slug}
                 stock={item.stock}
+                label={item.label}
               />
             ))}
           </motion.div>

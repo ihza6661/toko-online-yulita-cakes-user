@@ -1,5 +1,5 @@
 import { useContext, useState, useRef, useEffect } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { ChevronLeft } from "lucide-react";
@@ -13,16 +13,16 @@ const Navbar = () => {
   const {
     getCartCount,
     token,
-    setToken,
-    setCartItems,
-    authFetch,
+    // setToken,
+    // setCartItems,
+    // authFetch,
     handleLogout,
   } = useContext(AppContext);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const profileRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,9 +33,9 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location]);
+  // useEffect(() => {
+  //   setIsMenuOpen(false);
+  // }, [location]);
 
   // Close dropdown jika klik di luar
   useEffect(() => {

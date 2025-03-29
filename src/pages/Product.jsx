@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import ProductReview from "../components/ProductReview";
-import LatestCollection from "../components/LatestColletion";
+// import LatestCollection from "../components/LatestColletion";
 import RelatedProducts from "../components/RelatedProducts";
 
 const Product = () => {

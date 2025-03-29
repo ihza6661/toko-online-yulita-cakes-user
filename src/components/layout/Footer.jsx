@@ -1,13 +1,5 @@
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebook,
-  faYoutube,
-  faSquareXTwitter,
-  faSquareInstagram,
-  faSquareWhatsapp,
-} from "@fortawesome/free-brands-svg-icons";
-import { Instagram, Facebook, Twitter, Mail } from "lucide-react";
+import { Instagram, Mail } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {

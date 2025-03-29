@@ -1,5 +1,5 @@
-import React from "react";
-import { Cake, Gift, Clock, Award } from "lucide-react";
+// import React from "react";
+import { Cake, Gift, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 
 const FeaturesSection = () => {

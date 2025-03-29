@@ -34,6 +34,7 @@ const LatestCollection = () => {
               image: `/storage/${primaryImage.image}`,
               slug: product.slug,
               stock: product.stock,
+              label: product.label,
             };
           });
         setLatestProducts(productsWithImages.slice(0, 10));
@@ -123,6 +124,7 @@ const LatestCollection = () => {
                 salePrice={item.sale_price}
                 slug={item.slug}
                 stock={item.stock}
+                label={item.label}
               />
             </div>
           ))}

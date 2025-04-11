@@ -257,28 +257,28 @@ const Addresses = () => {
           Anda belum menambahkan alamat.
         </p>
       ) : (
-        <div className="grid gap-4">
+        <div className="grid gap-4 mt-4">
           {addresses.map((address) => (
             <div
               key={address.id}
-              className=" p-4 bg-white dark:bg-gray-800 rounded-xl leading-relaxed"
+              className="p-4 bg-white dark:bg-gray-800 rounded-xl leading-relaxed"
             >
               <div className="space-y-1 text-gray-700 dark:text-gray-300">
-                <p className="font-semibold text-pink-700 dark:text-pink-300">
+                <p className="border-b border-gray-200 dark:border-gray-700 pb-1 font-semibold text-pink-700 dark:text-pink-300">
                   <span className="text-gray-800 dark:text-white font-medium">
                     Nama:
                   </span>{" "}
                   {address.recipient_name}
                 </p>
 
-                <p className="text-gray-700 dark:text-gray-300">
+                <p className="border-b border-gray-200 dark:border-gray-700 pb-1 text-gray-700 dark:text-gray-300">
                   <span className="text-gray-800 dark:text-white font-medium">
                     No. Telepon:
                   </span>{" "}
                   {address.phone_number}
                 </p>
 
-                <p className="text-gray-700 dark:text-gray-300">
+                <p className="border-b border-gray-200 dark:border-gray-700 pb-1 text-gray-700 dark:text-gray-300">
                   <span className="text-gray-800 dark:text-white font-medium">
                     Alamat:
                   </span>{" "}
@@ -286,12 +286,12 @@ const Addresses = () => {
                 </p>
 
                 {address.address_line2 && (
-                  <p className="text-gray-700 dark:text-gray-300">
+                  <p className="border-b border-gray-200 dark:border-gray-700 pb-1 text-gray-700 dark:text-gray-300">
                     {address.address_line2}
                   </p>
                 )}
 
-                <p className="text-gray-700 dark:text-gray-300">
+                <p className="border-b border-gray-200 dark:border-gray-700 pb-1 text-gray-700 dark:text-gray-300">
                   <span className="text-gray-800 dark:text-white font-medium">
                     Kota:
                   </span>{" "}

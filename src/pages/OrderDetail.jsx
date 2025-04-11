@@ -186,7 +186,7 @@ const OrderDetail = () => {
               </thead>
               <tbody>
                 {order.order_items.map((item) => (
-                  <tr key={item.id} className="hover:bg-gray-50">
+                  <tr key={item.id}>
                     <td className="border p-2 md:p-3 break-words">
                       {item.product.product_name}
                     </td>
